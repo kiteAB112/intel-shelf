@@ -1,0 +1,18 @@
+[
+  {
+    "id": "feodo-status-review-20261103",
+    "source_id": "feodo",
+    "status": "reviewed-scope-restricted",
+    "reviewed_by": "Codex",
+    "reviewed_on": "2026-11-03",
+    "agent_run": "20261103T134121Z",
+    "evidence": [
+      "https://feodotracker.abuse.ch/blocklist/",
+      "https://feodotracker.abuse.ch/faq/",
+      "https://feodotracker.abuse.ch/downloads/ipblocklist.json"
+    ],
+    "decision": "historical-only; not a current active-C2 source",
+    "uncertainty": "Reason for old JSON despite official empty-dataset notice remains unknown",
+    "automatic_change": false
+  }
+]

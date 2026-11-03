@@ -1,0 +1,7 @@
+cases/
+data/history/
+data/hermes-runs/
+data/queries/
+.env
+.venv/
+__pycache__/

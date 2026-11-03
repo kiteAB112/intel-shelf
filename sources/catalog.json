@@ -1,0 +1,463 @@
+[
+  {
+    "id": "nvd",
+    "name": "NVD",
+    "categories": [
+      "漏洞基础与已知利用"
+    ],
+    "url": "https://nvd.nist.gov/",
+    "endpoint": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1",
+    "format": "nvd",
+    "purpose": "漏洞记录与参考链接",
+    "limits": "单条探针只验证接口，不验证全库及时性",
+    "nature": "official-aggregation",
+    "interval_hours": 24,
+    "stale_after_hours": 168,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://nvd.nist.gov/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "cve-json",
+    "query_endpoint": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={value}"
+  },
+  {
+    "id": "cisa-kev",
+    "name": "CISA KEV",
+    "categories": [
+      "漏洞基础与已知利用"
+    ],
+    "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+    "endpoint": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "format": "kev",
+    "purpose": "已知利用漏洞及收录日期",
+    "limits": "未收录不代表未被利用",
+    "nature": "official-curation",
+    "interval_hours": 12,
+    "stale_after_hours": 168,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "cve-json"
+  },
+  {
+    "id": "unit42",
+    "name": "Unit 42",
+    "categories": [
+      "攻击活动与研究报告"
+    ],
+    "url": "https://unit42.paloaltonetworks.com/",
+    "endpoint": "https://unit42.paloaltonetworks.com/feed/",
+    "format": "rss",
+    "purpose": "攻击活动、漏洞利用与 IOC 报告",
+    "limits": "按文章判断原始观测和引用关系",
+    "nature": "research",
+    "interval_hours": 12,
+    "stale_after_hours": 720,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://unit42.paloaltonetworks.com/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "manual",
+    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+  },
+  {
+    "id": "talos",
+    "name": "Cisco Talos",
+    "categories": [
+      "攻击活动与研究报告"
+    ],
+    "url": "https://blog.talosintelligence.com/",
+    "endpoint": "https://blog.talosintelligence.com/rss/",
+    "format": "rss",
+    "purpose": "威胁研究及事件响应报告",
+    "limits": "不保证每个 CVE 均有覆盖",
+    "nature": "research",
+    "interval_hours": 12,
+    "stale_after_hours": 720,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://blog.talosintelligence.com/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "manual",
+    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+  },
+  {
+    "id": "checkpoint",
+    "name": "Check Point Research",
+    "categories": [
+      "攻击活动与研究报告"
+    ],
+    "url": "https://research.checkpoint.com/",
+    "endpoint": "https://research.checkpoint.com/feed/",
+    "format": "rss",
+    "purpose": "恶意软件、活动与漏洞研究",
+    "limits": "报告发布时间不等于攻击发生时间",
+    "nature": "research",
+    "interval_hours": 12,
+    "stale_after_hours": 1440,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://research.checkpoint.com/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "manual",
+    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+  },
+  {
+    "id": "dfir-report",
+    "name": "The DFIR Report",
+    "categories": [
+      "入侵过程与狩猎线索"
+    ],
+    "url": "https://thedfirreport.com/",
+    "endpoint": "https://thedfirreport.com/feed/",
+    "format": "rss",
+    "purpose": "入侵过程、行为及检测线索",
+    "limits": "公开报告低频更新可正常；检测需适配日志",
+    "nature": "incident-research",
+    "interval_hours": 24,
+    "stale_after_hours": 4320,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://thedfirreport.com/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "manual",
+    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+  },
+  {
+    "id": "threatfox",
+    "name": "ThreatFox",
+    "categories": [
+      "恶意基础设施与载荷地址"
+    ],
+    "url": "https://threatfox.abuse.ch/api/",
+    "endpoint": null,
+    "format": null,
+    "purpose": "恶意软件相关 IOC 与参考来源",
+    "limits": "API 需 Auth-Key；公司用途需核对条件；过期不等于安全",
+    "nature": "community-curation",
+    "interval_hours": 24,
+    "stale_after_hours": 24,
+    "access_review": "pending",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://threatfox.abuse.ch/api/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "ip",
+      "domain",
+      "url"
+    ],
+    "query_mode": "authenticated-api"
+  },
+  {
+    "id": "urlhaus",
+    "name": "URLhaus",
+    "categories": [
+      "恶意基础设施与载荷地址"
+    ],
+    "url": "https://urlhaus.abuse.ch/api/",
+    "endpoint": null,
+    "format": null,
+    "purpose": "恶意软件下载 URL",
+    "limits": "API 需 Auth-Key；不等同钓鱼目录；公司用途需核对条件",
+    "nature": "community-curation",
+    "interval_hours": 24,
+    "stale_after_hours": 24,
+    "access_review": "pending",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://urlhaus.abuse.ch/api/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "ip",
+      "domain",
+      "url"
+    ],
+    "query_mode": "authenticated-api"
+  },
+  {
+    "id": "malwarebazaar",
+    "name": "MalwareBazaar",
+    "categories": [
+      "文件与恶意样本"
+    ],
+    "url": "https://bazaar.abuse.ch/api/",
+    "endpoint": null,
+    "format": null,
+    "purpose": "文件哈希与样本元数据补查",
+    "limits": "API 需 Auth-Key；本项目不下载或执行样本；公司用途需核对条件",
+    "nature": "community-curation",
+    "interval_hours": 24,
+    "stale_after_hours": 24,
+    "access_review": "pending",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://bazaar.abuse.ch/api/",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "md5",
+      "sha256"
+    ],
+    "query_mode": "authenticated-api"
+  },
+  {
+    "id": "openphish",
+    "name": "OpenPhish Community",
+    "categories": [
+      "钓鱼"
+    ],
+    "url": "https://www.openphish.com/phishing_feeds.html",
+    "endpoint": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
+    "format": "url-list",
+    "purpose": "有限覆盖的钓鱼 URL 集合",
+    "limits": "社区版标示 12 小时更新；无逐条观测时间；需核对条款",
+    "nature": "curated-feed",
+    "interval_hours": 12,
+    "stale_after_hours": 48,
+    "access_review": "public-endpoint-candidate",
+    "documentation_reviewed_on": "2026-11-02",
+    "quality_review": "candidate-not-yet-accepted",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "仅核对目录/官方入口；尚未证明完整性、准确率或发布延迟",
+    "terms_url": "https://www.openphish.com/phishing_feeds.html",
+    "license": "使用条件见官方说明；未取得企业集成或再分发许可结论",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "来源条目日期或发布字段，不等于当前恶意活动时间",
+    "capabilities": [
+      "url"
+    ],
+    "query_mode": "feed-exact"
+  },
+  {
+    "id": "tweetfeed",
+    "name": "TweetFeed",
+    "categories": [
+      "恶意基础设施与载荷地址",
+      "文件与恶意样本",
+      "钓鱼"
+    ],
+    "url": "https://github.com/0xDanielLopez/TweetFeed",
+    "endpoint": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+    "format": "tweetfeed-csv",
+    "purpose": "社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用",
+    "limits": "API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析",
+    "nature": "community-aggregation",
+    "interval_hours": 6,
+    "stale_after_hours": 48,
+    "capabilities": [
+      "ip",
+      "domain",
+      "url",
+      "md5",
+      "sha256",
+      "report-reference"
+    ],
+    "license": "CC0 for native feed; external corroboration has separate upstream terms",
+    "usage_scope": "public-research",
+    "terms_url": "https://github.com/0xDanielLopez/TweetFeed#license",
+    "time_semantics": "reported_at = community report time, not last malicious activity",
+    "upstream_api": "https://api.tweetfeed.live/v1/today",
+    "access_review": "public-data-verified",
+    "documentation_reviewed_on": "2026-11-03",
+    "quality_review": "reviewed-for-stated-research-purpose",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "见 docs/ioc-source-review.md；仅按限定用途使用，不认可所有单条指标",
+    "use_status": "candidate",
+    "query_mode": "feed-exact"
+  },
+  {
+    "id": "c2intel",
+    "name": "C2IntelFeeds（非商业研究）",
+    "categories": [
+      "恶意基础设施与载荷地址"
+    ],
+    "url": "https://github.com/drb-ra/C2IntelFeeds",
+    "endpoint": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
+    "format": "c2-csv",
+    "purpose": "上游 verified 类别的30天C2 IP列表，附C2工具/指纹标签",
+    "limits": "CC BY-NC-SA 4.0；不可据此直接用于公司；本CSV无逐条时间或原始报告，指纹命中可能误报",
+    "nature": "scan-derived",
+    "interval_hours": 24,
+    "stale_after_hours": 72,
+    "capabilities": [
+      "ip",
+      "c2-label"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "usage_scope": "noncommercial-research-only",
+    "terms_url": "https://github.com/drb-ra/C2IntelFeeds/blob/master/License.md",
+    "time_semantics": "30-day window is upstream claim; row timestamps absent",
+    "access_review": "public-data-verified",
+    "documentation_reviewed_on": "2026-11-03",
+    "quality_review": "reviewed-for-stated-research-purpose",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "见 docs/ioc-source-review.md；仅按限定用途使用，不认可所有单条指标",
+    "use_status": "candidate",
+    "query_mode": "feed-exact"
+  },
+  {
+    "id": "feodo",
+    "name": "Feodo Tracker（历史参考）",
+    "categories": [
+      "恶意基础设施与载荷地址"
+    ],
+    "url": "https://feodotracker.abuse.ch/blocklist/",
+    "endpoint": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
+    "format": "feodo-json",
+    "purpose": "僵尸网络C2 IP/端口、家族、first_seen/last_online及上游状态",
+    "limits": "仅历史参考：官方当前称数据集为空；当前JSON仍含3月旧记录，online不代表当前在线；差异原因未查明",
+    "nature": "botnet-tracking",
+    "interval_hours": 24,
+    "stale_after_hours": 720,
+    "capabilities": [
+      "ip",
+      "port",
+      "malware-family",
+      "last-online"
+    ],
+    "license": "abuse.ch terms",
+    "usage_scope": "terms-review-required",
+    "terms_url": "https://abuse.ch/terms-of-use/",
+    "time_semantics": "last_online from upstream, not local confirmation",
+    "access_review": "public-data-verified",
+    "documentation_reviewed_on": "2026-11-03",
+    "quality_review": "excluded-from-current-feed",
+    "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
+    "review_note": "2026-11-03官方FAQ称当前无活跃C2且数据集为空；直接请求说明页确认横幅。JSON仍返回3月历史条目，原因未明，不再作为活跃C2源。",
+    "use_status": "historical-only",
+    "official_status_url": "https://feodotracker.abuse.ch/faq/",
+    "query_mode": "feed-exact"
+  },
+  {
+    "id": "circl",
+    "name": "CIRCL Vulnerability-Lookup",
+    "categories": [
+      "漏洞基础与已知利用"
+    ],
+    "url": "https://vulnerability.circl.lu/",
+    "endpoint": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
+    "format": "cve-record",
+    "purpose": "按CVE查询跨来源记录、受影响产品和原始引用；可作NVD不可达时补充",
+    "limits": "维护探针只验证单条记录；转引CNA等数据，不是独立利用证据；不保证IOC/评论齐全",
+    "nature": "official-aggregation",
+    "interval_hours": 24,
+    "stale_after_hours": 168,
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "cve-json",
+    "query_endpoint": "https://vulnerability.circl.lu/api/vulnerability/{value}",
+    "access_review": "public-endpoint-candidate",
+    "quality_review": "reviewed-for-targeted-cve-lookup",
+    "documentation_reviewed_on": "2026-11-03",
+    "discovered_via": "https://www.vulnerability-lookup.org/documentation/api.html",
+    "review_note": "按官方API文档实现定向查询；不枚举全库",
+    "license": "以原始数据来源条款为准",
+    "terms_url": "https://vulnerability.circl.lu/about",
+    "usage_scope": "public-reference",
+    "use_status": "candidate",
+    "time_semantics": "漏洞记录发布时间/修改时间，不等于利用时间"
+  },
+  {
+    "id": "paloalto-psirt",
+    "name": "Palo Alto Networks PSIRT",
+    "categories": [
+      "厂商安全公告"
+    ],
+    "url": "https://security.paloaltonetworks.com/",
+    "endpoint": null,
+    "format": null,
+    "access_mode": "manual",
+    "purpose": "核对PAN-OS等产品影响版本、配置、修复与公告更正",
+    "limits": "仅适用于该厂商产品；不同分支修复必须读版本表；本入口不自动判断资产受影响",
+    "nature": "vendor-advisory",
+    "interval_hours": 24,
+    "stale_after_hours": 168,
+    "capabilities": [
+      "cve"
+    ],
+    "query_mode": "manual",
+    "query_note": "先根据漏洞记录确定厂商；匹配Palo Alto产品时查对应PSIRT公告",
+    "access_review": "manual-reference",
+    "quality_review": "reviewed-for-vendor-guidance",
+    "documentation_reviewed_on": "2026-11-03",
+    "discovered_via": "CVE-2024-3400原始引用",
+    "review_note": "已用于MVP案例，尚未集成公告全文抓取",
+    "license": "厂商公开公告，使用条件见官网",
+    "terms_url": "https://security.paloaltonetworks.com/",
+    "usage_scope": "public-reference",
+    "use_status": "manual-reference",
+    "time_semantics": "公告公布/更新时间，旧建议可能已撤回"
+  }
+]

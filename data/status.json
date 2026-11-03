@@ -1,0 +1,482 @@
+{
+  "nvd": {
+    "id": "nvd",
+    "check_origin": "local",
+    "alerts": [],
+    "content": "valid",
+    "freshness": "unknown",
+    "consecutive_failures": 0,
+    "access": "reachable",
+    "checked_at": "2026-11-03T12:30:04.618199+00:00",
+    "request_attempts": [
+      {
+        "outcome": "received",
+        "at": "2026-11-03T12:30:06.749176+00:00"
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1",
+    "count": 1,
+    "samples": [
+      {
+        "cve": "CVE-1999-0095",
+        "published": "1988-10-01T04:00:00.000"
+      }
+    ],
+    "latest_item_at": null,
+    "sha256": "1e82b7ab1c692f9c2bc3feb38df677672f95e5d53f9f727a56ae796ed80f2c53",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T12:30:04.618199+00:00",
+    "last_success_at": "2026-11-03T12:30:04.618199+00:00"
+  },
+  "cisa-kev": {
+    "id": "cisa-kev",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1766,
+    "latest_item_at": "2026-10-30T17:02:45.366500+00:00",
+    "sha256": "3aa9cf3c01f116362a29d111702979175453c425e3733bde80fc4f6f8e2294e5",
+    "changed": false,
+    "last_content_change_at": "2026-11-02T14:54:56.795046+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-03T12:29:10.740021+00:00",
+    "checked_at": "2026-11-03T12:29:10.740021+00:00",
+    "http_status": 200,
+    "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "samples": [
+      {
+        "cve": "CVE-2020-10189",
+        "title": "Zoho ManageEngine Desktop Central File Upload Vulnerability",
+        "date": "2021-11-03"
+      },
+      {
+        "cve": "CVE-2019-8394",
+        "title": "Zoho ManageEngine ServiceDesk Plus (SDP) File Upload Vulnerability",
+        "date": "2021-11-03"
+      },
+      {
+        "cve": "CVE-2020-29583",
+        "title": "Zyxel Multiple Products Use of Hard-Coded Credentials Vulnerability",
+        "date": "2021-11-03"
+      }
+    ]
+  },
+  "unit42": {
+    "id": "unit42",
+    "check_origin": "local",
+    "alerts": [],
+    "content": "valid",
+    "freshness": "within-window",
+    "consecutive_failures": 0,
+    "access": "reachable",
+    "count": 15,
+    "latest_item_at": "2026-11-02T23:00:45+00:00",
+    "sha256": "c0d56a30ff9c14a9837ad43db859593ace1a3fa89c499a75a0c7465cbdb46c68",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T12:29:10.740021+00:00",
+    "last_success_at": "2026-11-03T12:29:10.740021+00:00",
+    "checked_at": "2026-11-03T12:29:10.740021+00:00",
+    "http_status": 200,
+    "final_url": "https://unit42.paloaltonetworks.com/feed/",
+    "samples": [
+      {
+        "title": "Unit 42 Threat Intelligence Highlights - Nov. 2, 2026",
+        "url": "https://unit42.paloaltonetworks.com/u42-threat-intelligence-highlights-oct-2026/"
+      },
+      {
+        "title": "Threat Brief: Critical Vulnerabilities in PHP: CVE-2026-109618, CVE-2026-109619 (Updated October 29)",
+        "url": "https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619/"
+      },
+      {
+        "title": "Unwrapping Retail Peak Season Cyber Threats",
+        "url": "https://unit42.paloaltonetworks.com/unwrapping-retail-cyber-threats/"
+      }
+    ]
+  },
+  "talos": {
+    "id": "talos",
+    "check_origin": "local",
+    "alerts": [],
+    "content": "valid",
+    "freshness": "within-window",
+    "consecutive_failures": 0,
+    "access": "reachable",
+    "count": 15,
+    "latest_item_at": "2026-10-31T12:00:00+00:00",
+    "sha256": "7fffa0c9b3d03695ce2e6909d2413f547b53cb844b25cb5a66805f9b58cbc05f",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T12:29:10.740021+00:00",
+    "last_success_at": "2026-11-03T12:29:10.740021+00:00",
+    "checked_at": "2026-11-03T12:29:10.740021+00:00",
+    "http_status": 200,
+    "final_url": "https://blog.talosintelligence.com/rss/",
+    "samples": [
+      {
+        "title": "Appraisal by AI: Model-driven victim prioritization in the VOLTA infostealer",
+        "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+      },
+      {
+        "title": "A quiet week in infosec <.<",
+        "url": "https://blog.talosintelligence.com/a-quiet-week-in-infosec/"
+      },
+      {
+        "title": "IR trends Q3 2026: Actors impersonate IT help desks in vishing attacks as ransomware activity increases",
+        "url": "https://blog.talosintelligence.com/ir-trends-q3-2026/"
+      }
+    ]
+  },
+  "checkpoint": {
+    "id": "checkpoint",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 15,
+    "latest_item_at": "2026-11-02T15:57:23+00:00",
+    "sha256": "3109905781138e505ae1f5245c42b0d12a9c8a76b2d6016fedd6ec292e2d5299",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T12:29:10.740021+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-03T12:29:10.740021+00:00",
+    "checked_at": "2026-11-03T12:29:10.740021+00:00",
+    "http_status": 200,
+    "final_url": "https://research.checkpoint.com/feed/",
+    "samples": [
+      {
+        "title": "2nd November – Threat Intelligence Report",
+        "url": "https://research.checkpoint.com/2026/2nd-november-threat-intelligence-report/"
+      },
+      {
+        "title": "Cohere’s Qwen Story: Looks More Like Model Jaggedness",
+        "url": "https://research.checkpoint.com/2026/coheres-qwen-story-looks-more-like-model-jaggedness/"
+      },
+      {
+        "title": "Tricks from the Past deployed via signed ChatGPT and Claude binaries",
+        "url": "https://research.checkpoint.com/2026/tricks-from-the-past-deployed-via-signed-chatgpt-and-claude-binaries/"
+      }
+    ]
+  },
+  "dfir-report": {
+    "id": "dfir-report",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 10,
+    "latest_item_at": "2026-08-24T14:28:41+00:00",
+    "sha256": "aae918b1adbf638e11e081f6a26685a69f581fc4478ac0c00f2ac15e74823f0f",
+    "changed": false,
+    "last_content_change_at": "2026-11-02T14:54:56.795046+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-03T12:30:04.618199+00:00",
+    "checked_at": "2026-11-03T12:30:04.618199+00:00",
+    "request_attempts": [
+      {
+        "outcome": "received",
+        "at": "2026-11-03T12:30:09.308838+00:00"
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://thedfirreport.com/feed/",
+    "samples": [
+      {
+        "title": "BengalSEO Part 1: Anatomy of the Operation",
+        "url": "https://thedfirreport.com/2026/08/24/bengalseo-part-1-anatomy-of-the-operation/"
+      },
+      {
+        "title": "From Bing Search to Ransomware: Bumblebee and AdaptixC2 Deliver Akira",
+        "url": "https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/"
+      },
+      {
+        "title": "Flash Alert: EtherRat and TukTuk C2 End in The Gentleman Ransomware",
+        "url": "https://thedfirreport.com/2026/05/11/flash-alert-etherrat-and-tuktuk-c2-end-in-the-gentleman-ransomware/"
+      }
+    ]
+  },
+  "threatfox": {
+    "id": "threatfox",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "needs-auth-or-access-review",
+    "content": "not-checked",
+    "freshness": "unknown",
+    "evaluated_at": "2026-11-03T13:58:59.278381+00:00"
+  },
+  "urlhaus": {
+    "id": "urlhaus",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "needs-auth-or-access-review",
+    "content": "not-checked",
+    "freshness": "unknown",
+    "evaluated_at": "2026-11-03T13:58:59.278381+00:00"
+  },
+  "malwarebazaar": {
+    "id": "malwarebazaar",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "needs-auth-or-access-review",
+    "content": "not-checked",
+    "freshness": "unknown",
+    "evaluated_at": "2026-11-03T13:58:59.278381+00:00"
+  },
+  "openphish": {
+    "id": "openphish",
+    "check_origin": "local",
+    "alerts": [],
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 300,
+    "latest_item_at": null,
+    "sha256": "8fadb80ff4c8dfa3d27b12be8deaa02dc9e278662345476d49742972e1ffb157",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T12:29:10.740021+00:00",
+    "freshness": "unknown",
+    "content": "valid",
+    "last_success_at": "2026-11-03T12:29:10.740021+00:00",
+    "checked_at": "2026-11-03T12:29:10.740021+00:00",
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
+    "samples": []
+  },
+  "tweetfeed": {
+    "id": "tweetfeed",
+    "check_origin": "local",
+    "alerts": [],
+    "request_attempts": [
+      {
+        "outcome": "received",
+        "at": "2026-11-03T13:12:31.666829+00:00"
+      }
+    ],
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "content": "valid",
+    "freshness": "within-window",
+    "checked_at": "2026-11-03T13:12:30.687966+00:00",
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+    "count": 1006,
+    "samples": [
+      {
+        "type": "url",
+        "value": "hxxp://181[.]85[.]173[.]171:8001/api/blob",
+        "reported_at": "2026-11-03 12:35:40",
+        "reporter": "suyog41",
+        "tags": [],
+        "reference": "https://x.com/suyog41/status/2117596570468405324",
+        "observed_at": null,
+        "current_validity": "unknown",
+        "validation_error": null
+      },
+      {
+        "type": "url",
+        "value": "hxxp://181[.]85[.]173[.]171:8001/api/checkin",
+        "reported_at": "2026-11-03 12:35:40",
+        "reporter": "suyog41",
+        "tags": [],
+        "reference": "https://x.com/suyog41/status/2117596570468405324",
+        "observed_at": null,
+        "current_validity": "unknown",
+        "validation_error": null
+      },
+      {
+        "type": "url",
+        "value": "hxxp://181[.]85[.]173[.]171:8001/api/result",
+        "reported_at": "2026-11-03 12:35:40",
+        "reporter": "suyog41",
+        "tags": [],
+        "reference": "https://x.com/suyog41/status/2117596570468405324",
+        "observed_at": null,
+        "current_validity": "unknown",
+        "validation_error": null
+      }
+    ],
+    "latest_item_at": "2026-11-03T12:35:40+00:00",
+    "sha256": "8037198aea479565baf40ed3baa68909a1c44aa01ae25fd3336b3ad65c6c0cdc",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T13:12:30.687966+00:00",
+    "last_success_at": "2026-11-03T13:12:30.687966+00:00",
+    "indicator_types": {
+      "domain": 324,
+      "url": 427,
+      "md5": 28,
+      "sha256": 104,
+      "ip": 123
+    },
+    "time_basis": "report-time",
+    "upstream_status_counts": {},
+    "reference_count": 1006,
+    "total_record_count": 1006,
+    "rejected_record_count": 0,
+    "rejected_samples": [],
+    "record_count": 1006,
+    "unique_indicator_count": 972
+  },
+  "c2intel": {
+    "id": "c2intel",
+    "check_origin": "local",
+    "alerts": [],
+    "request_attempts": [
+      {
+        "outcome": "received",
+        "at": "2026-11-03T13:12:34.406573+00:00"
+      }
+    ],
+    "content": "valid",
+    "freshness": "unknown",
+    "consecutive_failures": 0,
+    "access": "reachable",
+    "checked_at": "2026-11-03T13:12:30.687966+00:00",
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
+    "count": 210,
+    "samples": [
+      {
+        "type": "ip",
+        "value": "1[.]117[.]74[.]144",
+        "label": "Possible Cobaltstrike C2 IP",
+        "observed_at": null,
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "1[.]12[.]253[.]219",
+        "label": "Possible Cobaltstrike C2 IP",
+        "observed_at": null,
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "1[.]15[.]76[.]39",
+        "label": "Possible Cobaltstrike C2 IP",
+        "observed_at": null,
+        "current_validity": "unknown"
+      }
+    ],
+    "latest_item_at": null,
+    "sha256": "a1ebf9d283e169b292d6abde35abe4956aa1c334cfdef8424cd8dfb89a3a9358",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T13:12:30.687966+00:00",
+    "last_success_at": "2026-11-03T13:12:30.687966+00:00",
+    "indicator_types": {
+      "ip": 210
+    },
+    "time_basis": "not-provided",
+    "upstream_status_counts": {},
+    "reference_count": 0,
+    "total_record_count": 210,
+    "rejected_record_count": 0,
+    "rejected_samples": [],
+    "record_count": 210,
+    "unique_indicator_count": 210
+  },
+  "feodo": {
+    "id": "feodo",
+    "checked_at": "2026-11-03T13:11:28.365010+00:00",
+    "check_origin": "local",
+    "alerts": [
+      "review-freshness"
+    ],
+    "request_attempts": [
+      {
+        "outcome": "received",
+        "at": "2026-11-03T13:11:37.931010+00:00"
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 5,
+    "samples": [
+      {
+        "type": "ip",
+        "value": "50[.]16[.]16[.]211",
+        "port": 443,
+        "observed_at": "2026-03-12",
+        "first_seen": "2025-12-30 13:56:31",
+        "upstream_status": "online",
+        "malware": "QakBot",
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "162[.]243[.]103[.]246",
+        "port": 8080,
+        "observed_at": "2026-03-07",
+        "first_seen": "2022-06-04 21:24:53",
+        "upstream_status": "offline",
+        "malware": "Emotet",
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "27[.]133[.]154[.]218",
+        "port": 443,
+        "observed_at": "2026-03-05",
+        "first_seen": "2026-03-04 14:28:39",
+        "upstream_status": "offline",
+        "malware": "QakBot",
+        "current_validity": "unknown"
+      }
+    ],
+    "latest_item_at": "2026-03-12T00:00:00+00:00",
+    "sha256": "ef1c98c807014247b232483e542b5deadb1b8738d30a072f2e2b154b05ebda52",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T13:11:28.365010+00:00",
+    "freshness": "review",
+    "content": "valid",
+    "last_success_at": "2026-11-03T13:11:28.365010+00:00",
+    "indicator_types": {
+      "ip": 5
+    },
+    "time_basis": "last-online",
+    "upstream_status_counts": {
+      "offline": 4,
+      "online": 1
+    },
+    "reference_count": 0,
+    "record_count": 5,
+    "unique_indicator_count": 5
+  },
+  "circl": {
+    "id": "circl",
+    "checked_at": "2026-11-03T13:58:59.278381+00:00",
+    "check_origin": "local",
+    "alerts": [],
+    "request_attempts": [
+      {
+        "outcome": "received",
+        "at": "2026-11-03T13:59:04.084475+00:00"
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1,
+    "samples": [],
+    "latest_item_at": null,
+    "sha256": "4f173b1a5a982fb4c8916e287beada6b4ad01e8b2ba18ec96f9655ebe2fc1759",
+    "changed": true,
+    "last_content_change_at": "2026-11-03T13:58:59.278381+00:00",
+    "freshness": "unknown",
+    "content": "valid",
+    "last_success_at": "2026-11-03T13:58:59.278381+00:00"
+  },
+  "paloalto-psirt": {
+    "id": "paloalto-psirt",
+    "check_origin": "local",
+    "alerts": [],
+    "evaluated_at": "2026-11-03T13:58:59.278381+00:00",
+    "access": "manual-reference",
+    "content": "not-checked",
+    "freshness": "unknown"
+  }
+}
