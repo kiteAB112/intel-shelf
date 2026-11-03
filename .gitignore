@@ -13,13 +13,3 @@ __pycache__/
 !.env.example
 *.py[cod]
 .pytest_cache/
-
-# Local investigation prototypes outside the source-maintenance release
-/scripts/query.py
-/tests/test_query.py
-/workflows/investigate.md
-/templates/analysis.md
-/examples/CVE-2024-3400.md
-/examples/indicator-lookup.md
-/.agents/skills/intel-shelf-investigate/
-/docs/mvp-validation.md

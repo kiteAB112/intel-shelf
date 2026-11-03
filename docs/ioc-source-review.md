@@ -37,4 +37,4 @@
 
 ## 后续更正（2026-11-03）
 
-上述“Feodo仅需复核、Hermes尚未执行”属于早先阶段。后续Hermes真实网页调查发现Empty datasets横幅，Codex直接请求源站确认并沿FAQ核实官方当前称无活跃C2、数据集为空。因此Feodo已调整为historical-only，不再作为当前活跃源；旧JSON与说明差异仍未知，不宣判源停运。此次调查与输出错误修正详见docs/hermes-review-validation.md。
+上述“Feodo仅需复核、Hermes尚未执行”属于早先阶段。后续Hermes真实网页调查发现Empty datasets横幅，Codex直接请求源站确认并沿FAQ核实官方当前称无活跃C2、数据集为空。因此Feodo已调整为historical-only，不再作为当前活跃源；旧JSON与说明差异仍未知，不宣判源停运。复核证据见 [来源维护决定](../data/feedback.json)。
