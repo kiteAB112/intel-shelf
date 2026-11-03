@@ -254,7 +254,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-03T15:00:53.881005+00:00",
+    "evaluated_at": "2026-11-03T15:19:55.550513+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -263,7 +263,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-03T15:00:53.881005+00:00",
+    "evaluated_at": "2026-11-03T15:19:55.550513+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -272,7 +272,7 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-03T15:00:53.881005+00:00",
+    "evaluated_at": "2026-11-03T15:19:55.550513+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -579,7 +579,7 @@
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-03T15:00:53.881005+00:00",
+    "evaluated_at": "2026-11-03T15:19:55.550513+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
