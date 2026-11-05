@@ -39,14 +39,15 @@
   },
   "cisa-kev": {
     "id": "cisa-kev",
-    "checked_at": "2026-11-05T00:17:49.228217+00:00",
+    "checked_at": "2026-11-05T12:17:50.847115+00:00",
     "check_origin": "hermes-cloud",
     "alerts": [
-      "fetch-or-parse-error"
+      "fetch-or-parse-error",
+      "repeated-failure"
     ],
     "request_attempts": [
       {
-        "started_at": "2026-11-05T00:17:50.204206+00:00",
+        "started_at": "2026-11-05T12:17:50.847599+00:00",
         "requested_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
         "route": "direct",
         "outcome": "failed",
@@ -54,13 +55,13 @@
         "http_status": 403,
         "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
         "content_type": "text/html",
-        "at": "2026-11-05T00:17:50.412015+00:00",
-        "elapsed_ms": 208
+        "at": "2026-11-05T12:17:51.070557+00:00",
+        "elapsed_ms": 223
       }
     ],
     "content": "not-validated",
     "freshness": "unknown",
-    "consecutive_failures": 2,
+    "consecutive_failures": 3,
     "access": "fetch-failed",
     "error": "HTTP Error 403: Forbidden",
     "http_status": 403,
@@ -68,12 +69,12 @@
   },
   "unit42": {
     "id": "unit42",
-    "checked_at": "2026-11-05T00:17:49.228217+00:00",
+    "checked_at": "2026-11-05T12:17:50.847115+00:00",
     "check_origin": "hermes-cloud",
     "alerts": [],
     "request_attempts": [
       {
-        "started_at": "2026-11-05T00:17:50.412373+00:00",
+        "started_at": "2026-11-05T12:17:51.070933+00:00",
         "requested_url": "https://unit42.paloaltonetworks.com/feed/",
         "route": "direct",
         "http_status": 200,
@@ -81,8 +82,8 @@
         "content_type": "application/rss+xml; charset=UTF-8",
         "outcome": "received",
         "bytes_read": 24232,
-        "at": "2026-11-05T00:17:50.792700+00:00",
-        "elapsed_ms": 380
+        "at": "2026-11-05T12:17:51.555322+00:00",
+        "elapsed_ms": 484
       }
     ],
     "access": "reachable",
@@ -108,18 +109,18 @@
     "last_content_change_at": "2026-11-03T15:00:53.881005+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-05T00:17:49.228217+00:00",
+    "last_success_at": "2026-11-05T12:17:50.847115+00:00",
     "http_status": 200,
     "final_url": "https://unit42.paloaltonetworks.com/feed/"
   },
   "talos": {
     "id": "talos",
-    "checked_at": "2026-11-05T00:17:49.228217+00:00",
+    "checked_at": "2026-11-05T12:17:50.847115+00:00",
     "check_origin": "hermes-cloud",
     "alerts": [],
     "request_attempts": [
       {
-        "started_at": "2026-11-05T00:17:50.797216+00:00",
+        "started_at": "2026-11-05T12:17:51.556945+00:00",
         "requested_url": "https://blog.talosintelligence.com/rss/",
         "route": "direct",
         "http_status": 200,
@@ -127,8 +128,8 @@
         "content_type": "application/rss+xml; charset=utf-8",
         "outcome": "received",
         "bytes_read": 1026162,
-        "at": "2026-11-05T00:17:52.075772+00:00",
-        "elapsed_ms": 1279
+        "at": "2026-11-05T12:17:55.262097+00:00",
+        "elapsed_ms": 3705
       }
     ],
     "access": "reachable",
@@ -149,23 +150,23 @@
       }
     ],
     "latest_item_at": "2026-10-31T12:00:00+00:00",
-    "sha256": "f82a1b3884ea634b1eaab1e7215ac79fc4aba074b058b38d220df5234938eaf0",
+    "sha256": "54e33855e2b95b4161487e2a9af62ec7cc4b46bfbe1ac6a9215b5c9c07216904",
     "changed": true,
-    "last_content_change_at": "2026-11-05T00:17:49.228217+00:00",
+    "last_content_change_at": "2026-11-05T12:17:50.847115+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-05T00:17:49.228217+00:00",
+    "last_success_at": "2026-11-05T12:17:50.847115+00:00",
     "http_status": 200,
     "final_url": "https://blog.talosintelligence.com/rss/"
   },
   "checkpoint": {
     "id": "checkpoint",
-    "checked_at": "2026-11-05T00:17:49.228217+00:00",
+    "checked_at": "2026-11-05T12:17:50.847115+00:00",
     "check_origin": "hermes-cloud",
     "alerts": [],
     "request_attempts": [
       {
-        "started_at": "2026-11-05T00:17:52.093635+00:00",
+        "started_at": "2026-11-05T12:17:55.284441+00:00",
         "requested_url": "https://research.checkpoint.com/feed/",
         "route": "direct",
         "http_status": 200,
@@ -173,8 +174,8 @@
         "content_type": "application/rss+xml; charset=UTF-8",
         "outcome": "received",
         "bytes_read": 274915,
-        "at": "2026-11-05T00:17:53.335291+00:00",
-        "elapsed_ms": 1242
+        "at": "2026-11-05T12:17:58.207923+00:00",
+        "elapsed_ms": 2924
       }
     ],
     "access": "reachable",
@@ -200,7 +201,7 @@
     "last_content_change_at": "2026-11-03T15:00:53.881005+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-05T00:17:49.228217+00:00",
+    "last_success_at": "2026-11-05T12:17:50.847115+00:00",
     "http_status": 200,
     "final_url": "https://research.checkpoint.com/feed/"
   },
@@ -254,7 +255,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-05T00:17:49.228217+00:00",
+    "evaluated_at": "2026-11-05T12:17:50.847115+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -263,7 +264,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-05T00:17:49.228217+00:00",
+    "evaluated_at": "2026-11-05T12:17:50.847115+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -272,32 +273,40 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-05T00:17:49.228217+00:00",
+    "evaluated_at": "2026-11-05T12:17:50.847115+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
   },
   "openphish": {
     "id": "openphish",
-    "checked_at": "2026-11-05T00:17:49.228217+00:00",
+    "checked_at": "2026-11-05T12:17:50.847115+00:00",
     "check_origin": "hermes-cloud",
-    "alerts": [],
+    "alerts": [
+      "fetch-or-parse-error"
+    ],
     "request_attempts": [
       {
-        "started_at": "2026-11-05T00:17:54.024972+00:00",
+        "started_at": "2026-11-05T12:17:58.213669+00:00",
         "requested_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
         "route": "direct",
-        "http_status": 200,
-        "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
-        "content_type": "text/plain; charset=utf-8",
-        "outcome": "received",
-        "bytes_read": 18158,
-        "at": "2026-11-05T00:17:58.168546+00:00",
-        "elapsed_ms": 4144
+        "outcome": "failed",
+        "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>",
+        "at": "2026-11-05T12:18:34.695934+00:00",
+        "elapsed_ms": 36482
+      },
+      {
+        "started_at": "2026-11-05T12:18:34.695958+00:00",
+        "requested_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
+        "route": "direct",
+        "outcome": "failed",
+        "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>",
+        "at": "2026-11-05T12:19:24.975050+00:00",
+        "elapsed_ms": 50279
       }
     ],
-    "access": "reachable",
-    "consecutive_failures": 0,
+    "access": "fetch-failed",
+    "consecutive_failures": 1,
     "count": 300,
     "samples": [],
     "latest_item_at": null,
@@ -305,32 +314,39 @@
     "changed": true,
     "last_content_change_at": "2026-11-05T00:17:49.228217+00:00",
     "freshness": "unknown",
-    "content": "valid",
+    "content": "not-validated",
     "last_success_at": "2026-11-05T00:17:49.228217+00:00",
-    "http_status": 200,
-    "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt"
+    "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>"
   },
   "tweetfeed": {
     "id": "tweetfeed",
-    "checked_at": "2026-11-05T00:17:49.228217+00:00",
+    "checked_at": "2026-11-05T12:17:50.847115+00:00",
     "check_origin": "hermes-cloud",
-    "alerts": [],
+    "alerts": [
+      "fetch-or-parse-error"
+    ],
     "request_attempts": [
       {
-        "started_at": "2026-11-05T00:17:58.169029+00:00",
+        "started_at": "2026-11-05T12:19:24.975311+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
-        "http_status": 200,
-        "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
-        "content_type": "text/plain; charset=utf-8",
-        "outcome": "received",
-        "bytes_read": 145025,
-        "at": "2026-11-05T00:18:00.787544+00:00",
-        "elapsed_ms": 2619
+        "outcome": "failed",
+        "error": "The read operation timed out",
+        "at": "2026-11-05T12:19:50.406037+00:00",
+        "elapsed_ms": 25431
+      },
+      {
+        "started_at": "2026-11-05T12:19:50.406069+00:00",
+        "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+        "route": "direct",
+        "outcome": "failed",
+        "error": "The read operation timed out",
+        "at": "2026-11-05T12:21:06.809109+00:00",
+        "elapsed_ms": 76403
       }
     ],
-    "access": "reachable",
-    "consecutive_failures": 0,
+    "access": "fetch-failed",
+    "consecutive_failures": 1,
     "count": 1149,
     "samples": [
       {
@@ -377,8 +393,8 @@
     "sha256": "d2b3d389d02a908cd9ebae0e78c1d7848e9ce3cc3271857acae4ae4c487cbd74",
     "changed": true,
     "last_content_change_at": "2026-11-05T00:17:49.228217+00:00",
-    "freshness": "within-window",
-    "content": "valid",
+    "freshness": "unknown",
+    "content": "not-validated",
     "last_success_at": "2026-11-05T00:17:49.228217+00:00",
     "indicator_types": {
       "domain": 278,
@@ -395,8 +411,7 @@
     "rejected_samples": [],
     "record_count": 1149,
     "unique_indicator_count": 1119,
-    "http_status": 200,
-    "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv"
+    "error": "The read operation timed out"
   },
   "c2intel": {
     "id": "c2intel",
@@ -581,7 +596,7 @@
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-05T00:17:49.228217+00:00",
+    "evaluated_at": "2026-11-05T12:17:50.847115+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
