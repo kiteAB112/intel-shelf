@@ -6,15 +6,7 @@
       "repeated-failure"
     ],
     "error": "HTTP Error 403: Forbidden",
-    "checked_at": "2026-11-05T12:17:50.847115+00:00"
-  },
-  {
-    "id": "openphish",
-    "alerts": [
-      "fetch-or-parse-error"
-    ],
-    "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>",
-    "checked_at": "2026-11-05T12:17:50.847115+00:00"
+    "checked_at": "2026-11-06T12:17:50.460122+00:00"
   },
   {
     "id": "feodo",
