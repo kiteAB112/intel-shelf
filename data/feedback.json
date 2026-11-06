@@ -14,5 +14,22 @@
     "decision": "historical-only; not a current active-C2 source",
     "uncertainty": "Reason for old JSON despite official empty-dataset notice remains unknown",
     "automatic_change": false
+  },
+  {
+    "id": "cisa-kev-fetch-block-20261105",
+    "source_id": "cisa-kev",
+    "status": "known-environment-fetch-block",
+    "reviewed_by": "Codex",
+    "reviewed_on": "2026-11-05",
+    "agent_run": "20261105T125553Z",
+    "evidence": [
+      "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json (HTTP 403, x-reference-error=Akamai WAF)",
+      "https://github.com/cisagov/kev-data (official cisagov mirror, default branch develop)",
+      "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json",
+      "https://firewallsync.com/posts/cisa-kev-json-feed-what-each-field-means-and-how-to-match-it-against-a-scanner-export (2026-10-15 snapshot)"
+    ],
+    "decision": "Source healthy and current (2026 entries observed via retrieval layer); the 403 is an Akamai WAF block on the check script's direct egress, not a source outage or format change. Endpoint and 'kev' format remain correct; no source-side change. Official GitHub mirror cisagov/kev-data available as fallback.",
+    "uncertainty": "Whether the Akamai block is temporary or permanent for this egress, and whether a proxy would restore direct fetch. raw.githubusercontent.com is also slow/flaky from this environment, so the mirror is not a reliable automatic fallback here.",
+    "automatic_change": false
   }
 ]
