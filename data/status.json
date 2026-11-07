@@ -255,7 +255,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-06T12:17:50.460122+00:00",
+    "evaluated_at": "2026-11-07T00:17:49.184814+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -264,7 +264,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-06T12:17:50.460122+00:00",
+    "evaluated_at": "2026-11-07T00:17:49.184814+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -273,7 +273,7 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-06T12:17:50.460122+00:00",
+    "evaluated_at": "2026-11-07T00:17:49.184814+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -313,37 +313,33 @@
   },
   "tweetfeed": {
     "id": "tweetfeed",
-    "checked_at": "2026-11-06T12:17:50.460122+00:00",
+    "checked_at": "2026-11-07T00:17:49.184814+00:00",
     "check_origin": "hermes-cloud",
-    "alerts": [],
+    "alerts": [
+      "fetch-or-parse-error"
+    ],
     "request_attempts": [
       {
-        "started_at": "2026-11-06T12:18:07.868305+00:00",
+        "started_at": "2026-11-07T00:17:49.185494+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
-        "http_status": 200,
-        "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
-        "content_type": "text/plain; charset=utf-8",
         "outcome": "failed",
-        "error": "The read operation timed out",
-        "at": "2026-11-06T12:18:53.350912+00:00",
-        "elapsed_ms": 45483
+        "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>",
+        "at": "2026-11-07T00:18:17.569949+00:00",
+        "elapsed_ms": 28384
       },
       {
-        "started_at": "2026-11-06T12:18:53.350936+00:00",
+        "started_at": "2026-11-07T00:18:17.569979+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
-        "http_status": 200,
-        "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
-        "content_type": "text/plain; charset=utf-8",
-        "outcome": "received",
-        "bytes_read": 224557,
-        "at": "2026-11-06T12:19:08.011480+00:00",
-        "elapsed_ms": 14661
+        "outcome": "failed",
+        "error": "The read operation timed out",
+        "at": "2026-11-07T00:19:08.084523+00:00",
+        "elapsed_ms": 50515
       }
     ],
-    "access": "reachable",
-    "consecutive_failures": 0,
+    "access": "fetch-failed",
+    "consecutive_failures": 1,
     "count": 1768,
     "samples": [
       {
@@ -384,8 +380,8 @@
     "sha256": "c91cd34fb844e309497df01a1fbeb045dc7dedfd1216c1a7c3a92143ed6ead7e",
     "changed": true,
     "last_content_change_at": "2026-11-06T12:17:50.460122+00:00",
-    "freshness": "within-window",
-    "content": "valid",
+    "freshness": "unknown",
+    "content": "not-validated",
     "last_success_at": "2026-11-06T12:17:50.460122+00:00",
     "indicator_types": {
       "domain": 556,
@@ -402,8 +398,7 @@
     "rejected_samples": [],
     "record_count": 1768,
     "unique_indicator_count": 1734,
-    "http_status": 200,
-    "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv"
+    "error": "The read operation timed out"
   },
   "c2intel": {
     "id": "c2intel",
@@ -588,7 +583,7 @@
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-06T12:17:50.460122+00:00",
+    "evaluated_at": "2026-11-07T00:17:49.184814+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
