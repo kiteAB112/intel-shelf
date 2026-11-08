@@ -10,7 +10,9 @@
       ],
       "checked_at": "2026-11-08T12:17:50.004206+00:00",
       "last_reviewed_on": "2026-11-05",
-      "error": "HTTP Error 403: Forbidden"
+      "error": "HTTP Error 403: Forbidden",
+      "consecutive_problem_checks": 6,
+      "action": "repair-required"
     }
   ]
 }

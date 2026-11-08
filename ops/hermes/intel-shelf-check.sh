@@ -6,8 +6,6 @@ flock -n 9
 git pull --ff-only --quiet
 export INTEL_SHELF_ORIGIN=hermes-cloud
 python3 scripts/maintain.py > data/latest-check.log
-files=(data/status.json data/review-queue.json data/maintenance-tasks.json data/feedback.json DIRECTORY.md index.html)
-if ! git diff --quiet HEAD -- "${files[@]}"; then
-    git commit --quiet --only -m "Refresh Hermes source maintenance snapshot" -- "${files[@]}"
-fi
-git push --quiet origin HEAD:main
+# Release the check lock before invoking the publisher that uses the same lock.
+flock -u 9
+bash ops/hermes/intel-shelf-publish.sh >> data/latest-check.log 2>&1

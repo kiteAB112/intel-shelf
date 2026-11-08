@@ -205,6 +205,8 @@ def check(source, previous, opener, timestamp, route='direct'):
         result['alerts'] = ['fetch-or-parse-error']
         if result['consecutive_failures'] >= 3:
             result['alerts'].append('repeated-failure')
+    result['alert_streaks'] = {alert: previous.get('alert_streaks', {}).get(alert, 0) + 1
+                               for alert in result.get('alerts', [])}
     return result
 
 
@@ -289,15 +291,19 @@ def review_tasks(catalog, state, feedback, timestamp):
         latest = max((r['reviewed_on'] for r in reviews), default=None)
         baseline = parse_date(latest or source.get('documentation_reviewed_on'))
         reasons = set(row.get('alerts', []))
-        if row.get('access') == 'fetch-failed' and row.get('consecutive_failures', 0) < 3:
+        if row.get('consecutive_failures', 0) < 3:
             reasons.discard('fetch-or-parse-error')
         if source.get('use_status') == 'historical-only':
             reasons.discard('review-freshness')
         if baseline is None or (timestamp.date() - baseline.date()).days >= 30:
             reasons.add('periodic-review')
         if reasons:
+            count = max(row.get('consecutive_failures', 0),
+                        max((row.get('alert_streaks', {}).get(r, 0) for r in reasons), default=0))
             tasks.append(dict(source_id=sid, reasons=sorted(reasons), checked_at=row.get('checked_at'),
-                              last_reviewed_on=latest, error=row.get('error')))
+                              last_reviewed_on=latest, error=row.get('error'),
+                              consecutive_problem_checks=count,
+                              action='repair-required' if count >= 3 else 'review'))
     return {'schema_version': 1, 'review_interval_days': 30, 'tasks': tasks}
 
 
@@ -307,11 +313,14 @@ def main():
     parser.add_argument('--render-only', action='store_true')
     parser.add_argument('--retry-failed', action='store_true', help='Retry currently failed sources before their normal interval')
     parser.add_argument('--force', action='store_true', help='Recheck public endpoints, ignoring the normal interval')
+    parser.add_argument('--source', help='Check only this catalog source ID, retaining other observations')
     args = parser.parse_args()
     catalog = json.loads((ROOT / 'sources/catalog.json').read_text(encoding='utf-8'))
     ids = [s['id'] for s in catalog]
     if len(ids) != len(set(ids)):
         raise ValueError('Duplicate source IDs')
+    if args.source and args.source not in ids:
+        parser.error('Unknown source ID')
     state_path = ROOT / 'data/status.json'
     state = json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {}
     if not args.render_only:
@@ -320,6 +329,8 @@ def main():
         opener = urllib.request.build_opener(urllib.request.ProxyHandler(proxy))
         timestamp = now()
         for source in catalog:
+            if args.source and source['id'] != args.source:
+                continue
             previous = dict(state.get(source['id'], {}))
             if args.force or (args.retry_failed and previous.get('consecutive_failures', 0)):
                 previous.pop('checked_at', None)

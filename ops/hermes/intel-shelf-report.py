@@ -47,8 +47,18 @@ if review:
             print("AI复核无新增报告。")
         elif response:
             print("AI结果摘要：" + response[:1100])
+        elif 'no_change (agent run suppressed)' in text:
+            print('AI复核：待办触发条件无变化，本轮未调用模型。')
         else:
             print("AI输出未包含结果正文，请查运行记录。")
+
+feedback = json.loads((root / 'data/feedback.json').read_text())
+for item in feedback:
+    if item.get('changes') and item.get('reviewed_on') == datetime.now(zone).date().isoformat():
+        print(f"维护变更 {item['source_id']}：{item.get('outcome', '未知')}")
+        print('改动：' + '；'.join(item['changes']))
+        print('依据：' + item.get('why', '未记录'))
+        print('验证：' + str(item.get('validation', '未记录')))
 def git(*args):
     return subprocess.check_output(["git", "-C", str(root), *args], text=True, timeout=25).strip()
 try:

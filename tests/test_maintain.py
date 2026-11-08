@@ -44,6 +44,34 @@ class HealthTests(unittest.TestCase):
         r = m.check(dict(self.source, endpoint=None), {}, None, self.time)
         self.assertEqual(r['access'], 'needs-auth-or-access-review')
 
+    def test_three_failures_require_repair_including_parse_errors(self):
+        for access in ('reachable', 'fetch-failed'):
+            state = {'test': dict(access=access, consecutive_failures=2, alerts=['fetch-or-parse-error'])}
+            source = dict(self.source, documentation_reviewed_on='2026-11-02')
+            self.assertEqual(m.review_tasks([source], state, [], self.time)['tasks'], [])
+            state['test']['consecutive_failures'] = 3
+            task = m.review_tasks([self.source], state, [], self.time)['tasks'][0]
+            self.assertEqual(task['action'], 'repair-required')
+            self.assertEqual(task['consecutive_problem_checks'], 3)
+
+    def test_content_alert_streak_increments_only_on_real_checks(self):
+        class Response:
+            status = 200
+            url = 'https://example.test/feed'
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def read(self, limit): return b'<rss><channel/></rss>'
+        class Working:
+            def open(self, *args, **kwargs): return Response()
+        row = {}
+        for i in range(3):
+            row = m.check(self.source, row, Working(), self.time + timedelta(hours=i))
+        self.assertEqual(row['alert_streaks']['empty-data'], 3)
+        skipped = m.check(self.source, row, None, self.time + timedelta(hours=2, minutes=1))
+        self.assertEqual(skipped['alert_streaks']['empty-data'], 3)
+        task = m.review_tasks([self.source], {'test': row}, [], self.time)['tasks'][0]
+        self.assertEqual(task['action'], 'repair-required')
+
     def test_interval_does_not_fake_new_check(self):
         previous = dict(checked_at=self.time.isoformat(), access='reachable')
         self.assertEqual(m.check(self.source, previous, None, self.time + timedelta(minutes=5)), previous)
@@ -64,6 +92,20 @@ class HealthTests(unittest.TestCase):
 
     def test_kev_fractional_timestamp(self):
         self.assertIsNotNone(m.parse_date('2026-10-30T17:02:45.3665Z'))
+
+    def test_kev_parse_current_schema(self):
+        body = (b'{"title":"CISA Catalog of Known Exploited Vulnerabilities",'
+                b'"catalogVersion":"2026.10.04","dateReleased":"2026-10-04T18:52:56.0635Z","count":2,'
+                b'"vulnerabilities":[{"cveID":"CVE-2026-11111","dateAdded":"2026-10-04"},'
+                b'{"cveID":"CVE-2026-22222","dateAdded":"2026-10-03"}]}')
+        count, latest = m.parse(body, 'kev')
+        self.assertEqual(count, 2)
+        self.assertEqual(latest, m.parse_date('2026-10-04T18:52:56.0635Z'))
+
+    def test_kev_parse_rejects_record_without_cveid(self):
+        body = b'{"dateReleased":"2026-10-04T00:00:00Z","vulnerabilities":[{"vendorProject":"x"}]}'
+        with self.assertRaises(ValueError):
+            m.parse(body, 'kev')
 
     def test_missing_article_link_is_not_ready(self):
         body = b'<rss><channel><item><title>x</title></item></channel></rss>'
