@@ -5,12 +5,14 @@ description: 复核 intel-shelf 来源异常，在连续三轮异常后修复检
 
 在 ~/intel-shelf 工作。读取 AGENTS.md、workflows/maintain.md、data/maintenance-tasks.json、data/status.json 与既有反馈。
 
+优先复用已有核验记录，只检索本次证据缺口。修改文件使用 patch 或文件编辑工具，测试与实测调用仓库中的命名脚本。无人值守工具拒绝内联 Python、heredoc 或 execute_code 时，记录限制并使用已允许的文件工具，不反复尝试被拒绝的执行方式，不修改全局审批设置。
+
 对 action=repair-required 的任务必须完成一次代码修复尝试，不能仅记录调查即结束。三次指独立检测轮次，一轮内的请求重试算一次。先核实请求和官方样例，找可复现的根因，修改实际检测逻辑及必要档案，补能捕获该故障的离线测试。优先针对来源修改，保持每次尝试的请求证据。不能把删告警、放宽格式检查、减少失败计数或无依据换源当作修复。
 
 每次最多尝试两种有依据的方案，控制在20分钟内。若根因缺证据、需要凭证或可行方案均失败，记录 outcome=blocked、原因与下一步验证条件，不能虚构修复。同一异常再累积三轮会重新触发。普通复核任务完成语义核验即可。
 
 修改后运行完整离线测试，并在云端仅重查目标来源：
-python3 scripts/maintain.py --source SOURCE_ID --force
+INTEL_SHELF_ORIGIN=hermes-cloud python3 scripts/maintain.py --source SOURCE_ID --force
 结果必须区分 tests_passed 与 live_check_passed。网络失败仍保留失败，不能把测试通过当成来源恢复。
 
 每项在 data/feedback.json 追加对象，包含 id、source_id、reviewed_by、reviewed_on、evidence、decision、uncertainty，以及以下字段：

@@ -132,6 +132,11 @@ class HealthTests(unittest.TestCase):
         directory = m.render([source], {'test':dict(checked_at='2000-01-01T00:00:00Z',access='reachable',content='valid',count=1,alerts=[])})
         self.assertIn('已验证可读取 0 个', directory)
 
+    def test_directory_links_to_successful_mirror(self):
+        source = dict(self.source, name='mirror', url='https://example.test', categories=['test'], purpose='p', limits='l')
+        row = dict(checked_at=m.now().isoformat(), access='reachable', content='valid', count=1, alerts=[], final_url='https://mirror.example.test/feed')
+        self.assertIn('[数据入口](https://mirror.example.test/feed)', m.render([source], {'test': row}))
+
     def test_historical_source_stays_out_even_after_fetch_success(self):
         source = dict(self.source, name='historical',url='https://example.test',categories=['test'],purpose='p',limits='l',use_status='historical-only')
         row = dict(checked_at=m.now().isoformat(),access='reachable',content='valid',count=1,alerts=[])

@@ -19,6 +19,8 @@ def page(catalog, state, feedback, tasks, timestamp):
     for source in sorted(catalog, key=lambda s: (rank[s['categories'][0]], s['name'].casefold())):
         sid = source['id']
         row = state.get(sid, {})
+        endpoint = row.get('final_url') if row.get('access') == 'reachable' else None
+        endpoint = endpoint or source.get('endpoint')
         checked = row.get('checked_at')
 
         recent = checked and (timestamp - datetime.fromisoformat(checked.replace('Z', '+00:00'))).total_seconds() <= max(24, source['interval_hours'] * 2) * 3600
@@ -44,14 +46,14 @@ def page(catalog, state, feedback, tasks, timestamp):
                 evidence = ' '.join(link(url, f'依据 {i}') for i, url in enumerate(review.get('evidence', []), 1))
                 details += f'<dt>维护决定</dt><dd>{escape(review["decision"])} {evidence}</dd>'
         cats = escape('|'.join(source['categories']), quote=True)
-        rows.append(f"""<tr><td><strong>{escape(source['name'])}</strong><br>{link(source['url'], '官网')} {link(source.get('endpoint'), '数据入口')}</td>
+        rows.append(f"""<tr><td><strong>{escape(source['name'])}</strong><br>{link(source['url'], '官网')} {link(endpoint, '数据入口')}</td>
 <td>{escape(' · '.join(source['categories']))}</td><td>{escape(source['purpose'])}
 <details><summary>限制与档案</summary><p>{escape(source['limits'])}</p><dl>{details}</dl></details></td>
 <td>{status}</td><td>{escape(checked[:16].replace('T', ' ') if checked else '无请求记录')}</td></tr>""")
         cards.append(f"""<article data-categories="{cats}"><small>{escape(source['categories'][0])}</small>
 <h2>{escape(source['name'])}</h2><b>{status}</b><p>{escape(source['purpose'])}</p>
 <p class="limit">{escape(source['limits'])}</p><details><summary>查看档案与复核依据</summary><dl>{details}</dl></details>
-<footer>{link(source['url'], '官网')} {link(source.get('endpoint'), '数据入口')}</footer></article>""")
+<footer>{link(source['url'], '官网')} {link(endpoint, '数据入口')}</footer></article>""")
     options = ''.join(f'<option>{escape(c)}</option>' for c in categories)
     return f"""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Intel Shelf · 情报来源目录</title><style>

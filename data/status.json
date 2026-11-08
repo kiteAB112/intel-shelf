@@ -39,7 +39,7 @@
   },
   "cisa-kev": {
     "id": "cisa-kev",
-    "check_origin": "local",
+    "check_origin": "hermes-cloud",
     "alerts": [
       "fetch-or-parse-error",
       "repeated-failure"

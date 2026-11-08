@@ -54,7 +54,8 @@ if review:
 
 feedback = json.loads((root / 'data/feedback.json').read_text())
 for item in feedback:
-    if item.get('changes') and item.get('reviewed_on') == datetime.now(zone).date().isoformat():
+    verified_today = item.get('verified_at') and datetime.fromisoformat(item['verified_at']).astimezone(zone).date() == datetime.now(zone).date()
+    if item.get('changes') and (item.get('reviewed_on') == datetime.now(zone).date().isoformat() or verified_today):
         print(f"维护变更 {item['source_id']}：{item.get('outcome', '未知')}")
         print('改动：' + '；'.join(item['changes']))
         print('依据：' + item.get('why', '未记录'))

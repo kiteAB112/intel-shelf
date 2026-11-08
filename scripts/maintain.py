@@ -261,7 +261,8 @@ def render(catalog, state):
             if not usable(source):
                 continue
             row = state.get(source['id'], {})
-            cells = [f"[{source['name']}]({source['url']}) · [数据入口]({source['endpoint']})", source['purpose'] + '；' + source['limits'],
+            endpoint = row.get('final_url') or source['endpoint']
+            cells = [f"[{source['name']}]({source['url']}) · [数据入口]({endpoint})", source['purpose'] + '；' + source['limits'],
                      labels.get(row.get('access'), '未检查'), labels.get(row.get('content'), '未检查'), labels.get(row.get('freshness'), '未知'), row.get('checked_at', '—')]
             lines.append('| ' + ' | '.join(str(x).replace('|', '\\|').replace('\n', ' ') for x in cells) + ' |')
         lines.append('')
