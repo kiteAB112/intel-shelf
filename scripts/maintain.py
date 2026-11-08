@@ -193,9 +193,10 @@ def check(source, previous, opener, timestamp, route='direct'):
                 except (urllib.error.URLError, OSError) as network_error:
                     evidence.update(outcome='failed', error=str(network_error)[:400])
                     if isinstance(network_error, urllib.error.HTTPError):
-                        evidence.update(http_status=network_error.code, final_url=network_error.url,
+                        failed_url = network_error.__dict__.get('url', endpoint)
+                        evidence.update(http_status=network_error.code, final_url=failed_url,
                                         content_type=network_error.headers.get('Content-Type') if network_error.headers else None)
-                        result.update(http_status=network_error.code, final_url=network_error.url)
+                        result.update(http_status=network_error.code, final_url=failed_url)
                     last_error = network_error
                     if endpoint == source['endpoint'] and primary_error is None:
                         primary_error = network_error
