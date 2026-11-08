@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 import unittest
+import urllib.error
 from datetime import datetime, timezone, timedelta
 
 spec = importlib.util.spec_from_file_location('maintain', Path(__file__).resolve().parents[1] / 'scripts/maintain.py')
@@ -137,6 +138,58 @@ class HealthTests(unittest.TestCase):
         directory=m.render([source],{'test':row})
         self.assertIn('已验证可读取 0 个',directory)
         self.assertIn('仅历史参考',directory)
+
+    def test_mirror_fallback_used_when_primary_fetch_fails(self):
+        primary = 'https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json'
+        mirror = 'https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json'
+        kev_body = (b'{"title":"CISA Catalog of Known Exploited Vulnerabilities",'
+                    b'"catalogVersion":"2026.11.06","dateReleased":"2026-10-04T18:52:56.0635Z","count":2,'
+                    b'"vulnerabilities":[{"cveID":"CVE-2026-11111","dateAdded":"2026-10-04"},'
+                    b'{"cveID":"CVE-2026-22222","dateAdded":"2026-10-03"}]}')
+
+        class Response:
+            status = 200
+            url = mirror
+            headers = {'Content-Type': 'application/json'}
+            def __enter__(self): return self
+            def __exit__(self, *a): pass
+            def read(self, limit): return kev_body
+
+        class Opener:
+            def open(self, req, timeout=None):
+                if req.full_url == mirror:
+                    return Response()
+                raise urllib.error.HTTPError(primary, 403, 'Forbidden', {}, None)
+
+        source = dict(id='cisa-kev', format='kev', stale_after_hours=48, endpoint=primary,
+                      mirror_endpoint=mirror, interval_hours=1)
+        r = m.check(source, {}, Opener(), self.time)
+        self.assertEqual(r['access'], 'reachable')
+        self.assertEqual(r['content'], 'valid')
+        self.assertEqual(r['count'], 2)
+        self.assertEqual(r['final_url'], mirror)
+        self.assertNotIn('error', r)
+        self.assertEqual(r['consecutive_failures'], 0)
+        urls = [a['requested_url'] for a in r['request_attempts']]
+        self.assertIn(primary, urls)
+        self.assertIn(mirror, urls)
+
+    def test_mirror_fallback_retains_failure_when_both_fail(self):
+        primary = 'https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json'
+        mirror = 'https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json'
+
+        class Opener:
+            def open(self, req, timeout=None):
+                raise urllib.error.HTTPError(primary, 403, 'Forbidden', {}, None)
+
+        source = dict(id='cisa-kev', format='kev', stale_after_hours=48, endpoint=primary,
+                      mirror_endpoint=mirror, interval_hours=1)
+        r = m.check(source, {'consecutive_failures': 2}, Opener(), self.time)
+        self.assertEqual(r['access'], 'fetch-failed')
+        self.assertEqual(r['consecutive_failures'], 3)
+        self.assertIn('repeated-failure', r['alerts'])
+        self.assertEqual(r['error'], 'HTTP Error 403: Forbidden')
+        self.assertEqual([a['requested_url'] for a in r['request_attempts']], [primary, mirror])
 
 
 if __name__ == '__main__': unittest.main()

@@ -31,5 +31,30 @@
     "decision": "Source healthy and current (2026 entries observed via retrieval layer); the 403 is an Akamai WAF block on the check script's direct egress, not a source outage or format change. Endpoint and 'kev' format remain correct; no source-side change. Official GitHub mirror cisagov/kev-data available as fallback.",
     "uncertainty": "Whether the Akamai block is temporary or permanent for this egress, and whether a proxy would restore direct fetch. raw.githubusercontent.com is also slow/flaky from this environment, so the mirror is not a reliable automatic fallback here.",
     "automatic_change": false
+  },
+  {
+    "id": "cisa-kev-mirror-fallback-20261108",
+    "source_id": "cisa-kev",
+    "reviewed_by": "Hermes",
+    "reviewed_on": "2026-11-08",
+    "outcome": "improved",
+    "trigger_count": 6,
+    "evidence": [
+      "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json (HTTP 403, x-reference-error Akamai WAF; cisa.gov root/CSV/HTML all 403 from this egress)",
+      "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json (official mirror; returns current KEV, catalogVersion 2026.11.06, count 1769)",
+      "https://github.com/cisagov/kev-data (official CISA mirror repo)",
+      "https://github.com/dependency-check/DependencyCheck/issues/7929 (community report of the same Akamai 403 on the KEV JSON)"
+    ],
+    "decision": "Implemented automatic fallback to the documented official mirror when the primary endpoint is fetch-blocked. The source itself is healthy and current; the 403 is an Akamai WAF block on the check egress, and raw.githubusercontent.com is also slow/unreachable from the local egress, so the live recheck still failed.",
+    "uncertainty": "Whether raw.githubusercontent.com is reachable fast enough from the hermes-cloud production egress; the local egress cannot complete the ~1.8 MiB mirror download within the 120s stall timeout. The fallback auto-recovers the source whenever the mirror is reachable, but production recovery is unproven.",
+    "changes": [
+      "scripts/maintain.py: check() now falls back to source['mirror_endpoint'] when the primary fetch fails (HTTP or network error); every attempt is recorded in request_attempts with its URL and route; the primary error is retained when both endpoints fail",
+      "scripts/maintain.py: added per-source timeout_seconds (default 25) applied to opener.open",
+      "sources/catalog.json: cisa-kev timeout_seconds=120 to allow the ~1.8 MiB mirror download",
+      "tests/test_maintain.py: added test_mirror_fallback_used_when_primary_fetch_fails and test_mirror_fallback_retains_failure_when_both_fail"
+    ],
+    "why": "cisa.gov returns 403 (Akamai WAF) on every path for the check egress, so the primary endpoint is unreachable; User-Agent/headers do not help. The catalog already documented the official cisagov/kev-data mirror but the check never used it. The fallback makes the check use that mirror, which returns current valid KEV data; a 120s stall timeout is required because the mirror is ~1.8 MiB and raw.githubusercontent.com transfers slowly.",
+    "validation": "python3 -m unittest discover -s tests -> 28 tests passed (incl. 2 new mirror-fallback tests). python3 scripts/maintain.py --source cisa-kev --force on 2026-11-08 -> tests_passed=true, live_check_passed=false (primary 403; mirror TLS handshake timeout then read timeout). Network failure retained.",
+    "automatic_change": true
   }
 ]

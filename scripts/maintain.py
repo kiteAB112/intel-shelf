@@ -165,32 +165,49 @@ def check(source, previous, opener, timestamp, route='direct'):
     result.pop('http_status', None)
     result.pop('final_url', None)
     result['check_origin'] = 'github-actions' if os.environ.get('GITHUB_ACTIONS') == 'true' else os.environ.get('INTEL_SHELF_ORIGIN', 'local')
+    timeout = source.get('timeout_seconds', 25)
+    endpoints = [source['endpoint']]
+    mirror = source.get('mirror_endpoint')
+    if mirror and mirror != source['endpoint']:
+        endpoints.append(mirror)
     try:
-        req = urllib.request.Request(source['endpoint'], headers={'User-Agent': 'intel-shelf/0.1 (manual public-source health checks)'})
         result['request_attempts'] = []
-        for attempt in range(2):
-            started = monotonic()
-            evidence = dict(started_at=now().isoformat(), requested_url=source['endpoint'], route=route)
-            result['request_attempts'].append(evidence)
-            try:
-                with opener.open(req, timeout=25) as response:
-                    result.update(http_status=response.status, final_url=response.url)
-                    evidence.update(http_status=response.status, final_url=response.url,
-                                    content_type=getattr(response, 'headers', {}).get('Content-Type'))
-                    body = response.read(12 * 1024 * 1024 + 1)
-                evidence.update(outcome='received', bytes_read=len(body))
+        body = None
+        primary_error = None
+        last_error = None
+        for endpoint in endpoints:
+            ep_route = route if endpoint == source['endpoint'] else route + '-mirror'
+            req = urllib.request.Request(endpoint, headers={'User-Agent': 'intel-shelf/0.1 (manual public-source health checks)'})
+            for attempt in range(2):
+                started = monotonic()
+                evidence = dict(started_at=now().isoformat(), requested_url=endpoint, route=ep_route)
+                result['request_attempts'].append(evidence)
+                try:
+                    with opener.open(req, timeout=timeout) as response:
+                        result.update(http_status=response.status, final_url=response.url)
+                        evidence.update(http_status=response.status, final_url=response.url,
+                                        content_type=getattr(response, 'headers', {}).get('Content-Type'))
+                        body = response.read(12 * 1024 * 1024 + 1)
+                    evidence.update(outcome='received', bytes_read=len(body))
+                    break
+                except (urllib.error.URLError, OSError) as network_error:
+                    evidence.update(outcome='failed', error=str(network_error)[:400])
+                    if isinstance(network_error, urllib.error.HTTPError):
+                        evidence.update(http_status=network_error.code, final_url=network_error.url,
+                                        content_type=network_error.headers.get('Content-Type') if network_error.headers else None)
+                        result.update(http_status=network_error.code, final_url=network_error.url)
+                    last_error = network_error
+                    if endpoint == source['endpoint'] and primary_error is None:
+                        primary_error = network_error
+                    # Do not repeatedly hit authentication, throttling or policy responses.
+                    if attempt or isinstance(network_error, urllib.error.HTTPError):
+                        break
+                finally:
+                    evidence.update(at=now().isoformat(), elapsed_ms=round((monotonic() - started) * 1000))
+            if body is not None:
                 break
-            except (urllib.error.URLError, OSError) as network_error:
-                evidence.update(outcome='failed', error=str(network_error)[:400])
-                if isinstance(network_error, urllib.error.HTTPError):
-                    evidence.update(http_status=network_error.code, final_url=network_error.url,
-                                    content_type=network_error.headers.get('Content-Type') if network_error.headers else None)
-                    result.update(http_status=network_error.code, final_url=network_error.url)
-                # Do not repeatedly hit authentication, throttling or policy responses.
-                if attempt or isinstance(network_error, urllib.error.HTTPError):
-                    raise
-            finally:
-                evidence.update(at=now().isoformat(), elapsed_ms=round((monotonic() - started) * 1000))
+        if body is None:
+            raise (primary_error or last_error) if (primary_error or last_error) else OSError('no response from any endpoint')
         result.update(access='reachable', consecutive_failures=0)
         if len(body) > 12 * 1024 * 1024:
             raise ValueError('Response exceeds 12 MiB limit')
