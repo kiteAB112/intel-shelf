@@ -2,7 +2,7 @@
 
 ## 当前可读取的公开入口
 
-已验证可读取 9 个；受限、异常及检查过期的来源单列在下方，不计入可用数量。
+已验证可读取 8 个；受限、异常及检查过期的来源单列在下方，不计入可用数量。
 
 这是入口可用性验证，不是情报准确率认证或公司使用许可。RSS 用于发现文章，不是历史 CVE 搜索 API。时间为 UTC。
 
@@ -31,21 +31,17 @@
 
 | 来源 | 用途 / 限制 | 获取 | 内容 | 新鲜度 | 检查时间 |
 |---|---|---|---|---|---|
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-07T12:17:49.868313+00:00 |
 | [C2IntelFeeds（非商业研究）](https://github.com/drb-ra/C2IntelFeeds) · [数据入口](https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv) | 上游 verified 类别的30天C2 IP列表，附C2工具/指纹标签；CC BY-NC-SA 4.0；不可据此直接用于公司；本CSV无逐条时间或原始报告，指纹命中可能误报 | 获取成功 | 基础解析通过 | 未知 | 2026-11-07T12:17:49.868313+00:00 |
 
 ## 文件与恶意样本
 
-| 来源 | 用途 / 限制 | 获取 | 内容 | 新鲜度 | 检查时间 |
-|---|---|---|---|---|---|
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-07T12:17:49.868313+00:00 |
+暂无通过本次可用性条件的公开数据入口；待接入/异常项见下方。
 
 ## 钓鱼
 
 | 来源 | 用途 / 限制 | 获取 | 内容 | 新鲜度 | 检查时间 |
 |---|---|---|---|---|---|
 | [OpenPhish Community](https://www.openphish.com/phishing_feeds.html) · [数据入口](https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt) | 有限覆盖的钓鱼 URL 集合；社区版标示 12 小时更新；无逐条观测时间；需核对条款 | 获取成功 | 基础解析通过 | 未知 | 2026-11-07T12:17:49.868313+00:00 |
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-07T12:17:49.868313+00:00 |
 
 ## 厂商安全公告
 
@@ -61,6 +57,7 @@
 | [ThreatFox](https://threatfox.abuse.ch/api/) | 待认证/条件核验 | — |
 | [URLhaus](https://urlhaus.abuse.ch/api/) | 待认证/条件核验 | — |
 | [MalwareBazaar](https://bazaar.abuse.ch/api/) | 待认证/条件核验 | — |
+| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) | 获取失败：The read operation timed out | 2026-11-07T12:17:49.868313+00:00 |
 | [Feodo Tracker（历史参考）](https://feodotracker.abuse.ch/blocklist/) | 仅历史参考；官方当前数据集状态见来源档案，未作为活跃情报接入 | 2026-11-07T12:17:49.868313+00:00 |
 
 ## 本次获取的内容示例
@@ -72,7 +69,6 @@
 - Cisco Talos：[Bring a tent, I've got the coffee: Lessons from it-sa](https://blog.talosintelligence.com/bring-a-tent-ive-got-the-coffee-lessons-from-it-sa/)
 - Check Point Research：[Hacking on Autopilot: Inside ARTEX Cybercrime Campaigns](https://research.checkpoint.com/2026/hacking-on-autopilot-inside-artex-cybercrime-campaigns/)
 - The DFIR Report：[BengalSEO Part 1: Anatomy of the Operation](https://thedfirreport.com/2026/08/24/bengalseo-part-1-anatomy-of-the-operation/)
-- TweetFeed：`poiwalsdas[.]com`
 - C2IntelFeeds（非商业研究）：`1[.]117[.]74[.]144`
 
 ## 恶意指标数据核验
