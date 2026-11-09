@@ -37,3 +37,11 @@ Actions 从 main 读取门禁代码，核对 base_sha 和目标来源、检查�
 Actions 计划每天四轮（北京时间 02:17/08:17/14:17/20:17），受实际调度影响。云端只保留每 15 分钟轻量取单与早晚 QQ 汇总，不保留第二套正式检查。监控只同步完整 state 提交，队列没有新触发时不调用模型；空队列不因输出变化反向唤醒模型。QQ 区分检查完成、接单已触发、待验证/已合入和来源是否恢复，不从旧 Hermes 执行记录推断 Actions 状态。
 
 维护执行步骤唯一入口：[intel-shelf-maintain Skill](../skills/intel-shelf-maintain/SKILL.md)。
+
+## 2026-11-09 部署验收
+
+本地实现并推送后，云端从 GitHub 拉取；没有在云端另写一份检查器。已暂停旧 intel-shelf-check 定时任务，接单改为每 15 分钟，保留既有 QQ 早晚汇总。旧项目任务配置、脚本、Skill 和最后的云端快照备份于云端 `~/.hermes/backups/intel-shelf-actions-20261109T144333Z/`；原逐轮历史保留。
+
+[首轮正式 Actions](https://github.com/kiteAB112/intel-shelf/actions/runs/42637365593) 完成 11 个来源的获取解析及专项检查并发布 state；10 个满足可读取条件，Feodo 保留历史用途及时效提醒，AI 待办为零。该轮 CISA 主入口在 Actions 环境返回成功，不再沿用旧云端的 403 结论。响应及快照附件已保存。此前隔离测试误写的新状态分支快照已标明无效，并被这轮真实结果替换，不作为来源观察。
+
+[维护实测工作流](https://github.com/kiteAB112/intel-shelf/actions/runs/42637753724) 在固定 Ubuntu 24.04 / Python 3.12 环境通过 49 项测试及 CISA 目标实测；本地 Python 3.9 与云端测试亦通过。发布隔离、环境变量不泄漏、同轮去重、候选实测不改变正式计数、fixed 实测失败禁止合入及 improved 保留失败均有回归覆盖。维护分支合入门禁已做临时 Git 仓库集成测试；当前没有实际异常待办，尚未产生新版 AI 自动修复案例，不将迁移验收当作长期稳定性验收。
