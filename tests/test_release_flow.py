@@ -2,6 +2,7 @@
 import contextlib
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -112,6 +113,14 @@ class ReleaseFlow(unittest.TestCase):
         self.assertFalse(verify_repair.allowed('scripts/verify_repair.py'))
         self.assertFalse(verify_repair.allowed('.github/workflows/check-sources.yml'))
         self.assertTrue(verify_repair.allowed('scripts/source_checks.py'))
+
+    def test_gate_library_does_not_change_the_surrounding_actions_environment(self):
+        self.candidate('reviewed')
+        envfile = self.root / 'github-env'
+        envfile.write_text('ORIGINAL=kept\n')
+        with patch.object(verify_repair, 'ROOT', self.repo), patch.dict(os.environ, {'GITHUB_ENV': str(envfile)}):
+            verify_repair.prepare()
+        self.assertEqual(envfile.read_text(), 'ORIGINAL=kept\n')
 
 
 if __name__ == '__main__':

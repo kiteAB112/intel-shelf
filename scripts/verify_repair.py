@@ -46,9 +46,6 @@ def prepare():
         raise ValueError('Unknown maintenance outcome')
     if repair['outcome'] in ('blocked', 'reviewed') and any(p.startswith(('scripts/', 'sources/')) for p in changed):
         raise ValueError('Code changes need a fixed or improved outcome')
-    if os.environ.get('GITHUB_ENV'):
-        with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as f:
-            f.write('REPAIR_SOURCE=' + repair['source_id'] + '\n')
     return repair
 
 
@@ -78,4 +75,12 @@ def promote():
 
 
 if __name__ == '__main__':
-    {'prepare': prepare, 'promote': promote}[sys.argv[1]]()
+    if sys.argv[1] == 'prepare':
+        repair = prepare()
+        if os.environ.get('GITHUB_ENV'):
+            with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as f:
+                f.write('REPAIR_SOURCE=' + repair['source_id'] + '\n')
+    elif sys.argv[1] == 'promote':
+        promote()
+    else:
+        raise ValueError('Expected prepare or promote')
