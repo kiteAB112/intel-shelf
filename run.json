@@ -1,9 +1,26 @@
 {
-  "run_kind": "test",
-  "started_at": "2026-11-09T00:00:00Z",
-  "status": "invalid-test-snapshot",
-  "note": "Invalid isolated-test output; not a production check. Awaiting first real Actions round.",
-  "code_sha": "6af04df3bc66ce8a2b4976d96c7335372918e723",
-  "run_id": "invalid-test",
-  "schema_version": 2
+  "schema_version": 2,
+  "run_id": "42637365593",
+  "run_kind": "scheduled",
+  "status": "completed",
+  "started_at": "2026-11-09T14:43:01.994037+00:00",
+  "finished_at": "2026-11-09T14:43:04.271136+00:00",
+  "code_sha": "6f5271aa6fb6e22607dc1d22de8d7ebae1da3877",
+  "catalog_sha256": "e85c8134b8ce8ec55c0fecbae3b00dbd3171afac0cebcd35f9248e5123b526f3",
+  "check_origin": "github-actions",
+  "checked_sources": [
+    "nvd",
+    "cisa-kev",
+    "unit42",
+    "talos",
+    "checkpoint",
+    "dfir-report",
+    "openphish",
+    "tweetfeed",
+    "c2intel",
+    "feodo",
+    "circl"
+  ],
+  "live_check_passed": false,
+  "workflow_url": "https://github.com/kiteAB112/intel-shelf/actions/runs/42637365593"
 }

@@ -1,1 +1,678 @@
-{}
+{
+  "nvd": {
+    "id": "nvd",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:02.008131+00:00",
+        "requested_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1",
+        "content_type": "application/json",
+        "outcome": "received",
+        "bytes_read": 2517,
+        "body_file": "evidence/nvd/attempt-1.response",
+        "body_sha256": "416dd0497e044fd7ec96fd4297a822637c214d991c77a40608e444638a6febf1",
+        "at": "2026-11-09T14:43:02.403557+00:00",
+        "elapsed_ms": 395
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1,
+    "samples": [
+      {
+        "cve": "CVE-1999-0095",
+        "published": "1988-10-01T04:00:00.000"
+      }
+    ],
+    "latest_item_at": null,
+    "sha256": "416dd0497e044fd7ec96fd4297a822637c214d991c77a40608e444638a6febf1",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "unknown",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "cisa-kev": {
+    "id": "cisa-kev",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:02.404299+00:00",
+        "requested_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "route": "direct",
+        "timeout_seconds": 120,
+        "http_status": 200,
+        "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "content_type": "application/json",
+        "outcome": "received",
+        "bytes_read": 1832349,
+        "body_file": "evidence/cisa-kev/attempt-1.response",
+        "body_sha256": "47e0406b2be5a40420eff66f3d90e83eb8883dae6ff4d08e1b2a942c366f6cc2",
+        "at": "2026-11-09T14:43:02.554795+00:00",
+        "elapsed_ms": 151
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1769,
+    "samples": [
+      {
+        "cve": "CVE-2020-10189",
+        "title": "Zoho ManageEngine Desktop Central File Upload Vulnerability",
+        "date": "2021-11-03"
+      },
+      {
+        "cve": "CVE-2019-8394",
+        "title": "Zoho ManageEngine ServiceDesk Plus (SDP) File Upload Vulnerability",
+        "date": "2021-11-03"
+      },
+      {
+        "cve": "CVE-2020-29583",
+        "title": "Zyxel Multiple Products Use of Hard-Coded Credentials Vulnerability",
+        "date": "2021-11-03"
+      }
+    ],
+    "latest_item_at": "2026-11-06T19:44:45.179700+00:00",
+    "sha256": "47e0406b2be5a40420eff66f3d90e83eb8883dae6ff4d08e1b2a942c366f6cc2",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "unit42": {
+    "id": "unit42",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:02.577588+00:00",
+        "requested_url": "https://unit42.paloaltonetworks.com/feed/",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://unit42.paloaltonetworks.com/feed/",
+        "content_type": "application/rss+xml; charset=UTF-8",
+        "outcome": "received",
+        "bytes_read": 24043,
+        "body_file": "evidence/unit42/attempt-1.response",
+        "body_sha256": "2fb25eb15b1310a848ff3c61a9e7c9768c8d1864fed357f8ea8b10771f552f93",
+        "at": "2026-11-09T14:43:02.685928+00:00",
+        "elapsed_ms": 108
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://unit42.paloaltonetworks.com/feed/",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 15,
+    "samples": [
+      {
+        "title": "Turning Up the Heat: Inside the Attacks on Europe’s Refrigeration System",
+        "url": "https://unit42.paloaltonetworks.com/europes-refrigeration-systems-attacks/"
+      },
+      {
+        "title": "Unit 42 Threat Intelligence Highlights - Nov. 2, 2026",
+        "url": "https://unit42.paloaltonetworks.com/u42-threat-intelligence-highlights-oct-2026/"
+      },
+      {
+        "title": "Threat Brief: Critical Vulnerabilities in PHP: CVE-2026-109618, CVE-2026-109619 (Updated October 29)",
+        "url": "https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619/"
+      }
+    ],
+    "latest_item_at": "2026-11-06T21:15:09+00:00",
+    "sha256": "2fb25eb15b1310a848ff3c61a9e7c9768c8d1864fed357f8ea8b10771f552f93",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "talos": {
+    "id": "talos",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:02.688112+00:00",
+        "requested_url": "https://blog.talosintelligence.com/rss/",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://blog.talosintelligence.com/rss/",
+        "content_type": "application/rss+xml; charset=utf-8",
+        "outcome": "received",
+        "bytes_read": 1029460,
+        "body_file": "evidence/talos/attempt-1.response",
+        "body_sha256": "0056d7465c4544a63db8958245aa06fe9c0b9465b8186df3559d715f2501d322",
+        "at": "2026-11-09T14:43:02.799895+00:00",
+        "elapsed_ms": 112
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://blog.talosintelligence.com/rss/",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 15,
+    "samples": [
+      {
+        "title": "Bring a tent, I've got the coffee: Lessons from it-sa",
+        "url": "https://blog.talosintelligence.com/bring-a-tent-ive-got-the-coffee-lessons-from-it-sa/"
+      },
+      {
+        "title": "Appraisal by AI: Model-driven victim prioritization in the VOLTA infostealer",
+        "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/"
+      },
+      {
+        "title": "A quiet week in infosec <.<",
+        "url": "https://blog.talosintelligence.com/a-quiet-week-in-infosec/"
+      }
+    ],
+    "latest_item_at": "2026-11-05T19:00:00+00:00",
+    "sha256": "0056d7465c4544a63db8958245aa06fe9c0b9465b8186df3559d715f2501d322",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "checkpoint": {
+    "id": "checkpoint",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:02.810858+00:00",
+        "requested_url": "https://research.checkpoint.com/feed/",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://research.checkpoint.com/feed/",
+        "content_type": "application/rss+xml; charset=UTF-8",
+        "outcome": "received",
+        "bytes_read": 315492,
+        "body_file": "evidence/checkpoint/attempt-1.response",
+        "body_sha256": "35d3fe7fb0eab9b24bbd192b312eb8e7317df457c03abde710e4b4d3354e4b84",
+        "at": "2026-11-09T14:43:02.996759+00:00",
+        "elapsed_ms": 186
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://research.checkpoint.com/feed/",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 15,
+    "samples": [
+      {
+        "title": "Hacking on Autopilot: Inside ARTEX Cybercrime Campaigns",
+        "url": "https://research.checkpoint.com/2026/hacking-on-autopilot-inside-artex-cybercrime-campaigns/"
+      },
+      {
+        "title": "ChatGPT Lockdown Mode Bypass: Phishing, Malware Delivery, and Silent Data Exfiltration",
+        "url": "https://research.checkpoint.com/2026/chatgpt-lockdown-mode-bypass-phishing-malware-delivery-and-silent-data-exfiltration/"
+      },
+      {
+        "title": "Free the Model, Sell the Gateway: Prompt Adware hidden in Jailbreak Bundles",
+        "url": "https://research.checkpoint.com/2026/free-the-model-sell-the-gateway-prompt-adware-hidden-in-jailbreak-bundles/"
+      }
+    ],
+    "latest_item_at": "2026-11-05T17:22:06+00:00",
+    "sha256": "35d3fe7fb0eab9b24bbd192b312eb8e7317df457c03abde710e4b4d3354e4b84",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "dfir-report": {
+    "id": "dfir-report",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:03.001213+00:00",
+        "requested_url": "https://thedfirreport.com/feed/",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://thedfirreport.com/feed/",
+        "content_type": "application/rss+xml; charset=UTF-8",
+        "outcome": "received",
+        "bytes_read": 13933,
+        "body_file": "evidence/dfir-report/attempt-1.response",
+        "body_sha256": "aae918b1adbf638e11e081f6a26685a69f581fc4478ac0c00f2ac15e74823f0f",
+        "at": "2026-11-09T14:43:03.112182+00:00",
+        "elapsed_ms": 111
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://thedfirreport.com/feed/",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 10,
+    "samples": [
+      {
+        "title": "BengalSEO Part 1: Anatomy of the Operation",
+        "url": "https://thedfirreport.com/2026/08/24/bengalseo-part-1-anatomy-of-the-operation/"
+      },
+      {
+        "title": "From Bing Search to Ransomware: Bumblebee and AdaptixC2 Deliver Akira",
+        "url": "https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/"
+      },
+      {
+        "title": "Flash Alert: EtherRat and TukTuk C2 End in The Gentleman Ransomware",
+        "url": "https://thedfirreport.com/2026/05/11/flash-alert-etherrat-and-tuktuk-c2-end-in-the-gentleman-ransomware/"
+      }
+    ],
+    "latest_item_at": "2026-08-24T14:28:41+00:00",
+    "sha256": "aae918b1adbf638e11e081f6a26685a69f581fc4478ac0c00f2ac15e74823f0f",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "threatfox": {
+    "id": "threatfox",
+    "check_origin": "local",
+    "alerts": [],
+    "evaluated_at": "2026-11-09T14:43:01.994037+00:00",
+    "access": "needs-auth-or-access-review",
+    "content": "not-checked",
+    "freshness": "unknown"
+  },
+  "urlhaus": {
+    "id": "urlhaus",
+    "check_origin": "local",
+    "alerts": [],
+    "evaluated_at": "2026-11-09T14:43:01.994037+00:00",
+    "access": "needs-auth-or-access-review",
+    "content": "not-checked",
+    "freshness": "unknown"
+  },
+  "malwarebazaar": {
+    "id": "malwarebazaar",
+    "check_origin": "local",
+    "alerts": [],
+    "evaluated_at": "2026-11-09T14:43:01.994037+00:00",
+    "access": "needs-auth-or-access-review",
+    "content": "not-checked",
+    "freshness": "unknown"
+  },
+  "openphish": {
+    "id": "openphish",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:03.113144+00:00",
+        "requested_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
+        "content_type": "text/plain; charset=utf-8",
+        "outcome": "received",
+        "bytes_read": 15890,
+        "body_file": "evidence/openphish/attempt-1.response",
+        "body_sha256": "4a916348812f65e11db10a066e6f0f637388979b31bad8d5aba71a89fbb7e956",
+        "at": "2026-11-09T14:43:03.138591+00:00",
+        "elapsed_ms": 25
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 300,
+    "samples": [],
+    "latest_item_at": null,
+    "sha256": "4a916348812f65e11db10a066e6f0f637388979b31bad8d5aba71a89fbb7e956",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "unknown",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "tweetfeed": {
+    "id": "tweetfeed",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-09T18:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:03.139886+00:00",
+        "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+        "content_type": "text/plain; charset=utf-8",
+        "outcome": "received",
+        "bytes_read": 229970,
+        "body_file": "evidence/tweetfeed/attempt-1.response",
+        "body_sha256": "0a414313af7856b82740d49f370d230c08a83eea026814aae5891a1e0b8a1cc2",
+        "at": "2026-11-09T14:43:03.275105+00:00",
+        "elapsed_ms": 135
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1803,
+    "samples": [
+      {
+        "type": "url",
+        "value": "hxxps://github[.]com/i25968627-ui/crispy-spoon",
+        "reported_at": "2026-11-09 13:52:21",
+        "reporter": "James_inthe_box",
+        "tags": [
+          "#Remcos"
+        ],
+        "reference": "https://x.com/James_inthe_box/status/2119790196032258336",
+        "observed_at": null,
+        "current_validity": "unknown",
+        "validation_error": null
+      },
+      {
+        "type": "url",
+        "value": "hxxps://github[.]com/i25968627-ui/psychic-engine/",
+        "reported_at": "2026-11-09 13:52:21",
+        "reporter": "James_inthe_box",
+        "tags": [
+          "#Remcos"
+        ],
+        "reference": "https://x.com/James_inthe_box/status/2119790196032258336",
+        "observed_at": null,
+        "current_validity": "unknown",
+        "validation_error": null
+      },
+      {
+        "type": "ip",
+        "value": "162[.]35[.]123[.]185",
+        "reported_at": "2026-11-09 13:52:21",
+        "reporter": "James_inthe_box",
+        "tags": [
+          "#Remcos"
+        ],
+        "reference": "https://x.com/James_inthe_box/status/2119790196032258336",
+        "observed_at": null,
+        "current_validity": "unknown",
+        "validation_error": null
+      }
+    ],
+    "latest_item_at": "2026-11-09T13:52:21+00:00",
+    "sha256": "0a414313af7856b82740d49f370d230c08a83eea026814aae5891a1e0b8a1cc2",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "indicator_types": {
+      "domain": 565,
+      "url": 665,
+      "ip": 360,
+      "sha256": 186,
+      "md5": 27
+    },
+    "time_basis": "report-time",
+    "upstream_status_counts": {},
+    "reference_count": 1803,
+    "total_record_count": 1803,
+    "rejected_record_count": 0,
+    "rejected_samples": [],
+    "record_count": 1803,
+    "unique_indicator_count": 1762,
+    "alert_streaks": {}
+  },
+  "c2intel": {
+    "id": "c2intel",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:03.306359+00:00",
+        "requested_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
+        "content_type": "text/plain; charset=utf-8",
+        "outcome": "received",
+        "bytes_read": 9614,
+        "body_file": "evidence/c2intel/attempt-1.response",
+        "body_sha256": "8bb86c9eece3fac9c74367705731f46cb2a6e5e710398b7ddbcee54afa6f51ee",
+        "at": "2026-11-09T14:43:03.393970+00:00",
+        "elapsed_ms": 88
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 227,
+    "samples": [
+      {
+        "type": "ip",
+        "value": "1[.]117[.]74[.]144",
+        "label": "Possible Cobaltstrike C2 IP",
+        "observed_at": null,
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "1[.]12[.]253[.]219",
+        "label": "Possible Cobaltstrike C2 IP",
+        "observed_at": null,
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "1[.]15[.]76[.]39",
+        "label": "Possible Cobaltstrike C2 IP",
+        "observed_at": null,
+        "current_validity": "unknown"
+      }
+    ],
+    "latest_item_at": null,
+    "sha256": "8bb86c9eece3fac9c74367705731f46cb2a6e5e710398b7ddbcee54afa6f51ee",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "unknown",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "indicator_types": {
+      "ip": 227
+    },
+    "time_basis": "not-provided",
+    "upstream_status_counts": {},
+    "reference_count": 0,
+    "total_record_count": 227,
+    "rejected_record_count": 0,
+    "rejected_samples": [],
+    "record_count": 227,
+    "unique_indicator_count": 227,
+    "alert_streaks": {}
+  },
+  "feodo": {
+    "id": "feodo",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [
+      "review-freshness"
+    ],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:03.396131+00:00",
+        "requested_url": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
+        "content_type": "application/json",
+        "outcome": "received",
+        "bytes_read": 1763,
+        "body_file": "evidence/feodo/attempt-1.response",
+        "body_sha256": "ef1c98c807014247b232483e542b5deadb1b8738d30a072f2e2b154b05ebda52",
+        "at": "2026-11-09T14:43:03.526779+00:00",
+        "elapsed_ms": 131
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 5,
+    "samples": [
+      {
+        "type": "ip",
+        "value": "50[.]16[.]16[.]211",
+        "port": 443,
+        "observed_at": "2026-03-12",
+        "first_seen": "2025-12-30 13:56:31",
+        "upstream_status": "online",
+        "malware": "QakBot",
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "162[.]243[.]103[.]246",
+        "port": 8080,
+        "observed_at": "2026-03-07",
+        "first_seen": "2022-06-04 21:24:53",
+        "upstream_status": "offline",
+        "malware": "Emotet",
+        "current_validity": "unknown"
+      },
+      {
+        "type": "ip",
+        "value": "27[.]133[.]154[.]218",
+        "port": 443,
+        "observed_at": "2026-03-05",
+        "first_seen": "2026-03-04 14:28:39",
+        "upstream_status": "offline",
+        "malware": "QakBot",
+        "current_validity": "unknown"
+      }
+    ],
+    "latest_item_at": "2026-03-12T00:00:00+00:00",
+    "sha256": "ef1c98c807014247b232483e542b5deadb1b8738d30a072f2e2b154b05ebda52",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "review",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "indicator_types": {
+      "ip": 5
+    },
+    "time_basis": "last-online",
+    "upstream_status_counts": {
+      "offline": 4,
+      "online": 1
+    },
+    "reference_count": 0,
+    "total_record_count": 5,
+    "rejected_record_count": 0,
+    "rejected_samples": [],
+    "record_count": 5,
+    "unique_indicator_count": 5,
+    "alert_streaks": {
+      "review-freshness": 1
+    },
+    "incident_id": "feodo:2026-11-09T14:43:01.994037+00:00"
+  },
+  "circl": {
+    "id": "circl",
+    "checked_at": "2026-11-09T14:43:01.994037+00:00",
+    "check_origin": "github-actions",
+    "alerts": [],
+    "run_id": "42637365593",
+    "next_due_at": "2026-11-10T00:00:00+00:00",
+    "request_attempts": [
+      {
+        "started_at": "2026-11-09T14:43:03.527089+00:00",
+        "requested_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
+        "route": "direct",
+        "timeout_seconds": 25,
+        "http_status": 200,
+        "final_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
+        "content_type": "application/json",
+        "outcome": "received",
+        "bytes_read": 12044,
+        "body_file": "evidence/circl/attempt-1.response",
+        "body_sha256": "4f173b1a5a982fb4c8916e287beada6b4ad01e8b2ba18ec96f9655ebe2fc1759",
+        "at": "2026-11-09T14:43:04.267074+00:00",
+        "elapsed_ms": 740
+      }
+    ],
+    "http_status": 200,
+    "final_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1,
+    "samples": [],
+    "latest_item_at": null,
+    "sha256": "4f173b1a5a982fb4c8916e287beada6b4ad01e8b2ba18ec96f9655ebe2fc1759",
+    "changed": true,
+    "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
+    "freshness": "unknown",
+    "content": "valid",
+    "last_success_at": "2026-11-09T14:43:01.994037+00:00",
+    "alert_streaks": {}
+  },
+  "paloalto-psirt": {
+    "id": "paloalto-psirt",
+    "check_origin": "local",
+    "alerts": [],
+    "evaluated_at": "2026-11-09T14:43:01.994037+00:00",
+    "access": "manual-reference",
+    "content": "not-checked",
+    "freshness": "unknown"
+  }
+}
