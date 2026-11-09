@@ -1,7 +1,7 @@
 """Render the local, offline source directory."""
-from datetime import datetime
 from html import escape
 from urllib.parse import urlsplit
+from source_checks import display_status
 
 
 def link(url, label):
@@ -23,20 +23,8 @@ def page(catalog, state, feedback, tasks, timestamp):
         endpoint = endpoint or source.get('endpoint')
         checked = row.get('checked_at')
 
-        recent = checked and (timestamp - datetime.fromisoformat(checked.replace('Z', '+00:00'))).total_seconds() <= max(24, source['interval_hours'] * 2) * 3600
-        if source.get('use_status') == 'historical-only':
-            status = '仅历史参考'
-        elif source.get('access_mode') == 'manual':
-            status = '人工查阅'
-        elif not source.get('endpoint'):
-            status = '待接入'
-        elif not recent:
-            status = '待更新检查'
-        elif row.get('alerts') or row.get('content') != 'valid' or row.get('access') != 'reachable' or not row.get('count'):
-            status = '检查异常'
-        else:
-            status = '入口可读取'
-        fields = [('类别', ' · '.join(source['categories'])), ('查询类型', ' / '.join(source['capabilities'])),
+        status = display_status(source, row, timestamp)
+        fields = [('类别', ' · '.join(source['categories'])), ('数据类型', ' / '.join(source['capabilities'])),
                   ('时间含义', source['time_semantics']), ('使用范围', source['usage_scope']),
                   ('最近检查', checked or '无请求记录'), ('原始告警', ', '.join(row.get('alerts', [])) or '无'),
                   ('复核待办', ', '.join(pending.get(sid, [])) or '无')]

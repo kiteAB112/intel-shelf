@@ -13,3 +13,6 @@ __pycache__/
 !.env.example
 *.py[cod]
 .pytest_cache/
+/runtime/
+/baseline/
+/validation/

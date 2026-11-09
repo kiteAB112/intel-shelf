@@ -8,13 +8,17 @@ import tempfile
 from time import monotonic
 import urllib.request
 import urllib.error
+from urllib.parse import urlsplit
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 import xml.etree.ElementTree as ET
 import sys
+import subprocess
+import re
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from ioc_formats import summary as ioc_summary
 from directory_page import page
+from source_checks import validate as validate_source, display_status
 
 IOC_FORMATS = ('tweetfeed-csv', 'feodo-json', 'c2-csv', 'ip-list')
 
@@ -88,7 +92,7 @@ def parse(body, kind):
         return 1, None
     if kind == 'url-list':
         lines = [x.strip() for x in text.splitlines() if x.strip() and not x.startswith('#')]
-        if any(not x.startswith(('https://', 'http://')) or '<' in x for x in lines):
+        if any(urlsplit(x).scheme not in ('https', 'http') or not urlsplit(x).hostname or '<' in x for x in lines):
             raise ValueError('Expected one URL per line')
         return len(lines), None
     raise ValueError('Unknown parser')
@@ -96,6 +100,7 @@ def parse(body, kind):
 
 def assess(source, previous, body, timestamp):
     count, latest = parse(body, source['format'])
+    validate_source(source, body, parse_date)
     ioc_details = ioc_summary(body, source['format'], parse_date)[2] if source['format'] in IOC_FORMATS else {}
     digest = hashlib.sha256(body).hexdigest()
     alerts = []
@@ -151,7 +156,9 @@ def assess(source, previous, body, timestamp):
     return result
 
 
-def check(source, previous, opener, timestamp, route='direct'):
+def check(source, previous, opener, timestamp, route='direct', run_id=None, evidence_dir=None):
+    if run_id and previous.get('run_id') == run_id:
+        return previous
     result = dict(previous)
     result.update(id=source['id'], checked_at=timestamp.isoformat(), check_origin='local', alerts=[])
     if not source.get('endpoint'):
@@ -160,11 +167,17 @@ def check(source, previous, opener, timestamp, route='direct'):
         result.update(access='manual-reference' if source.get('access_mode') == 'manual' else 'needs-auth-or-access-review', content='not-checked', freshness='unknown')
         return result
     last = parse_date(previous.get('checked_at'))
-    if last and (timestamp - last).total_seconds() < source['interval_hours'] * 3600:
+    due = parse_date(previous.get('next_due_at'))
+    if last and ((due and timestamp < due) or (not due and (timestamp - last).total_seconds() < source['interval_hours'] * 3600)):
         return previous
     result.pop('http_status', None)
     result.pop('final_url', None)
     result['check_origin'] = 'github-actions' if os.environ.get('GITHUB_ACTIONS') == 'true' else os.environ.get('INTEL_SHELF_ORIGIN', 'local')
+    if run_id:
+        result['run_id'] = run_id
+    # Anchor due times to interval slots rather than drifting with network delays.
+    interval = source['interval_hours'] * 3600
+    result['next_due_at'] = datetime.fromtimestamp((int(timestamp.timestamp()) // interval + 1) * interval, timezone.utc).isoformat()
     timeout = source.get('timeout_seconds', 25)
     endpoints = [source['endpoint']]
     mirror = source.get('mirror_endpoint')
@@ -180,7 +193,8 @@ def check(source, previous, opener, timestamp, route='direct'):
             req = urllib.request.Request(endpoint, headers={'User-Agent': 'intel-shelf/0.1 (manual public-source health checks)'})
             for attempt in range(2):
                 started = monotonic()
-                evidence = dict(started_at=now().isoformat(), requested_url=endpoint, route=ep_route)
+                evidence = dict(started_at=now().isoformat(), requested_url=endpoint, route=ep_route,
+                                timeout_seconds=timeout)
                 result['request_attempts'].append(evidence)
                 try:
                     with opener.open(req, timeout=timeout) as response:
@@ -189,6 +203,12 @@ def check(source, previous, opener, timestamp, route='direct'):
                                         content_type=getattr(response, 'headers', {}).get('Content-Type'))
                         body = response.read(12 * 1024 * 1024 + 1)
                     evidence.update(outcome='received', bytes_read=len(body))
+                    if evidence_dir:
+                        dest = Path(evidence_dir) / source['id'] / ('attempt-%d.response' % len(result['request_attempts']))
+                        dest.parent.mkdir(parents=True, exist_ok=True)
+                        dest.write_bytes(body)
+                        evidence.update(body_file=str(dest.relative_to(Path(evidence_dir).parent)).replace('\\', '/'),
+                                        body_sha256=hashlib.sha256(body).hexdigest())
                     break
                 except (urllib.error.URLError, OSError) as network_error:
                     evidence.update(outcome='failed', error=str(network_error)[:400])
@@ -197,6 +217,13 @@ def check(source, previous, opener, timestamp, route='direct'):
                         evidence.update(http_status=network_error.code, final_url=failed_url,
                                         content_type=network_error.headers.get('Content-Type') if network_error.headers else None)
                         result.update(http_status=network_error.code, final_url=failed_url)
+                        if evidence_dir:
+                            error_body = network_error.read(65536) if network_error.fp else b''
+                            dest = Path(evidence_dir) / source['id'] / ('attempt-%d.response' % len(result['request_attempts']))
+                            dest.parent.mkdir(parents=True, exist_ok=True)
+                            dest.write_bytes(error_body)
+                            evidence.update(body_file=str(dest.relative_to(Path(evidence_dir).parent)).replace('\\', '/'),
+                                            error_body_truncated=len(error_body) == 65536)
                     last_error = network_error
                     if endpoint == source['endpoint'] and primary_error is None:
                         primary_error = network_error
@@ -220,11 +247,18 @@ def check(source, previous, opener, timestamp, route='direct'):
         if not isinstance(exc, (ValueError, ET.ParseError, KeyError, UnicodeError)):
             result['access'] = 'fetch-failed'
         result['error'] = str(exc)[:400]
+        result['problem_kind'] = 'content' if isinstance(exc, (ValueError, ET.ParseError, KeyError, UnicodeError, TypeError)) else 'access'
         result['alerts'] = ['fetch-or-parse-error']
         if result['consecutive_failures'] >= 3:
             result['alerts'].append('repeated-failure')
     result['alert_streaks'] = {alert: previous.get('alert_streaks', {}).get(alert, 0) + 1
                                for alert in result.get('alerts', [])}
+    if not result.get('error'):
+        result.pop('problem_kind', None)
+    if result.get('alerts'):
+        result['incident_id'] = previous.get('incident_id') if previous.get('alerts') and previous.get('incident_id') else source['id'] + ':' + timestamp.isoformat()
+    else:
+        result.pop('incident_id', None)
     return result
 
 
@@ -235,12 +269,7 @@ def render(catalog, state):
               'within-window':'复核窗口内','review':'待复核','unknown':'未知'}
     timestamp = now()
     def usable(source):
-        row = state.get(source['id'], {})
-        checked = parse_date(row.get('checked_at'))
-        return bool(source.get('use_status') != 'historical-only' and source.get('endpoint') and checked and
-                    (timestamp-checked).total_seconds() <= max(24, source['interval_hours']*2)*3600 and
-                    row.get('access') == 'reachable' and row.get('content') == 'valid' and
-                    row.get('count', 0) > 0 and not row.get('alerts'))
+        return display_status(source, state.get(source['id'], {}), timestamp) == '入口可读取'
     active = [s for s in catalog if usable(s)]
     lines = ['# 来源目录', '', '## 当前可读取的公开入口', '',
              f'已验证可读取 {len(active)} 个；受限、异常及检查过期的来源单列在下方，不计入可用数量。', '',
@@ -314,16 +343,50 @@ def review_tasks(catalog, state, feedback, timestamp):
             reasons.discard('fetch-or-parse-error')
         if source.get('use_status') == 'historical-only':
             reasons.discard('review-freshness')
-        if baseline is None or (timestamp.date() - baseline.date()).days >= 30:
+        if source.get('review_interval_days') and (baseline is None or (timestamp.date() - baseline.date()).days >= source['review_interval_days']):
             reasons.add('periodic-review')
         if reasons:
             count = max(row.get('consecutive_failures', 0),
                         max((row.get('alert_streaks', {}).get(r, 0) for r in reasons), default=0))
-            tasks.append(dict(source_id=sid, reasons=sorted(reasons), checked_at=row.get('checked_at'),
+            incident = row.get('incident_id', sid + ':legacy')
+            if reasons == {'periodic-review'}:
+                incident = sid + ':periodic:' + str(latest or source.get('documentation_reviewed_on'))
+            problem_key = [sorted(reasons), row.get('problem_kind'), row.get('http_status')]
+            signature = hashlib.sha256(json.dumps([incident, problem_key, count // 3], sort_keys=True).encode()).hexdigest()[:20]
+            reviews_for_issue = [r for r in reviews if r.get('incident_id') == incident]
+            recent_review = reviews_for_issue[-1] if reviews_for_issue else {}
+            if recent_review.get('task_id') == signature:
+                continue
+            retry_after = parse_date(recent_review.get('retry_after'))
+            if recent_review.get('outcome') == 'blocked' and recent_review.get('problem_key') == problem_key and retry_after and timestamp < retry_after:
+                continue
+            tasks.append(dict(source_id=sid, task_id=signature, incident_id=incident,
+                              run_id=row.get('run_id'), reasons=sorted(reasons), problem_key=problem_key, checked_at=row.get('checked_at'),
                               last_reviewed_on=latest, error=row.get('error'),
                               consecutive_problem_checks=count,
-                              action='repair-required' if count >= 3 else 'review'))
-    return {'schema_version': 1, 'review_interval_days': 30, 'tasks': tasks}
+                              action='diagnose-required' if count >= 3 else 'review'))
+    return {'schema_version': 2, 'tasks': tasks}
+
+
+def run_checks(catalog, state, opener, timestamp, mode, run_id, evidence_dir=None, only=None, force=False, retry_failed=False, route='direct'):
+    state = json.loads(json.dumps(state))
+    for source in catalog:
+        if only and source['id'] != only:
+            continue
+        previous = dict(state.get(source['id'], {}))
+        if mode == 'scheduled' and previous.get('check_origin') != 'github-actions':
+            previous = {}  # A different execution environment is a different baseline.
+        if force or mode == 'validation' or (retry_failed and previous.get('consecutive_failures', 0)):
+            previous.pop('checked_at', None)
+        row = check(source, previous, opener, timestamp, route, run_id, evidence_dir)
+        if mode == 'validation':
+            # Candidate requests never advance production streaks or resolve incidents.
+            for field in ('consecutive_failures', 'alert_streaks', 'incident_id'):
+                row.pop(field, None)
+            row['run_kind'] = 'validation'
+        state[source['id']] = row
+        print(source['id'], row.get('access'), flush=True)
+    return state
 
 
 def main():
@@ -333,6 +396,10 @@ def main():
     parser.add_argument('--retry-failed', action='store_true', help='Retry currently failed sources before their normal interval')
     parser.add_argument('--force', action='store_true', help='Recheck public endpoints, ignoring the normal interval')
     parser.add_argument('--source', help='Check only this catalog source ID, retaining other observations')
+    parser.add_argument('--mode', choices=('scheduled', 'validation'), default='validation')
+    parser.add_argument('--state-dir', type=Path, default=ROOT / 'runtime')
+    parser.add_argument('--baseline', type=Path, help='Read-only previous production status.json')
+    parser.add_argument('--run-id', default=None)
     args = parser.parse_args()
     catalog = json.loads((ROOT / 'sources/catalog.json').read_text(encoding='utf-8'))
     ids = [s['id'] for s in catalog]
@@ -340,33 +407,38 @@ def main():
         raise ValueError('Duplicate source IDs')
     if args.source and args.source not in ids:
         parser.error('Unknown source ID')
-    state_path = ROOT / 'data/status.json'
-    state = json.loads(state_path.read_text(encoding='utf-8')) if state_path.exists() else {}
+    if args.mode == 'scheduled' and os.environ.get('GITHUB_ACTIONS') != 'true':
+        parser.error('Production rounds run only in GitHub Actions; use --mode validation locally')
+    state_path = args.state_dir / 'status.json'
+    baseline = args.baseline or state_path
+    state = json.loads(baseline.read_text(encoding='utf-8')) if baseline.exists() else {}
+    run_id = args.run_id or os.environ.get('GITHUB_RUN_ID') or now().strftime('local-%Y%m%dT%H%M%S%fZ')
+    if not re.fullmatch(r'[A-Za-z0-9_-]+', run_id):
+        parser.error('Invalid run ID')
+    started = now()
     if not args.render_only:
         # Ignore inherited persistent proxy configuration unless explicitly selected.
         proxy = {'https': args.proxy, 'http': args.proxy} if args.proxy else {}
         opener = urllib.request.build_opener(urllib.request.ProxyHandler(proxy))
-        timestamp = now()
-        for source in catalog:
-            if args.source and source['id'] != args.source:
-                continue
-            previous = dict(state.get(source['id'], {}))
-            if args.force or (args.retry_failed and previous.get('consecutive_failures', 0)):
-                previous.pop('checked_at', None)
-            state[source['id']] = check(source, previous, opener, timestamp, 'proxy' if args.proxy else 'direct')
-            print(source['id'], state[source['id']].get('access'), flush=True)
+        state = run_checks(catalog, state, opener, started, args.mode, run_id,
+                           args.state_dir / 'evidence', args.source, args.force, args.retry_failed, 'proxy' if args.proxy else 'direct')
         atomic(state_path, json.dumps(state, ensure_ascii=False, indent=2) + '\n')
-        atomic(ROOT / ('data/history/' + timestamp.strftime('%Y%m%dT%H%M%S%fZ') + '.json'), json.dumps(state, ensure_ascii=False, indent=2) + '\n')
-    atomic(ROOT / 'DIRECTORY.md', render(catalog, state))
-    issues = [{'id': k, 'alerts': v.get('alerts'), 'error': v.get('error'), 'checked_at': v.get('checked_at')}
-              for k, v in state.items() if v.get('alerts')]
-    atomic(ROOT / 'data/review-queue.json', json.dumps(issues, ensure_ascii=False, indent=2) + '\n')
+    atomic(args.state_dir / 'DIRECTORY.md', render(catalog, state))
     feedback = json.loads((ROOT / 'data/feedback.json').read_text(encoding='utf-8'))
     tasks = review_tasks(catalog, state, feedback, now())
-    atomic(ROOT / 'index.html', page(catalog, state, feedback, tasks, now()))
-    atomic(ROOT / 'data/maintenance-tasks.json', json.dumps(tasks, ensure_ascii=False, indent=2) + '\n')
+    atomic(args.state_dir / 'index.html', page(catalog, state, feedback, tasks, now()))
+    atomic(args.state_dir / 'maintenance-tasks.json', json.dumps(tasks, ensure_ascii=False, indent=2) + '\n')
+    code_sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    checked = [sid for sid, row in state.items() if row.get('run_id') == run_id and row.get('checked_at')]
+    valid = all(state[sid].get('access') == 'reachable' and state[sid].get('content') == 'valid' and not state[sid].get('alerts') for sid in checked)
+    manifest = dict(schema_version=2, run_id=run_id, run_kind=args.mode, status='completed',
+                    started_at=started.isoformat(), finished_at=now().isoformat(), code_sha=code_sha,
+                    catalog_sha256=hashlib.sha256((ROOT / 'sources/catalog.json').read_bytes()).hexdigest(),
+                    check_origin='github-actions' if os.environ.get('GITHUB_ACTIONS') == 'true' else os.environ.get('INTEL_SHELF_ORIGIN', 'local'),
+                    checked_sources=checked, live_check_passed=bool(checked) and valid,
+                    workflow_url=('https://github.com/' + os.environ['GITHUB_REPOSITORY'] + '/actions/runs/' + os.environ['GITHUB_RUN_ID']) if os.environ.get('GITHUB_REPOSITORY') and os.environ.get('GITHUB_RUN_ID') else None)
+    atomic(args.state_dir / 'run.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     print('AI maintenance tasks:', len(tasks['tasks']))
-    print('Review items:', len(issues))
 
 
 if __name__ == '__main__':

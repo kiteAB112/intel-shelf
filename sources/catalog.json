@@ -26,8 +26,7 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "cve-json",
-    "query_endpoint": "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={value}"
+    "check_profile": "nvd"
   },
   {
     "id": "cisa-kev",
@@ -58,7 +57,7 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "cve-json"
+    "check_profile": "cisa-kev"
   },
   {
     "id": "unit42",
@@ -87,8 +86,7 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "manual",
-    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+    "check_profile": "unit42"
   },
   {
     "id": "talos",
@@ -117,8 +115,7 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "manual",
-    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+    "check_profile": "talos"
   },
   {
     "id": "checkpoint",
@@ -147,8 +144,7 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "manual",
-    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+    "check_profile": "checkpoint"
   },
   {
     "id": "dfir-report",
@@ -177,8 +173,7 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "manual",
-    "query_note": "在该来源搜索目标CVE并阅读原始报告；RSS当前窗口不保证历史覆盖"
+    "check_profile": "dfir-report"
   },
   {
     "id": "threatfox",
@@ -208,8 +203,7 @@
       "ip",
       "domain",
       "url"
-    ],
-    "query_mode": "authenticated-api"
+    ]
   },
   {
     "id": "urlhaus",
@@ -239,8 +233,7 @@
       "ip",
       "domain",
       "url"
-    ],
-    "query_mode": "authenticated-api"
+    ]
   },
   {
     "id": "malwarebazaar",
@@ -269,8 +262,7 @@
     "capabilities": [
       "md5",
       "sha256"
-    ],
-    "query_mode": "authenticated-api"
+    ]
   },
   {
     "id": "openphish",
@@ -299,7 +291,7 @@
     "capabilities": [
       "url"
     ],
-    "query_mode": "feed-exact"
+    "check_profile": "openphish"
   },
   {
     "id": "tweetfeed",
@@ -336,7 +328,7 @@
     "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
     "review_note": "见 docs/ioc-source-review.md；仅按限定用途使用，不认可所有单条指标",
     "use_status": "candidate",
-    "query_mode": "feed-exact"
+    "check_profile": "tweetfeed"
   },
   {
     "id": "c2intel",
@@ -366,7 +358,7 @@
     "discovered_via": "https://github.com/kraloveckey/threat-intelligence-feeds",
     "review_note": "见 docs/ioc-source-review.md；仅按限定用途使用，不认可所有单条指标",
     "use_status": "candidate",
-    "query_mode": "feed-exact"
+    "check_profile": "c2intel"
   },
   {
     "id": "feodo",
@@ -399,7 +391,7 @@
     "review_note": "2026-11-03官方FAQ称当前无活跃C2且数据集为空；直接请求说明页确认横幅。JSON仍返回3月历史条目，原因未明，不再作为活跃C2源。",
     "use_status": "historical-only",
     "official_status_url": "https://feodotracker.abuse.ch/faq/",
-    "query_mode": "feed-exact"
+    "check_profile": "feodo"
   },
   {
     "id": "circl",
@@ -418,8 +410,6 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "cve-json",
-    "query_endpoint": "https://vulnerability.circl.lu/api/vulnerability/{value}",
     "access_review": "public-endpoint-candidate",
     "quality_review": "reviewed-for-targeted-cve-lookup",
     "documentation_reviewed_on": "2026-11-03",
@@ -429,7 +419,9 @@
     "terms_url": "https://vulnerability.circl.lu/about",
     "usage_scope": "public-reference",
     "use_status": "candidate",
-    "time_semantics": "漏洞记录发布时间/修改时间，不等于利用时间"
+    "time_semantics": "漏洞记录发布时间/修改时间，不等于利用时间",
+    "check_profile": "circl",
+    "probe_cve": "CVE-2024-3400"
   },
   {
     "id": "paloalto-psirt",
@@ -449,8 +441,6 @@
     "capabilities": [
       "cve"
     ],
-    "query_mode": "manual",
-    "query_note": "先根据漏洞记录确定厂商；匹配Palo Alto产品时查对应PSIRT公告",
     "access_review": "manual-reference",
     "quality_review": "reviewed-for-vendor-guidance",
     "documentation_reviewed_on": "2026-11-03",

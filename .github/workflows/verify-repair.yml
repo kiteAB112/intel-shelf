@@ -1,0 +1,55 @@
+name: Verify maintenance
+on:
+  push:
+    branches: ['maintenance/**']
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Source ID to validate; empty runs offline tests only
+        type: string
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: intel-shelf-code
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.9'
+      - name: Validate maintenance scope
+        if: github.event_name == 'push'
+        run: |
+          git fetch origin main
+          git show origin/main:scripts/verify_repair.py > "$RUNNER_TEMP/verify_repair.py"
+          python "$RUNNER_TEMP/verify_repair.py" prepare
+      - name: Test checker
+        run: python -m unittest discover -s tests -q
+      - name: Validate target source in Actions
+        env:
+          MANUAL_SOURCE: ${{ inputs.source }}
+        run: |
+          if [ -n "${REPAIR_SOURCE:-$MANUAL_SOURCE}" ]; then
+            python scripts/maintain.py --mode validation --source "${REPAIR_SOURCE:-$MANUAL_SOURCE}" --state-dir validation --run-id "${GITHUB_RUN_ID}"
+          fi
+      - name: Save verification evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: maintenance-check-${{ github.run_id }}
+          path: validation/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Promote verified maintenance
+        if: github.event_name == 'push'
+        run: |
+          git config user.name 'intel-shelf-actions'
+          git config user.email 'intel-shelf-actions@users.noreply.github.com'
+          python "$RUNNER_TEMP/verify_repair.py" promote

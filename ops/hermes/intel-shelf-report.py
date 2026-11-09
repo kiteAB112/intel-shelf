@@ -1,72 +1,49 @@
-"""Summarize the latest maintenance round for Hermes cron delivery."""
+"""Report Actions observations and maintenance decisions for QQ delivery."""
+import importlib.util
 import json
-import sqlite3
-import subprocess
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-root = Path.home() / "intel-shelf"
-cron = Path.home() / ".hermes/cron"
-zone = timezone(timedelta(hours=8))
-with sqlite3.connect(f"file:{cron / 'executions.db'}?mode=ro", uri=True) as db:
-    db.row_factory = sqlite3.Row
-    def latest(job):
-        return db.execute("SELECT * FROM executions WHERE job_id=? ORDER BY claimed_at DESC LIMIT 1", (job,)).fetchone()
-    check = latest("c3468924865d")
-    review = latest("e206aebe6a47")
+ROOT = Path(__file__).resolve().parents[2]
+spec = importlib.util.spec_from_file_location('watch', Path(__file__).with_name('intel-shelf-watch.py'))
+watch = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(watch)
 
-def stamp(value):
-    return datetime.fromisoformat(value).astimezone(zone).strftime("%m-%d %H:%M") if value else "未知"
 
-print("Intel Shelf 来源维护报告")
-for label, row in (("来源检查", check), ("AI复核", review)):
-    if row:
-        print(f"{label}：{row['status']}，启动 {stamp(row['started_at'] or row['claimed_at'])}，结束 {stamp(row['finished_at'])}")
+def main():
+    data = watch.sync()
+    run, state = data['run.json'], data['status.json']
+    tasks = data['maintenance-tasks.json']['tasks']
+    zone = timezone(timedelta(hours=8))
+    stamp = datetime.fromisoformat(run['finished_at']).astimezone(zone)
+    print('Intel Shelf 来源适配维护报告')
+    print(f"最近完整检查：{stamp:%m-%d %H:%M}，GitHub Actions 轮次 {run['run_id']}，代码 {run['code_sha'][:7]}")
+    elapsed = datetime.fromisoformat(run['finished_at']) - datetime.fromisoformat(run['started_at'])
+    print(f"本轮实际检查 {len(run['checked_sources'])} 个来源，耗时 {elapsed.total_seconds():.1f}s。")
+    if datetime.now(timezone.utc) - datetime.fromisoformat(run['finished_at']) > timedelta(hours=12):
+        print('最近完整检查已超过12小时；后续工作流是否失败或未执行，请查看 Actions。')
+    feedback = json.loads((ROOT / 'data/feedback.json').read_text(encoding='utf-8'))
+    handled = {r.get('task_id') for r in feedback if r.get('task_id')}
+    pending = [t for t in tasks if t['task_id'] not in handled]
+    print(f'来源档案 {len(state)} 个，当前未处理维护待办 {len(pending)} 项。')
+    monitor_path = ROOT / 'runtime' / 'monitor-status.json'
+    monitor = json.loads(monitor_path.read_text(encoding='utf-8')) if monitor_path.exists() else {}
+    if monitor.get('run_id') == run['run_id']:
+        print('本轮接单监控：已触发 AI，处理进度见维护记录。' if monitor.get('model_requested') else '本轮接单监控：待办无新增触发，未调用模型。')
     else:
-        print(f"{label}：暂无执行记录")
-if check and review and review["claimed_at"] < check["claimed_at"]:
-    print("本轮AI复核尚无运行记录，以上为上一轮结果。")
-state = json.loads((root / "data/status.json").read_text())
-tasks = json.loads((root / "data/maintenance-tasks.json").read_text())["tasks"]
-print(f"来源档案 {len(state)} 个，当前AI待办 {len(tasks)} 项。")
-for sid, row in state.items():
-    if row.get("alerts"):
-        attempts = row.get("request_attempts", [])
-        elapsed = " / ".join(str(a["elapsed_ms"]) + "ms" for a in attempts if "elapsed_ms" in a)
-        status = row.get("http_status", "未知")
-        print(f"- {sid}：{', '.join(row['alerts'])}；HTTP {status}；耗时 {elapsed or '未记录'}；检查于 {stamp(row.get('checked_at'))}")
-for task in tasks:
-    print(f"待办 {task['source_id']}：{', '.join(task['reasons'])}")
-if review:
-    output_dir = cron / "output" / review["job_id"]
-    outputs = sorted(output_dir.glob("*.md"))
-    if outputs:
-        text = outputs[-1].read_text()
-        response = text.split("## Response\n", 1)[-1].strip() if "## Response\n" in text else ""
-        if response == "[SILENT]":
-            print("AI复核无新增报告。")
-        elif response:
-            print("AI结果摘要：" + response[:1100])
-        elif 'no_change (agent run suppressed)' in text:
-            print('AI复核：待办触发条件无变化，本轮未调用模型。')
-        else:
-            print("AI输出未包含结果正文，请查运行记录。")
+        print('本轮接单监控尚无记录，暂不判断模型是否被调用。')
+    for sid, row in state.items():
+        if row.get('alerts'):
+            print(f"- {sid}：{', '.join(row['alerts'])}；{row.get('error', '需结合来源语义判断')}；连续失败 {row.get('consecutive_failures', 0)} 轮")
+    for item in feedback:
+        if item.get('task_id') and item.get('reviewed_on') == datetime.now(zone).date().isoformat():
+            print(f"维护 {item['source_id']}：{item.get('outcome')}；{item.get('decision')}")
+            print('改动与依据：' + str(item.get('changes', [])) + '；' + item.get('why', ''))
+            print('验证：' + str(item.get('validation', '未记录')))
+            print('Actions 验证：' + str(item.get('actions_validation', '尚未记录')))
+    print('正式状态已从 GitHub state 分支读取；修复仅在 Actions 验证后进入 main。')
+    print(run.get('workflow_url') or 'https://github.com/kiteAB112/intel-shelf/actions')
 
-feedback = json.loads((root / 'data/feedback.json').read_text())
-for item in feedback:
-    verified_today = item.get('verified_at') and datetime.fromisoformat(item['verified_at']).astimezone(zone).date() == datetime.now(zone).date()
-    if item.get('changes') and (item.get('reviewed_on') == datetime.now(zone).date().isoformat() or verified_today):
-        print(f"维护变更 {item['source_id']}：{item.get('outcome', '未知')}")
-        print('改动：' + '；'.join(item['changes']))
-        print('依据：' + item.get('why', '未记录'))
-        print('验证：' + str(item.get('validation', '未记录')))
-def git(*args):
-    return subprocess.check_output(["git", "-C", str(root), *args], text=True, timeout=25).strip()
-try:
-    head = git("rev-parse", "HEAD")
-    remote = git("ls-remote", "origin", "refs/heads/main").split()[0]
-    dirty = bool(git("status", "--porcelain"))
-    print(f"GitHub：{'已同步' if head == remote and not dirty else '存在待同步改动或分支差异'}，云端提交 {head[:7]}。")
-except (subprocess.SubprocessError, IndexError) as exc:
-    print(f"GitHub同步状态核验失败：{type(exc).__name__}")
-print("仓库 https://github.com/kiteAB112/intel-shelf")
+
+if __name__ == '__main__':
+    main()

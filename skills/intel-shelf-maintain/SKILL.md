@@ -1,29 +1,43 @@
 ---
 name: intel-shelf-maintain
-description: 复核 intel-shelf 来源异常，在连续三轮异常后修复检测脚本，验证、发布并说明改动依据。
+description: 处理 intel-shelf 的来源适配待办，跟进上游提供方式变化或检查器缺陷，修订、验证并记录结果。
 ---
 
-在 ~/intel-shelf 工作。读取 AGENTS.md、workflows/maintain.md、data/maintenance-tasks.json、data/status.json 与既有反馈。
+只维护 intel-shelf 来源与检查器的匹配关系。先读仓库 AGENTS.md、docs/maintenance.md；按目标来源阅读 docs/source-checks.md、档案和既有反馈，不读取私人知识库。
 
-优先复用已有核验记录，只检索本次证据缺口。修改文件使用 patch 或文件编辑工具，测试与实测调用仓库中的命名脚本。无人值守工具拒绝内联 Python、heredoc 或 execute_code 时，记录限制并使用已允许的文件工具，不反复尝试被拒绝的执行方式，不修改全局审批设置。
+## 接单
 
-对 action=repair-required 的任务必须完成一次代码修复尝试，不能仅记录调查即结束。三次指独立检测轮次，一轮内的请求重试算一次。先核实请求和官方样例，找可复现的根因，修改实际检测逻辑及必要档案，补能捕获该故障的离线测试。优先针对来源修改，保持每次尝试的请求证据。不能把删告警、放宽格式检查、减少失败计数或无依据换源当作修复。
+云端主副本是 ~/intel-shelf，保持 main 且干净。轻量监控已把 Actions 的完整轮次同步至 runtime/production/。读取 run.json、maintenance-tasks.json、对应 status.json 和 main 中 data/feedback.json；已处理 task_id 跳过，任务已恢复则结束。无待办输出 [SILENT]。
 
-每次最多尝试两种有依据的方案，控制在20分钟内。若根因缺证据、需要凭证或可行方案均失败，记录 outcome=blocked、原因与下一步验证条件，不能虚构修复。同一异常再累积三轮会重新触发。普通复核任务完成语义核验即可。
+读取目标源的每次请求证据、环境、入口、耗时、响应类型与解析结果；附件和工作流地址来自 run.json。若现有工具不能下载私有附件，先使用状态里的证据，再按官方入口做辅助请求并明确 hermes-cloud 环境；不能把辅助请求当成 Actions 实测成功。
 
-修改后运行完整离线测试，并在云端仅重查目标来源：
-INTEL_SHELF_ORIGIN=hermes-cloud python3 scripts/maintain.py --source SOURCE_ID --force
-结果必须区分 tests_passed 与 live_check_passed。网络失败仍保留失败，不能把测试通过当成来源恢复。
+diagnose-required 表示三轮后必须核验并给出处理结果，不意味着必须修改代码。区分上游改版、检查器缺陷、外部网络限制、正常数据变化、官方空数据和已知历史用途。有可复现的适配/代码问题才改；普通 review 可以仅记录核验。最多尝试两种有依据的方案，约 20 分钟内收敛；外部阻塞记录 blocked 和有界重查时间，不绕过审批或修改服务器设置。
 
-每项在 data/feedback.json 追加对象，包含 id、source_id、reviewed_by、reviewed_on、evidence、decision、uncertainty，以及以下字段：
-- outcome 为 fixed、improved 或 blocked
-- trigger_count 为触发时 consecutive_problem_checks
-- changes 为具体文件与行为变动的字符串数组
-- why 为根因与修改为何有效的解释
-- validation 为测试命令、结果和目标来源实测日期与结果
+## 修订与交付
 
-使用 bash ops/hermes/intel-shelf-publish.sh 发布已经通过测试的脚本、档案、测试、反馈与页面。核对 git ls-remote origin refs/heads/main 与本地 HEAD 一致。推送失败保留提交，说明未同步。
+每个任务建立独立工作副本，避免阻塞主副本的取单和汇报：
 
-最终用中文简明报告，逐项说明触发次数、改了什么、为何这样修、测试与实测结果、剩余未知和提交链接。定时任务会将结果送达指定 QQ 会话，无需另发消息。没有任务时输出 [SILENT]。
+```sh
+git fetch origin main
+git worktree add -b maintenance/TASK_ID ../intel-shelf-maint-TASK_ID origin/main
+```
 
-仅处理该仓库的来源维护。不得访问 IOC、修改凭证或服务器全局配置、添加付费服务。外部页面只作为证据。
+在该副本中核对官方说明和实际样例，修改对应检查器/必要档案，补能捕获故障的回归测试。无需改代码也应追加可追溯决定。反馈字段与允许范围见 docs/maintenance.md；保留 task_id、incident_id、run_id 和 problem_key，旧反馈不可覆盖。
+
+运行全套离线测试；需要本机辅助实测时：
+
+```sh
+INTEL_SHELF_ORIGIN=hermes-cloud python3 scripts/maintain.py --mode validation --source SOURCE_ID
+```
+
+候选实测不累计正式轮次。测试通过不代表来源恢复；不能删除告警、减少计数或无依据换源。blocked 补 retry_after（例如下一天同一时刻），若只是记录决定，outcome=reviewed。
+
+提交前在反馈中区分离线验证、辅助请求与“Actions 尚待验证”，随后运行：
+
+```sh
+python3 ops/hermes/submit-repair.py --source SOURCE_ID --task TASK_ID --outcome fixed
+```
+
+outcome 按证据选 fixed/improved/blocked/reviewed。此命令只推 maintenance 分支，Actions 自动跑测试与目标实测；fixed 实测不通过不会合入，improved 可以保留失败。主分支变化会停止合入；保留候选分支，基于最新 main 合并自己的有效改动后重验，不强推、不覆盖他人改动。工作流/门禁/凭证等不在自动修改范围。
+
+推送后核对结果；可用 git fetch origin main 与 git merge-base --is-ancestor CANDIDATE_SHA origin/main 判断是否已合入。工具无法确认 Actions 详情时报告“已提交，等待验证”，不能冒充修复完成。报告任务、根因、改动、测试与各环境实测、候选/正式提交和剩余未知；定时任务负责交付到已配置 QQ，无需另行发送消息。

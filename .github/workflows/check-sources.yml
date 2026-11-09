@@ -1,0 +1,46 @@
+name: Check sources
+on:
+  schedule:
+    - cron: '17 0,6,12,18 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: intel-shelf-state
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.9'
+      - name: Test checker
+        run: python -m unittest discover -s tests -q
+      - name: Read previous Actions state
+        run: |
+          mkdir -p baseline
+          if git ls-remote --exit-code --heads origin state > /dev/null; then
+            git fetch origin state
+            git show FETCH_HEAD:status.json > baseline/status.json
+          fi
+      - name: Check due sources
+        run: python scripts/maintain.py --mode scheduled --baseline baseline/status.json --state-dir runtime --run-id "${GITHUB_RUN_ID}"
+      - name: Save request evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: source-check-${{ github.run_id }}
+          path: runtime/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Publish completed round
+        run: |
+          git config user.name 'intel-shelf-actions'
+          git config user.email 'intel-shelf-actions@users.noreply.github.com'
+          python scripts/publish_state.py runtime

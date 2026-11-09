@@ -45,14 +45,14 @@ class HealthTests(unittest.TestCase):
         r = m.check(dict(self.source, endpoint=None), {}, None, self.time)
         self.assertEqual(r['access'], 'needs-auth-or-access-review')
 
-    def test_three_failures_require_repair_including_parse_errors(self):
+    def test_three_failures_require_diagnosis_including_parse_errors(self):
         for access in ('reachable', 'fetch-failed'):
             state = {'test': dict(access=access, consecutive_failures=2, alerts=['fetch-or-parse-error'])}
             source = dict(self.source, documentation_reviewed_on='2026-11-02')
             self.assertEqual(m.review_tasks([source], state, [], self.time)['tasks'], [])
             state['test']['consecutive_failures'] = 3
             task = m.review_tasks([self.source], state, [], self.time)['tasks'][0]
-            self.assertEqual(task['action'], 'repair-required')
+            self.assertEqual(task['action'], 'diagnose-required')
             self.assertEqual(task['consecutive_problem_checks'], 3)
 
     def test_content_alert_streak_increments_only_on_real_checks(self):
@@ -71,7 +71,7 @@ class HealthTests(unittest.TestCase):
         skipped = m.check(self.source, row, None, self.time + timedelta(hours=2, minutes=1))
         self.assertEqual(skipped['alert_streaks']['empty-data'], 3)
         task = m.review_tasks([self.source], {'test': row}, [], self.time)['tasks'][0]
-        self.assertEqual(task['action'], 'repair-required')
+        self.assertEqual(task['action'], 'diagnose-required')
 
     def test_interval_does_not_fake_new_check(self):
         previous = dict(checked_at=self.time.isoformat(), access='reachable')
