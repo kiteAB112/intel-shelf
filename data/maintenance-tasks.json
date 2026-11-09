@@ -1,18 +1,5 @@
 {
   "schema_version": 1,
   "review_interval_days": 30,
-  "tasks": [
-    {
-      "source_id": "cisa-kev",
-      "reasons": [
-        "fetch-or-parse-error",
-        "repeated-failure"
-      ],
-      "checked_at": "2026-11-08T16:05:56.317165+00:00",
-      "last_reviewed_on": "2026-11-08",
-      "error": "HTTP Error 403: Forbidden",
-      "consecutive_problem_checks": 7,
-      "action": "repair-required"
-    }
-  ]
+  "tasks": []
 }
