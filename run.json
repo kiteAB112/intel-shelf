@@ -1,1 +1,9 @@
-{"run_kind": "scheduled", "status": "completed", "run_id": "r1", "code_sha": "3467faeb13bc4e0215d3803d30f91751938a816f", "started_at": "2026-11-09T00:00:00Z"}
+{
+  "run_kind": "test",
+  "started_at": "2026-11-09T00:00:00Z",
+  "status": "invalid-test-snapshot",
+  "note": "Invalid isolated-test output; not a production check. Awaiting first real Actions round.",
+  "code_sha": "6af04df3bc66ce8a2b4976d96c7335372918e723",
+  "run_id": "invalid-test",
+  "schema_version": 2
+}
