@@ -277,7 +277,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-08T12:17:50.004206+00:00",
+    "evaluated_at": "2026-11-09T00:17:49.157834+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -286,7 +286,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-08T12:17:50.004206+00:00",
+    "evaluated_at": "2026-11-09T00:17:49.157834+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -295,7 +295,7 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-08T12:17:50.004206+00:00",
+    "evaluated_at": "2026-11-09T00:17:49.157834+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -344,101 +344,86 @@
   },
   "tweetfeed": {
     "id": "tweetfeed",
-    "checked_at": "2026-11-08T12:17:50.004206+00:00",
+    "checked_at": "2026-11-09T00:17:49.157834+00:00",
     "check_origin": "hermes-cloud",
-    "alerts": [
-      "fetch-or-parse-error"
-    ],
+    "alerts": [],
     "request_attempts": [
       {
-        "started_at": "2026-11-08T12:18:26.816957+00:00",
+        "started_at": "2026-11-09T00:17:49.158617+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
-        "outcome": "failed",
-        "error": "<urlopen error _ssl.c:1064: The handshake operation timed out>",
-        "at": "2026-11-08T12:18:52.053938+00:00",
-        "elapsed_ms": 25237
-      },
-      {
-        "started_at": "2026-11-08T12:18:52.053963+00:00",
-        "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
-        "route": "direct",
-        "outcome": "failed",
-        "error": "The read operation timed out",
-        "at": "2026-11-08T12:19:29.787086+00:00",
-        "elapsed_ms": 37733
+        "http_status": 200,
+        "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+        "content_type": "text/plain; charset=utf-8",
+        "outcome": "received",
+        "bytes_read": 218456,
+        "at": "2026-11-09T00:17:50.915872+00:00",
+        "elapsed_ms": 1757
       }
     ],
-    "access": "fetch-failed",
-    "consecutive_failures": 2,
-    "count": 1830,
+    "access": "reachable",
+    "consecutive_failures": 0,
+    "count": 1708,
     "samples": [
       {
-        "type": "domain",
-        "value": "poiwalsdas[.]com",
-        "reported_at": "2026-11-07 09:32:11",
-        "reporter": "masaomi346",
-        "tags": [
-          "#malware",
-          "#phishing"
-        ],
-        "reference": "https://x.com/masaomi346/status/2118999948138348926",
+        "type": "sha256",
+        "value": "75f95037c962b4c4ccde50de6d0ac908714441c4da0296c1e89f4abb2a1468ed",
+        "reported_at": "2026-11-08 21:17:47",
+        "reporter": "skocherhan",
+        "tags": [],
+        "reference": "https://x.com/skocherhan/status/2119539907328651628",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
         "type": "url",
-        "value": "hxxps://poiwalsdas[.]com/downcb",
-        "reported_at": "2026-11-07 09:32:11",
-        "reporter": "masaomi346",
-        "tags": [
-          "#malware",
-          "#phishing"
-        ],
-        "reference": "https://x.com/masaomi346/status/2118999948138348926",
+        "value": "hxxp://94[.]103[.]2[.]76",
+        "reported_at": "2026-11-08 20:57:53",
+        "reporter": "smica83",
+        "tags": [],
+        "reference": "https://x.com/smica83/status/2119534899258392627",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
-        "type": "domain",
-        "value": "poiwamsda[.]com",
-        "reported_at": "2026-11-07 09:32:11",
-        "reporter": "masaomi346",
-        "tags": [
-          "#malware",
-          "#phishing"
-        ],
-        "reference": "https://x.com/masaomi346/status/2118999948138348926",
+        "type": "url",
+        "value": "hxxp://188[.]253[.]24[.]154",
+        "reported_at": "2026-11-08 20:57:53",
+        "reporter": "smica83",
+        "tags": [],
+        "reference": "https://x.com/smica83/status/2119534899258392627",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       }
     ],
-    "latest_item_at": "2026-11-07T09:32:11+00:00",
-    "sha256": "18e54a2674d562afa895953421e20e754df5a2007907f985bdc447c0dfae87a5",
+    "latest_item_at": "2026-11-08T21:17:47+00:00",
+    "sha256": "a2dadf56b27a2cbad4bd599bac2781d463c418a18fc9646aa261a0065598ab51",
     "changed": true,
-    "last_content_change_at": "2026-11-07T12:17:49.868313+00:00",
-    "freshness": "unknown",
-    "content": "not-validated",
-    "last_success_at": "2026-11-07T12:17:49.868313+00:00",
+    "last_content_change_at": "2026-11-09T00:17:49.157834+00:00",
+    "freshness": "within-window",
+    "content": "valid",
+    "last_success_at": "2026-11-09T00:17:49.157834+00:00",
     "indicator_types": {
-      "domain": 583,
-      "url": 674,
-      "sha256": 204,
-      "ip": 343,
-      "md5": 26
+      "domain": 533,
+      "url": 625,
+      "ip": 346,
+      "sha256": 180,
+      "md5": 24
     },
     "time_basis": "report-time",
     "upstream_status_counts": {},
-    "reference_count": 1830,
-    "total_record_count": 1830,
+    "reference_count": 1708,
+    "total_record_count": 1708,
     "rejected_record_count": 0,
     "rejected_samples": [],
-    "record_count": 1830,
-    "unique_indicator_count": 1796,
-    "error": "The read operation timed out"
+    "record_count": 1708,
+    "unique_indicator_count": 1677,
+    "http_status": 200,
+    "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
+    "alert_streaks": {}
   },
   "c2intel": {
     "id": "c2intel",
@@ -632,7 +617,7 @@
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-08T12:17:50.004206+00:00",
+    "evaluated_at": "2026-11-09T00:17:49.157834+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
