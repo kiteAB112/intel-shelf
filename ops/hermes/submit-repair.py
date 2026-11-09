@@ -19,7 +19,7 @@ def main():
     parser.add_argument('--outcome', choices=('fixed', 'improved', 'blocked', 'reviewed'), required=True)
     args = parser.parse_args()
     if not re.fullmatch('[a-f0-9]{20}', args.task):
-        parser.error('Task ID must come from the current maintenance queue')
+        parser.error('Task ID must come from the current maintenance queue or weekly review plan')
     git('fetch', 'origin', 'main')
     base = git('rev-parse', 'origin/main')
     if git('rev-parse', 'HEAD') != base:
