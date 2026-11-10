@@ -42,7 +42,7 @@ def main():
             print('验证：' + str(item.get('validation', '未记录')))
             print('Actions 验证：' + str(item.get('actions_validation', '尚未记录')))
     print('正式状态已从 GitHub state 分支读取；修复仅在 Actions 验证后进入 main。')
-    print(run.get('workflow_url') or 'https://github.com/kiteAB112/intel-shelf/actions')
+    print(run.get('workflow_url') or '暂无正式工作流链接；请检查 run.json。')
 
 
 if __name__ == '__main__':

@@ -16,3 +16,11 @@ __pycache__/
 /runtime/
 /baseline/
 /validation/
+
+# Deployment-specific files and credentials stay on the operator's machine.
+/local/
+/ops/hermes/*.local.*
+*.pem
+*.key
+id_rsa
+id_ed25519

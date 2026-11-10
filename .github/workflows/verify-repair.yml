@@ -11,7 +11,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: intel-shelf-code
+  group: intel-shelf-main-writes
   cancel-in-progress: false
 jobs:
   verify:

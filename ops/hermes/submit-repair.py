@@ -43,7 +43,7 @@ def main():
     git('push', '-u', 'origin', branch)
     print('Submitted candidate:', git('rev-parse', 'HEAD'))
     print('Actions will test and recheck the target before fast-forward promotion; inspect the workflow result before claiming recovery.')
-    print('https://github.com/kiteAB112/intel-shelf/actions')
+    print('Inspect this repository Actions page for the verification result.')
 
 
 if __name__ == '__main__':

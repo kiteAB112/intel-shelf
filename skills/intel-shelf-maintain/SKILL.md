@@ -7,7 +7,7 @@ description: 处理 intel-shelf 的来源适配待办及每周全量脚本审阅
 
 ## 接单
 
-云端主副本是 ~/intel-shelf，保持 main 且干净。先识别任务模式：普通接单按本节处理；提示词或预检输出标明 mode=weekly-audit 时执行下节全量审阅，不能因普通队列为空而结束。普通接单每小时轻量同步 GitHub 的完整轮次至 runtime/production/。读取 run.json、maintenance-tasks.json、对应 status.json 和 main 中 data/feedback.json；已处理 task_id 跳过，任务已恢复则结束。仅普通接单无待办时输出 [SILENT]。
+任务 workdir 是项目主副本（部署时指定），保持 main 且干净。先识别任务模式：普通接单按本节处理；提示词或预检输出标明 mode=weekly-audit 时执行下节全量审阅，不能因普通队列为空而结束。普通接单每小时轻量同步 GitHub 的完整轮次至 runtime/production/。读取 run.json、maintenance-tasks.json、对应 status.json 和 main 中 data/feedback.json；已处理 task_id 跳过，任务已恢复则结束。仅普通接单无待办时输出 [SILENT]。
 
 读取目标源的每次请求证据、环境、入口、耗时、响应类型与解析结果；附件和工作流地址来自 run.json。若现有工具不能下载私有附件，先使用状态里的证据，再按官方入口做辅助请求并明确 hermes-cloud 环境；不能把辅助请求当成 Actions 实测成功。
 
@@ -48,6 +48,6 @@ INTEL_SHELF_ORIGIN=hermes-cloud python3 scripts/maintain.py --mode validation --
 python3 ops/hermes/submit-repair.py --source SOURCE_ID --task TASK_ID --outcome fixed
 ```
 
-outcome 按证据选 fixed/improved/blocked/reviewed。此命令只推 maintenance 分支，Actions 自动跑测试与目标实测；fixed 实测不通过不会合入，improved 可以保留失败。主分支变化会停止合入；保留候选分支，基于最新 main 合并自己的有效改动后重验，不强推、不覆盖他人改动。工作流/门禁/凭证等不在自动修改范围。
+outcome 按证据选 fixed/improved/blocked/reviewed。此命令只推 maintenance 分支，Actions 自动跑测试与目标实测；fixed 实测不通过不会合入，improved 可以保留失败。仅 README 自动状态区的变化可由验收门禁合并保留；其他主分支变化会停止合入。保留候选分支，基于最新 main 合并自己的有效改动后重验，不强推、不覆盖他人改动。工作流/门禁/凭证等不在自动修改范围。
 
 推送后核对结果；可用 git fetch origin main 与 git merge-base --is-ancestor CANDIDATE_SHA origin/main 判断是否已合入。工具无法确认 Actions 详情时报告“已提交，等待验证”，不能冒充修复完成。报告任务、根因、改动、测试与各环境实测、候选/正式提交和剩余未知；定时任务负责交付到已配置 QQ，无需另行发送消息。

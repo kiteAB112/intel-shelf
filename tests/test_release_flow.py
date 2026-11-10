@@ -13,6 +13,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import publish_state
 import verify_repair
+from readme_status import START, END, replace_status
 
 
 class ReleaseFlow(unittest.TestCase):
@@ -30,6 +31,7 @@ class ReleaseFlow(unittest.TestCase):
         self.git('remote', 'add', 'origin', str(self.bare))
         self.write('sources/catalog.json', [dict(id='target', endpoint='https://example.test/feed')])
         self.write('data/feedback.json', [dict(source_id='old', decision='preserved')])
+        (self.repo / 'README.md').write_text('# Project\n\n' + START + '\nold status\n' + END + '\n\nHuman text.\n', encoding='utf-8')
         self.git('add', '.')
         self.git('commit', '-m', 'base')
         self.git('push', '-u', 'origin', 'main')
@@ -107,6 +109,45 @@ class ReleaseFlow(unittest.TestCase):
         self.git('commit', '-m', 'rewrite history')
         with patch.object(verify_repair, 'ROOT', self.repo):
             with self.assertRaisesRegex(ValueError, 'rewrite history'):
+                verify_repair.prepare()
+
+    def advance_main(self, path, body):
+        self.git('checkout', 'main')
+        (self.repo / path).write_text(body, encoding='utf-8')
+        self.git('add', '--', path)
+        self.git('commit', '-m', 'concurrent main change')
+        self.git('push', 'origin', 'main')
+        latest = self.git('rev-parse', 'HEAD')
+        self.git('checkout', 'maintenance/task')
+        return latest
+
+    def test_readme_status_refresh_keeps_the_candidate_publishable(self):
+        candidate = self.candidate('improved')
+        original = (self.repo / 'README.md').read_text(encoding='utf-8')
+        latest_text = replace_status(original, 'new production status')
+        latest = self.advance_main('README.md', latest_text)
+        self.write('validation/run.json', dict(code_sha=candidate, run_kind='validation', checked_sources=['target'],
+                                              live_check_passed=False, workflow_url='https://example.test/run', finished_at='2026-11-09T00:00:00Z'))
+        with patch.object(verify_repair, 'ROOT', self.repo), contextlib.redirect_stdout(io.StringIO()):
+            verify_repair.promote()
+        self.assertEqual((self.repo / 'README.md').read_text(encoding='utf-8'), latest_text)
+        self.git('merge-base', '--is-ancestor', candidate, 'HEAD')
+        self.git('merge-base', '--is-ancestor', latest, 'HEAD')
+        self.assertEqual(self.git('ls-remote', 'origin', 'refs/heads/main').split()[0], self.git('rev-parse', 'HEAD'))
+
+    def test_human_readme_change_requires_revalidation(self):
+        self.candidate('improved')
+        original = (self.repo / 'README.md').read_text(encoding='utf-8')
+        self.advance_main('README.md', original + '\nNew human explanation.\n')
+        with patch.object(verify_repair, 'ROOT', self.repo):
+            with self.assertRaisesRegex(ValueError, 'Main changed'):
+                verify_repair.prepare()
+
+    def test_code_change_on_main_requires_revalidation(self):
+        self.candidate('improved')
+        self.advance_main('sources/catalog.json', '[{"id":"target","endpoint":"https://example.test/changed"}]')
+        with patch.object(verify_repair, 'ROOT', self.repo):
+            with self.assertRaisesRegex(ValueError, 'Main changed'):
                 verify_repair.prepare()
 
     def test_gate_and_workflow_changes_are_outside_auto_maintenance_scope(self):

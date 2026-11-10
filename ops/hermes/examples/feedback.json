@@ -1,0 +1,21 @@
+{
+  "example_only": true,
+  "description": "Synthetic record illustrating a parser adaptation, not an observed incident. Replace all identities and evidence before appending a real record to data/feedback.json.",
+  "record": {
+    "source_id": "cisa-kev",
+    "task_id": "0123456789abcdef0123",
+    "incident_id": "example-incident",
+    "run_id": "example-run",
+    "reviewed_by": "maintainer",
+    "reviewed_on": "2026-01-01",
+    "reasons": ["fetch-or-parse-error", "repeated-failure"],
+    "problem_key": [["fetch-or-parse-error", "repeated-failure"], "content", 200],
+    "evidence": ["https://example.test/official-change-notice"],
+    "decision": "示例：根据已核实的上游字段变化修订解析器",
+    "why": "示例：旧解析器无法读取新结构；失败样例能稳定复现",
+    "changes": ["更新对应解析规则", "加入去武器化最小回归样例"],
+    "validation": {"offline": "example-only", "actions": "pending"},
+    "uncertainty": "目标来源是否恢复，仍需候选 Actions 实测和后续正式观察",
+    "outcome": "fixed"
+  }
+}

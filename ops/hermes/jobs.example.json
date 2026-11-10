@@ -1,0 +1,36 @@
+{
+  "description": "Deployment blueprint, not a replacement for Hermes cron/jobs.json. Read prompt_file when creating an agent job. Replace workdir locally.",
+  "jobs": [
+    {
+      "name": "intel-shelf-review",
+      "schedule": "47 * * * *",
+      "timezone": "Asia/Shanghai",
+      "workdir": "/absolute/path/to/intel-shelf",
+      "monitor_script": "intel-shelf-watch.py",
+      "skills": ["intel-shelf-maintain"],
+      "prompt_file": "ops/hermes/prompts/review.md",
+      "no_agent": false,
+      "deliver": "local"
+    },
+    {
+      "name": "intel-shelf-weekly-audit",
+      "schedule": "30 10 * * 0",
+      "timezone": "Asia/Shanghai",
+      "workdir": "/absolute/path/to/intel-shelf",
+      "script": "intel-shelf-weekly.py",
+      "skills": ["intel-shelf-maintain"],
+      "prompt_file": "ops/hermes/prompts/weekly-audit.md",
+      "no_agent": false,
+      "deliver": "local"
+    },
+    {
+      "name": "intel-shelf-report",
+      "schedule": "17 9,21 * * *",
+      "timezone": "Asia/Shanghai",
+      "workdir": "/absolute/path/to/intel-shelf",
+      "script": "intel-shelf-report.py",
+      "no_agent": true,
+      "deliver": "local"
+    }
+  ]
+}

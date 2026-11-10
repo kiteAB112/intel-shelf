@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: intel-shelf-state
+  group: intel-shelf-main-writes
   cancel-in-progress: false
 jobs:
   check:
@@ -44,3 +44,7 @@ jobs:
           git config user.name 'intel-shelf-actions'
           git config user.email 'intel-shelf-actions@users.noreply.github.com'
           python scripts/publish_state.py runtime
+      - name: Update README source status
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: python scripts/publish_readme.py runtime --repository "$REPOSITORY"

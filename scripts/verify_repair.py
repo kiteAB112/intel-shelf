@@ -9,7 +9,7 @@ ROOT = Path.cwd()
 
 
 def git(*args):
-    return subprocess.check_output(['git', *args], cwd=ROOT, text=True).strip()
+    return subprocess.check_output(['git', *args], cwd=ROOT, text=True, encoding='utf-8').strip()
 
 
 def allowed(path):
@@ -21,7 +21,7 @@ def allowed(path):
 def prepare():
     git('fetch', 'origin', 'main')
     repair = json.loads((ROOT / 'data/repair.json').read_text(encoding='utf-8'))
-    if repair['base_sha'] != git('rev-parse', 'origin/main'):
+    if not only_readme_status_changed(repair['base_sha'], git('rev-parse', 'origin/main')):
         raise ValueError('Main changed; rebase maintenance onto latest main and revalidate')
     changed = git('diff', '--name-only', repair['base_sha'], 'HEAD').splitlines()
     if not changed or not all(allowed(path) for path in changed):
@@ -67,11 +67,39 @@ def promote():
     feedback_path.write_text(json.dumps(feedback, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     git('add', '--', 'data/feedback.json')
     git('commit', '-m', 'Record Actions validation for ' + repair['task_id'])
-    # Fast-forward push fails if main changed during validation; never force-push.
+    git('fetch', 'origin', 'main')
+    latest = git('rev-parse', 'origin/main')
+    if not only_readme_status_changed(repair['base_sha'], latest):
+        raise ValueError('Main changed outside generated source status; revalidate')
+    if latest != repair['base_sha']:
+        git('merge', '--no-edit', latest)
+    # Push remains fast-forward only; an unexpected concurrent change fails safely.
     git('push', 'origin', 'HEAD:refs/heads/main')
     print(json.dumps(dict(code_sha=result['code_sha'], outcome=repair['outcome'],
                           tests_passed=True, live_check_passed=result['live_check_passed'],
                           workflow_url=result['workflow_url']), ensure_ascii=False))
+
+
+def only_readme_status_changed(base, latest):
+    """Permit generated status drift, never human README edits or code changes.
+
+    Keep this gate self-contained: Actions loads this file from trusted main,
+    not imports from the candidate checkout.
+    """
+    if base == latest:
+        return True
+    ancestor = subprocess.run(['git', 'merge-base', '--is-ancestor', base, latest], cwd=ROOT)
+    if ancestor.returncode != 0 or git('diff', '--name-only', base, latest).splitlines() != ['README.md']:
+        return False
+    def outside(sha):
+        text = subprocess.check_output(['git', 'show', sha + ':README.md'], cwd=ROOT, text=True, encoding='utf-8')
+        start, end = '<!-- intel-shelf-status:start -->', '<!-- intel-shelf-status:end -->'
+        if text.count(start) != 1 or text.count(end) != 1:
+            raise ValueError('Missing or ambiguous README status region')
+        before, rest = text.split(start)
+        _, after = rest.split(end)
+        return before, after
+    return outside(base) == outside(latest)
 
 
 if __name__ == '__main__':

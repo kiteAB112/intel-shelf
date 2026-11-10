@@ -6,6 +6,7 @@
 |---|---|---|
 | NVD | vulnerabilities 列表、totalResults、每条 CVE ID、published/lastModified | 单记录探针，不判断全库新鲜度 |
 | CISA KEV | catalogVersion、dateReleased、count 与列表长度、CVE ID 和 dateAdded | dateReleased 是目录发布日，dateAdded 是收录日；主入口获取失败可回退档案中的官方镜像 |
+| CIRCL | 返回的 cveId 必须等于指定 probe_cve，必须存在 CNA 容器 | 单条 CVE 查询探针，不证明全库及时性或独立利用证据 |
 | Unit 42 | RSS/Atom 每条标题、HTTP(S) 引用、可解析的发布日期 | 研究报告发布时间，不等于攻击发生时间；30 天时效复核窗口 |
 | Cisco Talos | 同上，独立 profile 与来源配置 | 报告发布时间；30 天窗口 |
 | Check Point Research | 同上，独立 profile 与来源配置 | 报告发布时间；60 天窗口 |

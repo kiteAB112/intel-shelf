@@ -10,7 +10,7 @@
 
 ## 状态与证据
 
-`main` 保存代码、档案、测试和 `data/feedback.json`；`state` 由正式检查独占发布 `status.json`、`maintenance-tasks.json`、`run.json` 及两种目录。Hermes 只读正式状态；其主副本保持 main 且干净，修复在独立 worktree 进行。状态不与源代码一起回推，旧 review-queue 由 status.alerts 取代。
+`main` 保存代码、档案、测试和 `data/feedback.json`；`state` 由正式检查独占发布 `status.json`、`maintenance-tasks.json`、`run.json` 及两种目录。发布完整 state 后，`publish_readme.py` 从该轮及其代码版本的来源档案更新 main 中 README 的自动状态区，不复制响应或日志。Hermes 只读正式状态；其主副本保持 main 且干净，修复在独立 worktree 进行。旧 review-queue 由 status.alerts 取代。
 
 每轮保存 run_id、执行种类、代码 SHA、档案哈希、环境、起止时间、实际检查源和工作流链接。每源区分 checked_at、last_success_at、latest_item_at、last_content_change_at；失败时旧数量/样例是历史值，不是当前验证。每次尝试保存地址、最终 URL、直连/显式代理/镜像、超时设置、HTTP 状态、内容类型、字节数、耗时与错误。完整成功响应上限 12 MiB；HTTP 错误页最多保存 64 KiB 并标明可能截断。原始响应仅作为数据，不执行、不访问其中的 IOC。请求证据与轮次快照使用 Actions 附件，当前保留 7 天；长期复现所需的最小去武器化样例加入测试。
 
@@ -30,7 +30,9 @@
 
 Hermes 用 submit-repair.py 提交 maintenance 分支。授权自动合入范围仅限检查器、来源专项规则、相应测试、目标来源档案和追加反馈；不修改 Actions 工作流、发布门禁、凭证或服务器全局配置。无需新增 GitHub API token，沿用仓库专用 SSH key。范围外修改保留并报告，不尝试绕过。
 
-Actions 从 main 读取门禁代码，核对 base_sha 和目标来源、检查修改范围、确认旧反馈未被覆盖，再跑全套测试和目标来源实测。fixed 实测失败不合入；improved 可合入并保留失败事实；blocked/reviewed 不允许夹带检查器或档案修改。验证结果绑定候选代码 SHA，验收只写 validation 输出，绝不修改正式计数。main 在验证期间有新提交则停止，保留分支，同步最新 main 后重新验证；不强推。工作流、测试或推送失败不能报告为已完成发布。
+Actions 从 main 读取自包含的门禁代码，核对 base_sha 和目标来源、检查修改范围、确认旧反馈未被覆盖，再跑全套测试和目标来源实测。fixed 实测失败不合入；improved 可合入并保留失败事实；blocked/reviewed 不允许夹带检查器或档案修改。验证结果绑定候选代码 SHA，验收只写 validation 输出，绝不修改正式计数。
+
+检查发布与维护验收共用 Actions concurrency 组，避免同时写 main。若 main 相较候选基线只有 README 自动状态区变化，门禁保留最新状态并合并至已验证候选，再以普通 fast-forward push 发布；不运行未验证的新检查代码。README 人工文字、代码、配置或其他文件变化均要求同步后重验，不强推。状态发布器遇到并发 main 更新会重取最新 README，只替换标记区后重试，不能覆盖人工文字。工作流、测试或推送失败不能报告为已完成发布。
 
 ## 运维与通知
 
@@ -42,8 +44,16 @@ Actions 计划每天四轮（北京时间 02:17/08:17/14:17/20:17），受实际
 
 ## 2026-11-09 部署验收
 
-本地实现并推送后，云端从 GitHub 拉取；没有在云端另写一份检查器。已暂停旧 intel-shelf-check 定时任务；初次接单设为每 15 分钟，后已按用户要求降为每小时，并增加每周全量审阅，保留既有 QQ 早晚汇总。旧项目任务配置、脚本、Skill 和最后的云端快照备份于云端 `~/.hermes/backups/intel-shelf-actions-20261109T144333Z/`；原逐轮历史保留。
+本地实现并推送后，运行端从 GitHub 拉取；没有在运行端另写一份检查器。旧正式采集任务已暂停，改为每小时取单、每周全量审阅及早晚汇总。旧配置和逐轮历史保留在运行端，不随公开包分发。脱敏任务蓝图、独立 Prompt、安装器和部署说明见 [Hermes 复用包](../ops/hermes/README.md)。
 
 [首轮正式 Actions](https://github.com/kiteAB112/intel-shelf/actions/runs/42637365593) 完成 11 个来源的获取解析及专项检查并发布 state；10 个满足可读取条件，Feodo 保留历史用途及时效提醒，AI 待办为零。该轮 CISA 主入口在 Actions 环境返回成功，不再沿用旧云端的 403 结论。响应及快照附件已保存。此前隔离测试误写的新状态分支快照已标明无效，并被这轮真实结果替换，不作为来源观察。
 
 [维护实测工作流](https://github.com/kiteAB112/intel-shelf/actions/runs/42637753724) 在固定 Ubuntu 24.04 / Python 3.12 环境通过 49 项测试及 CISA 目标实测；本地 Python 3.9 与云端测试亦通过。发布隔离、环境变量不泄漏、同轮去重、候选实测不改变正式计数、fixed 实测失败禁止合入及 improved 保留失败均有回归覆盖。维护分支合入门禁已做临时 Git 仓库集成测试；当前没有实际异常待办，尚未产生新版 AI 自动修复案例，不将迁移验收当作长期稳定性验收。
+
+## 当前限制与公开范围
+
+2026-11-10 审查时，周检任务的预检已验证，首次实际定时 AI 全量审阅计划在 11 月 15 日；尚无新版真实异常触发的完整 AI 自动修复案例。计划配置不等于完整验收，后续以实际证据更新。
+
+另有两个已复现、尚未在本次公开包装中修订的边界问题：blocked 到达 retry_after 后可能仍被同 task_id 去重，直到下一计数触发才重开；提交助手目前要求从 origin/main 开始未提交修订，已有候选提交在推送失败后的直接重试、或基线更新后的重提需要人工整理。不要把这些路径描述为已完成自动恢复。
+
+README 中的状态是最近发布时的快照，时间明确标为 UTC。已过期快照不会随浏览器时间自动计算；未刷新时先核对最近完整轮次和 Actions。完整响应只留作限期诊断附件；Git 提交仅包含代码、档案、摘要和必要维护依据。个人计划、私人链接、运行日志、真实 cron 配置、投递目标和凭证不得加入公开包；公开代码与第三方来源数据的许可区别见 [NOTICE](../NOTICE.md)。
