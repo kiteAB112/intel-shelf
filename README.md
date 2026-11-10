@@ -5,22 +5,20 @@
 ## 来源状态
 
 <!-- intel-shelf-status:start -->
-最近完整检查：**2026-11-10 01:33 UTC** · [运行记录](https://github.com/kiteAB112/intel-shelf/actions/runs/42736587720) · 代码 `73372c7`
+最近完整检查：**2026-11-10 14:24 UTC** · [运行记录](https://github.com/kiteAB112/intel-shelf/actions/runs/42833741229) · 代码 `fe964e4`
 
 已接入 **11** · 入口可读取 **10** · 维护待办 **0**
-
-**检查结果已超过 12 小时，请查看工作流是否延迟或失败。**
 
 | 来源 | 类别 | 状态 | 最近检查 · UTC |
 |---|---|---|---|
 | [NVD](https://nvd.nist.gov/) | 漏洞基础与已知利用 | 入口可读取 · 时效未知 | 11-10 01:33 |
-| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | 漏洞基础与已知利用 | 入口可读取 | 11-10 01:33 |
-| [Unit 42](https://unit42.paloaltonetworks.com/) | 攻击活动与研究报告 | 入口可读取 | 11-10 01:33 |
-| [Cisco Talos](https://blog.talosintelligence.com/) | 攻击活动与研究报告 | 入口可读取 | 11-10 01:33 |
-| [Check Point Research](https://research.checkpoint.com/) | 攻击活动与研究报告 | 入口可读取 | 11-10 01:33 |
+| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | 漏洞基础与已知利用 | 入口可读取 | 11-10 14:24 |
+| [Unit 42](https://unit42.paloaltonetworks.com/) | 攻击活动与研究报告 | 入口可读取 | 11-10 14:24 |
+| [Cisco Talos](https://blog.talosintelligence.com/) | 攻击活动与研究报告 | 入口可读取 | 11-10 14:24 |
+| [Check Point Research](https://research.checkpoint.com/) | 攻击活动与研究报告 | 入口可读取 | 11-10 14:24 |
 | [The DFIR Report](https://thedfirreport.com/) | 入侵过程与狩猎线索 | 入口可读取 | 11-10 01:33 |
-| [OpenPhish Community](https://www.openphish.com/phishing_feeds.html) | 钓鱼 | 入口可读取 · 时效未知 | 11-10 01:33 |
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) | 恶意基础设施与载荷地址 | 入口可读取 | 11-10 01:33 |
+| [OpenPhish Community](https://www.openphish.com/phishing_feeds.html) | 钓鱼 | 入口可读取 · 时效未知 | 11-10 14:24 |
+| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) | 恶意基础设施与载荷地址 | 入口可读取 | 11-10 14:24 |
 | [C2IntelFeeds（非商业研究）](https://github.com/drb-ra/C2IntelFeeds) | 恶意基础设施与载荷地址 | 入口可读取 · 时效未知 | 11-10 01:33 |
 | [Feodo Tracker（历史参考）](https://feodotracker.abuse.ch/blocklist/) | 恶意基础设施与载荷地址 | 仅历史参考 | 11-10 01:33 |
 | [CIRCL Vulnerability-Lookup](https://vulnerability.circl.lu/) | 漏洞基础与已知利用 | 入口可读取 · 时效未知 | 11-10 01:33 |
