@@ -32,21 +32,21 @@
 
 | 来源 | 用途 / 限制 | 获取 | 内容 | 新鲜度 | 检查时间 |
 |---|---|---|---|---|---|
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-10T14:24:31.880254+00:00 |
+| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-10T23:23:53.262016+00:00 |
 | [C2IntelFeeds（非商业研究）](https://github.com/drb-ra/C2IntelFeeds) · [数据入口](https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv) | 上游 verified 类别的30天C2 IP列表，附C2工具/指纹标签；CC BY-NC-SA 4.0；不可据此直接用于公司；本CSV无逐条时间或原始报告，指纹命中可能误报 | 获取成功 | 基础解析通过 | 未知 | 2026-11-10T01:33:22.811456+00:00 |
 
 ## 文件与恶意样本
 
 | 来源 | 用途 / 限制 | 获取 | 内容 | 新鲜度 | 检查时间 |
 |---|---|---|---|---|---|
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-10T14:24:31.880254+00:00 |
+| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-10T23:23:53.262016+00:00 |
 
 ## 钓鱼
 
 | 来源 | 用途 / 限制 | 获取 | 内容 | 新鲜度 | 检查时间 |
 |---|---|---|---|---|---|
 | [OpenPhish Community](https://www.openphish.com/phishing_feeds.html) · [数据入口](https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt) | 有限覆盖的钓鱼 URL 集合；社区版标示 12 小时更新；无逐条观测时间；需核对条款 | 获取成功 | 基础解析通过 | 未知 | 2026-11-10T14:24:31.880254+00:00 |
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-10T14:24:31.880254+00:00 |
+| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) · [数据入口](https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv) | 社区发布的 IP/域名/URL/MD5/SHA256；带发布者、报告时间和原帖引用；API 本地返回403；暂用官方发布的周度CSV；报告不等于恶意性验证，哈希情报不等同样本分析 | 获取成功 | 基础解析通过 | 复核窗口内 | 2026-11-10T23:23:53.262016+00:00 |
 
 ## 厂商安全公告
 
@@ -73,14 +73,14 @@
 - Cisco Talos：[Bring a tent, I've got the coffee: Lessons from it-sa](https://blog.talosintelligence.com/bring-a-tent-ive-got-the-coffee-lessons-from-it-sa/)
 - Check Point Research：[Not All That Glitters Is Gold: Tracking CopperDragon’s Sparrow Framework Around the Globe](https://research.checkpoint.com/2026/not-all-that-glitters-is-gold-tracking-copperdragons-sparrow-framework-around-the-globe/)
 - The DFIR Report：[BengalSEO Part 1: Anatomy of the Operation](https://thedfirreport.com/2026/08/24/bengalseo-part-1-anatomy-of-the-operation/)
-- TweetFeed：`arrivals-creative[.]com`
+- TweetFeed：`f006[.]backblazeb2[.]com`
 - C2IntelFeeds（非商业研究）：`1[.]117[.]74[.]144`
 
 ## 恶意指标数据核验
 
 | 来源 | 有效记录/去重指标/剔除条数 | 类型分布 | 时间含义与最新日期 | 原始引用条数 |
 |---|---|---|---|---|
-| TweetFeed | 1609/1572/0 | {'domain': 570, 'url': 675, 'sha256': 178, 'md5': 28, 'ip': 158} | report-time / 2026-11-10T14:04:14+00:00 | 1609 |
+| TweetFeed | 1678/1637/0 | {'domain': 592, 'url': 703, 'sha256': 194, 'md5': 28, 'ip': 161} | report-time / 2026-11-10T22:53:11+00:00 | 1678 |
 | C2IntelFeeds（非商业研究） | 227/227/0 | {'ip': 227} | not-provided / 未知 | 0 |
 | Feodo Tracker（历史参考） | 5/5/0 | {'ip': 5} | last-online / 2026-03-12T00:00:00+00:00 | 0 |
 

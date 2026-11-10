@@ -310,7 +310,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-10T14:55:39.228911+00:00",
+    "evaluated_at": "2026-11-10T23:23:53.262016+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -319,7 +319,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-10T14:55:39.228911+00:00",
+    "evaluated_at": "2026-11-10T23:23:53.262016+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -328,7 +328,7 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-10T14:55:39.228911+00:00",
+    "evaluated_at": "2026-11-10T23:23:53.262016+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -374,14 +374,14 @@
   },
   "tweetfeed": {
     "id": "tweetfeed",
-    "checked_at": "2026-11-10T14:24:31.880254+00:00",
+    "checked_at": "2026-11-10T23:23:53.262016+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "42833741229",
-    "next_due_at": "2026-11-10T18:00:00+00:00",
+    "run_id": "42923000613",
+    "next_due_at": "2026-11-11T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-10T14:24:32.926536+00:00",
+        "started_at": "2026-11-10T23:23:53.281460+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
         "timeout_seconds": 25,
@@ -389,79 +389,73 @@
         "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "content_type": "text/plain; charset=utf-8",
         "outcome": "received",
-        "bytes_read": 208406,
+        "bytes_read": 217860,
         "body_file": "evidence/tweetfeed/attempt-1.response",
-        "body_sha256": "6d326faf749906ab14f406e156ed6267ca502f2192b245c86103a66c4fe3325c",
-        "at": "2026-11-10T14:24:33.233700+00:00",
-        "elapsed_ms": 307
+        "body_sha256": "71fdb41e46d64427c1e7f56a2f41d690d005b4d9f1609ccc961766be1c5f7617",
+        "at": "2026-11-10T23:23:53.432039+00:00",
+        "elapsed_ms": 151
       }
     ],
     "access": "reachable",
     "consecutive_failures": 0,
-    "count": 1609,
+    "count": 1678,
     "samples": [
       {
         "type": "domain",
-        "value": "arrivals-creative[.]com",
-        "reported_at": "2026-11-10 14:04:14",
-        "reporter": "AaronCTI",
-        "tags": [
-          "#malware"
-        ],
-        "reference": "https://x.com/AaronCTI/status/2120155573979140344",
+        "value": "f006[.]backblazeb2[.]com",
+        "reported_at": "2026-11-10 22:53:11",
+        "reporter": "smica83",
+        "tags": [],
+        "reference": "https://x.com/smica83/status/2120288690178306511",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
         "type": "url",
-        "value": "hxxp://arrivals-creative[.]com",
-        "reported_at": "2026-11-10 14:04:14",
-        "reporter": "AaronCTI",
-        "tags": [
-          "#malware"
-        ],
-        "reference": "https://x.com/AaronCTI/status/2120155573979140344",
+        "value": "hxxps://f006[.]backblazeb2[.]com/file/nlptntpx/zra091jn[.]jpg",
+        "reported_at": "2026-11-10 22:53:11",
+        "reporter": "smica83",
+        "tags": [],
+        "reference": "https://x.com/smica83/status/2120288690178306511",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
-        "type": "domain",
-        "value": "apt-finder[.]org",
-        "reported_at": "2026-11-10 14:04:14",
-        "reporter": "AaronCTI",
-        "tags": [
-          "#malware"
-        ],
-        "reference": "https://x.com/AaronCTI/status/2120155573979140344",
+        "type": "url",
+        "value": "hxxp://216[.]203[.]20[.]126:10443",
+        "reported_at": "2026-11-10 22:53:11",
+        "reporter": "smica83",
+        "tags": [],
+        "reference": "https://x.com/smica83/status/2120288690178306511",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       }
     ],
-    "latest_item_at": "2026-11-10T14:04:14+00:00",
-    "sha256": "6d326faf749906ab14f406e156ed6267ca502f2192b245c86103a66c4fe3325c",
+    "latest_item_at": "2026-11-10T22:53:11+00:00",
+    "sha256": "71fdb41e46d64427c1e7f56a2f41d690d005b4d9f1609ccc961766be1c5f7617",
     "changed": true,
-    "last_content_change_at": "2026-11-10T14:24:31.880254+00:00",
+    "last_content_change_at": "2026-11-10T23:23:53.262016+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-10T14:24:31.880254+00:00",
+    "last_success_at": "2026-11-10T23:23:53.262016+00:00",
     "indicator_types": {
-      "domain": 570,
-      "url": 675,
-      "sha256": 178,
+      "domain": 592,
+      "url": 703,
+      "sha256": 194,
       "md5": 28,
-      "ip": 158
+      "ip": 161
     },
     "time_basis": "report-time",
     "upstream_status_counts": {},
-    "reference_count": 1609,
-    "total_record_count": 1609,
+    "reference_count": 1678,
+    "total_record_count": 1678,
     "rejected_record_count": 0,
     "rejected_samples": [],
-    "record_count": 1609,
-    "unique_indicator_count": 1572,
+    "record_count": 1678,
+    "unique_indicator_count": 1637,
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv"
@@ -670,7 +664,7 @@
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-10T14:55:39.228911+00:00",
+    "evaluated_at": "2026-11-10T23:23:53.262016+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
