@@ -5,7 +5,7 @@
 ## 来源状态
 
 <!-- intel-shelf-status:start -->
-最近完整检查：**2026-11-10 14:24 UTC** · [运行记录](https://github.com/kiteAB112/intel-shelf/actions/runs/42833741229) · 代码 `fe964e4`
+最近完整检查：**2026-11-10 14:55 UTC** · [运行记录](https://github.com/kiteAB112/intel-shelf/actions/runs/42839038313) · 代码 `d6d4e15`
 
 已接入 **11** · 入口可读取 **10** · 维护待办 **0**
 
