@@ -1,26 +1,21 @@
 {
   "schema_version": 2,
-  "run_id": "43686119238",
+  "run_id": "43749179741",
   "run_kind": "scheduled",
   "status": "completed",
-  "started_at": "2026-11-15T06:35:22.932925+00:00",
-  "finished_at": "2026-11-15T06:35:25.422706+00:00",
-  "code_sha": "8f751b2861ea66394bee73f2e6e3dbde20fb8015",
+  "started_at": "2026-11-15T18:52:30.545922+00:00",
+  "finished_at": "2026-11-15T18:52:31.357975+00:00",
+  "code_sha": "0cb3992c85bdbb177a408d00e80cef14c0e16b41",
   "catalog_sha256": "e85c8134b8ce8ec55c0fecbae3b00dbd3171afac0cebcd35f9248e5123b526f3",
   "check_origin": "github-actions",
   "checked_sources": [
-    "nvd",
     "cisa-kev",
     "unit42",
     "talos",
     "checkpoint",
-    "dfir-report",
     "openphish",
-    "tweetfeed",
-    "c2intel",
-    "feodo",
-    "circl"
+    "tweetfeed"
   ],
-  "live_check_passed": false,
-  "workflow_url": "https://github.com/kiteAB112/intel-shelf/actions/runs/43686119238"
+  "live_check_passed": true,
+  "workflow_url": "https://github.com/kiteAB112/intel-shelf/actions/runs/43749179741"
 }
