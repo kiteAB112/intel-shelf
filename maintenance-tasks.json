@@ -1,26 +1,4 @@
 {
   "schema_version": 2,
-  "tasks": [
-    {
-      "source_id": "circl",
-      "task_id": "77d1c5f46af72d6e4f40",
-      "incident_id": "circl:2026-11-17T07:56:29.576821+00:00",
-      "run_id": "44042561700",
-      "reasons": [
-        "review-unchanged-content"
-      ],
-      "problem_key": [
-        [
-          "review-unchanged-content"
-        ],
-        null,
-        200
-      ],
-      "checked_at": "2026-11-17T07:56:29.576821+00:00",
-      "last_reviewed_on": null,
-      "error": null,
-      "consecutive_problem_checks": 1,
-      "action": "review"
-    }
-  ]
+  "tasks": []
 }
