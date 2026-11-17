@@ -94,6 +94,13 @@
     "validation": "python3 -m unittest discover -s tests -> 61 tests passed (incl. 2 new). Offline assess() for circl/nvd probes with a 10-day-old static record yields no 'review-unchanged-content'; a url-list feed with identical conditions still raises it. Actions live recheck pending.",
     "uncertainty": "The change removes the staleness heuristic only for probe formats; a schema-valid but wrong/frozen probe record is still caught by validate_source (probe-CVE equality and CNA-container check). CIRCL/NVD freshness remains 'unknown' by contract.",
     "outcome": "fixed",
-    "execution_environment": "hermes-cloud"
+    "execution_environment": "hermes-cloud",
+    "actions_validation": {
+      "code_sha": "14d1d69049432158fb5f0de121e689fac4556730",
+      "workflow_url": "https://github.com/kiteAB112/intel-shelf/actions/runs/44051428797",
+      "tests_passed": true,
+      "live_check_passed": true,
+      "finished_at": "2026-11-17T08:59:30.498755+00:00"
+    }
   }
 ]
