@@ -1,14 +1,14 @@
 {
   "nvd": {
     "id": "nvd",
-    "checked_at": "2026-11-16T06:32:15.114926+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43817399361",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-18T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T06:32:15.134310+00:00",
+        "started_at": "2026-11-17T07:56:29.591195+00:00",
         "requested_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1",
         "route": "direct",
         "timeout_seconds": 25,
@@ -18,9 +18,9 @@
         "outcome": "received",
         "bytes_read": 2517,
         "body_file": "evidence/nvd/attempt-1.response",
-        "body_sha256": "f1d0c83d7f9bb72c13f291b12fed723e25bc78cec06ff9ee2eca17aeacf115f5",
-        "at": "2026-11-16T06:32:29.497684+00:00",
-        "elapsed_ms": 14363
+        "body_sha256": "c0c608b3408dfcc5d09b3faf50076a856d0359ad0ff73893fe71d7adb0b2d7d5",
+        "at": "2026-11-17T07:56:29.650751+00:00",
+        "elapsed_ms": 60
       }
     ],
     "access": "reachable",
@@ -33,26 +33,26 @@
       }
     ],
     "latest_item_at": null,
-    "sha256": "f1d0c83d7f9bb72c13f291b12fed723e25bc78cec06ff9ee2eca17aeacf115f5",
+    "sha256": "c0c608b3408dfcc5d09b3faf50076a856d0359ad0ff73893fe71d7adb0b2d7d5",
     "changed": true,
-    "last_content_change_at": "2026-11-16T06:32:15.114926+00:00",
+    "last_content_change_at": "2026-11-17T07:56:29.576821+00:00",
     "freshness": "unknown",
     "content": "valid",
-    "last_success_at": "2026-11-16T06:32:15.114926+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=1"
   },
   "cisa-kev": {
     "id": "cisa-kev",
-    "checked_at": "2026-11-16T22:04:12.272673+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43966356146",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-17T12:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T22:04:12.288401+00:00",
+        "started_at": "2026-11-17T07:56:29.651406+00:00",
         "requested_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
         "route": "direct",
         "timeout_seconds": 120,
@@ -63,8 +63,8 @@
         "bytes_read": 1854379,
         "body_file": "evidence/cisa-kev/attempt-1.response",
         "body_sha256": "4028ec035856331a717d3305e87e45be37d400fc500da34a5464f05fc2773764",
-        "at": "2026-11-16T22:04:12.448511+00:00",
-        "elapsed_ms": 160
+        "at": "2026-11-17T07:56:29.781863+00:00",
+        "elapsed_ms": 130
       }
     ],
     "access": "reachable",
@@ -93,21 +93,21 @@
     "last_content_change_at": "2026-11-14T06:26:06.018388+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
   },
   "unit42": {
     "id": "unit42",
-    "checked_at": "2026-11-16T22:04:12.272673+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43966356146",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-17T12:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T22:04:12.472833+00:00",
+        "started_at": "2026-11-17T07:56:29.805197+00:00",
         "requested_url": "https://unit42.paloaltonetworks.com/feed/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -115,11 +115,11 @@
         "final_url": "https://unit42.paloaltonetworks.com/feed/",
         "content_type": "application/rss+xml; charset=UTF-8",
         "outcome": "received",
-        "bytes_read": 24123,
+        "bytes_read": 24305,
         "body_file": "evidence/unit42/attempt-1.response",
-        "body_sha256": "0702aeb3e797b016ddc4cdd9bd06837f49d3b406486fcec7596b58df92ac67eb",
-        "at": "2026-11-16T22:04:12.617175+00:00",
-        "elapsed_ms": 144
+        "body_sha256": "00f2c1edc860c287642f62b04502c335923b40e981512db8fe57b7034870e5e4",
+        "at": "2026-11-17T07:56:29.946295+00:00",
+        "elapsed_ms": 141
       }
     ],
     "access": "reachable",
@@ -127,39 +127,39 @@
     "count": 15,
     "samples": [
       {
+        "title": "QUIC and Covert: Novel HTTP/3-Powered RATs Target Southeast Asian Governments",
+        "url": "https://unit42.paloaltonetworks.com/custom-rats-target-southeast-asia-governments/"
+      },
+      {
         "title": "Attackers Use Autonomous AI to Target Semiconductor, Defense and Civil Society Sectors",
         "url": "https://unit42.paloaltonetworks.com/cairn-framework-ai-autonomous-attacks/"
       },
       {
         "title": "ARTEX and AI-Powered Red Teaming Tools: What Defenders Need to Know",
         "url": "https://unit42.paloaltonetworks.com/artex-and-ai-powered-red-teaming-tools/"
-      },
-      {
-        "title": "The XG Files: Falcon C2 Flying Under The (Browser) Radar",
-        "url": "https://unit42.paloaltonetworks.com/falcon-c2-browser-compromise/"
       }
     ],
-    "latest_item_at": "2026-11-12T15:00:31+00:00",
-    "sha256": "0702aeb3e797b016ddc4cdd9bd06837f49d3b406486fcec7596b58df92ac67eb",
-    "changed": false,
-    "last_content_change_at": "2026-11-13T19:44:36.737779+00:00",
+    "latest_item_at": "2026-11-16T23:00:55+00:00",
+    "sha256": "00f2c1edc860c287642f62b04502c335923b40e981512db8fe57b7034870e5e4",
+    "changed": true,
+    "last_content_change_at": "2026-11-17T07:56:29.576821+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://unit42.paloaltonetworks.com/feed/"
   },
   "talos": {
     "id": "talos",
-    "checked_at": "2026-11-16T22:04:12.272673+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43966356146",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-17T12:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T22:04:12.618674+00:00",
+        "started_at": "2026-11-17T07:56:29.947814+00:00",
         "requested_url": "https://blog.talosintelligence.com/rss/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -170,8 +170,8 @@
         "bytes_read": 1013200,
         "body_file": "evidence/talos/attempt-1.response",
         "body_sha256": "185b934ca7071267c208be07629635f181f6d41936608e810f0924e093e6282c",
-        "at": "2026-11-16T22:04:12.741877+00:00",
-        "elapsed_ms": 123
+        "at": "2026-11-17T07:56:30.025986+00:00",
+        "elapsed_ms": 78
       }
     ],
     "access": "reachable",
@@ -193,25 +193,25 @@
     ],
     "latest_item_at": "2026-11-13T20:57:13+00:00",
     "sha256": "185b934ca7071267c208be07629635f181f6d41936608e810f0924e093e6282c",
-    "changed": true,
+    "changed": false,
     "last_content_change_at": "2026-11-16T22:04:12.272673+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://blog.talosintelligence.com/rss/"
   },
   "checkpoint": {
     "id": "checkpoint",
-    "checked_at": "2026-11-16T22:04:12.272673+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43966356146",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-17T12:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T22:04:12.753242+00:00",
+        "started_at": "2026-11-17T07:56:30.037385+00:00",
         "requested_url": "https://research.checkpoint.com/feed/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -222,8 +222,8 @@
         "bytes_read": 390118,
         "body_file": "evidence/checkpoint/attempt-1.response",
         "body_sha256": "ec0f06d2d8c6b4a91a9ebe08ec347f40d1fe4925c884d03eb8de5e88135f758d",
-        "at": "2026-11-16T22:04:13.537256+00:00",
-        "elapsed_ms": 784
+        "at": "2026-11-17T07:56:30.334181+00:00",
+        "elapsed_ms": 297
       }
     ],
     "access": "reachable",
@@ -245,25 +245,25 @@
     ],
     "latest_item_at": "2026-11-16T14:44:36+00:00",
     "sha256": "ec0f06d2d8c6b4a91a9ebe08ec347f40d1fe4925c884d03eb8de5e88135f758d",
-    "changed": true,
+    "changed": false,
     "last_content_change_at": "2026-11-16T22:04:12.272673+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://research.checkpoint.com/feed/"
   },
   "dfir-report": {
     "id": "dfir-report",
-    "checked_at": "2026-11-16T06:32:15.114926+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43817399361",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-18T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T06:32:29.939246+00:00",
+        "started_at": "2026-11-17T07:56:30.339431+00:00",
         "requested_url": "https://thedfirreport.com/feed/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -274,8 +274,8 @@
         "bytes_read": 13933,
         "body_file": "evidence/dfir-report/attempt-1.response",
         "body_sha256": "aae918b1adbf638e11e081f6a26685a69f581fc4478ac0c00f2ac15e74823f0f",
-        "at": "2026-11-16T06:32:29.995922+00:00",
-        "elapsed_ms": 57
+        "at": "2026-11-17T07:56:30.425924+00:00",
+        "elapsed_ms": 87
       }
     ],
     "access": "reachable",
@@ -301,7 +301,7 @@
     "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-16T06:32:15.114926+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://thedfirreport.com/feed/"
@@ -310,7 +310,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-16T22:04:12.272673+00:00",
+    "evaluated_at": "2026-11-17T07:56:29.576821+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -319,7 +319,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-16T22:04:12.272673+00:00",
+    "evaluated_at": "2026-11-17T07:56:29.576821+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -328,21 +328,21 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-16T22:04:12.272673+00:00",
+    "evaluated_at": "2026-11-17T07:56:29.576821+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
   },
   "openphish": {
     "id": "openphish",
-    "checked_at": "2026-11-16T22:04:12.272673+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43966356146",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-17T12:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T22:04:13.542601+00:00",
+        "started_at": "2026-11-17T07:56:30.426875+00:00",
         "requested_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
         "route": "direct",
         "timeout_seconds": 25,
@@ -350,11 +350,11 @@
         "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
         "content_type": "text/plain; charset=utf-8",
         "outcome": "received",
-        "bytes_read": 18086,
+        "bytes_read": 16023,
         "body_file": "evidence/openphish/attempt-1.response",
-        "body_sha256": "2e59abd7d633e1df55953e290b409e0586d41f997b5f5d13c81001a95a577e4a",
-        "at": "2026-11-16T22:04:13.568656+00:00",
-        "elapsed_ms": 26
+        "body_sha256": "6f048b916752b4f29a9d209166003c36632d60b8e51a583552c4b15be20d3fd2",
+        "at": "2026-11-17T07:56:30.455321+00:00",
+        "elapsed_ms": 28
       }
     ],
     "access": "reachable",
@@ -362,26 +362,26 @@
     "count": 300,
     "samples": [],
     "latest_item_at": null,
-    "sha256": "2e59abd7d633e1df55953e290b409e0586d41f997b5f5d13c81001a95a577e4a",
+    "sha256": "6f048b916752b4f29a9d209166003c36632d60b8e51a583552c4b15be20d3fd2",
     "changed": true,
-    "last_content_change_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_content_change_at": "2026-11-17T07:56:29.576821+00:00",
     "freshness": "unknown",
     "content": "valid",
-    "last_success_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt"
   },
   "tweetfeed": {
     "id": "tweetfeed",
-    "checked_at": "2026-11-16T22:04:12.272673+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43966356146",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-17T12:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T22:04:13.569994+00:00",
+        "started_at": "2026-11-17T07:56:30.456664+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
         "timeout_seconds": 25,
@@ -389,93 +389,93 @@
         "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "content_type": "text/plain; charset=utf-8",
         "outcome": "received",
-        "bytes_read": 235637,
+        "bytes_read": 224041,
         "body_file": "evidence/tweetfeed/attempt-1.response",
-        "body_sha256": "827c31d3fd7f2296003d1bda4c4a87c62be870536c7296fd2b7a6061bf1ee592",
-        "at": "2026-11-16T22:04:13.661045+00:00",
-        "elapsed_ms": 91
+        "body_sha256": "d1d5bbe394545c44be7c5de0bebe82cf3bdc1ed7119954ef4ae92e8d496bba93",
+        "at": "2026-11-17T07:56:30.587605+00:00",
+        "elapsed_ms": 131
       }
     ],
     "access": "reachable",
     "consecutive_failures": 0,
-    "count": 1850,
+    "count": 1768,
     "samples": [
       {
-        "type": "url",
-        "value": "hxxp://85[.]234[.]100[.]203/278",
-        "reported_at": "2026-11-16 21:34:05",
-        "reporter": "Alopsis",
+        "type": "domain",
+        "value": "epaper[.]dothome[.]co[.]kr",
+        "reported_at": "2026-11-17 07:40:01",
+        "reporter": "LandscapeThreat",
         "tags": [
-          "#ClickFix"
+          "#APT"
         ],
-        "reference": "https://x.com/Alopsis/status/2122443110857023548",
+        "reference": "https://x.com/LandscapeThreat/status/2122595600717734274",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
         "type": "url",
-        "value": "hxxp://85[.]234[.]100[.]203/279",
-        "reported_at": "2026-11-16 21:34:05",
-        "reporter": "Alopsis",
+        "value": "hxxp://epaper[.]dothome[.]co[.]kr",
+        "reported_at": "2026-11-17 07:40:01",
+        "reporter": "LandscapeThreat",
         "tags": [
-          "#ClickFix"
+          "#APT"
         ],
-        "reference": "https://x.com/Alopsis/status/2122443110857023548",
+        "reference": "https://x.com/LandscapeThreat/status/2122595600717734274",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
         "type": "domain",
-        "value": "boursorama-bancogalicia-customsupport[.]ph",
-        "reported_at": "2026-11-16 21:34:05",
-        "reporter": "Alopsis",
+        "value": "notepal[.]me",
+        "reported_at": "2026-11-17 07:40:01",
+        "reporter": "LandscapeThreat",
         "tags": [
-          "#ClickFix"
+          "#APT"
         ],
-        "reference": "https://x.com/Alopsis/status/2122443110857023548",
+        "reference": "https://x.com/LandscapeThreat/status/2122595600717734274",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       }
     ],
-    "latest_item_at": "2026-11-16T21:34:05+00:00",
-    "sha256": "827c31d3fd7f2296003d1bda4c4a87c62be870536c7296fd2b7a6061bf1ee592",
+    "latest_item_at": "2026-11-17T07:40:01+00:00",
+    "sha256": "d1d5bbe394545c44be7c5de0bebe82cf3bdc1ed7119954ef4ae92e8d496bba93",
     "changed": true,
-    "last_content_change_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_content_change_at": "2026-11-17T07:56:29.576821+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-16T22:04:12.272673+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "indicator_types": {
-      "domain": 510,
-      "url": 709,
-      "sha256": 230,
-      "ip": 345,
-      "md5": 56
+      "domain": 493,
+      "url": 676,
+      "ip": 343,
+      "md5": 57,
+      "sha256": 199
     },
     "time_basis": "report-time",
     "upstream_status_counts": {},
-    "reference_count": 1850,
-    "total_record_count": 1850,
+    "reference_count": 1768,
+    "total_record_count": 1768,
     "rejected_record_count": 0,
     "rejected_samples": [],
-    "record_count": 1850,
-    "unique_indicator_count": 1777,
+    "record_count": 1768,
+    "unique_indicator_count": 1693,
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv"
   },
   "c2intel": {
     "id": "c2intel",
-    "checked_at": "2026-11-16T06:32:15.114926+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "43817399361",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-18T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T06:32:30.146600+00:00",
+        "started_at": "2026-11-17T07:56:30.619299+00:00",
         "requested_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
         "route": "direct",
         "timeout_seconds": 25,
@@ -483,16 +483,16 @@
         "final_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv",
         "content_type": "text/plain; charset=utf-8",
         "outcome": "received",
-        "bytes_read": 9576,
+        "bytes_read": 9405,
         "body_file": "evidence/c2intel/attempt-1.response",
-        "body_sha256": "edbc90aa644f75cb74bf8d1bc2e2d1ef2ac71d0cccfa7c922bb516ba3f7e5091",
-        "at": "2026-11-16T06:32:30.230041+00:00",
-        "elapsed_ms": 83
+        "body_sha256": "936efc7bc4d86a01021ff113c2d182fd54482f1107bfae56ae653601be8d90f8",
+        "at": "2026-11-17T07:56:30.644406+00:00",
+        "elapsed_ms": 25
       }
     ],
     "access": "reachable",
     "consecutive_failures": 0,
-    "count": 226,
+    "count": 222,
     "samples": [
       {
         "type": "ip",
@@ -517,39 +517,39 @@
       }
     ],
     "latest_item_at": null,
-    "sha256": "edbc90aa644f75cb74bf8d1bc2e2d1ef2ac71d0cccfa7c922bb516ba3f7e5091",
+    "sha256": "936efc7bc4d86a01021ff113c2d182fd54482f1107bfae56ae653601be8d90f8",
     "changed": true,
-    "last_content_change_at": "2026-11-16T06:32:15.114926+00:00",
+    "last_content_change_at": "2026-11-17T07:56:29.576821+00:00",
     "freshness": "unknown",
     "content": "valid",
-    "last_success_at": "2026-11-16T06:32:15.114926+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "indicator_types": {
-      "ip": 226
+      "ip": 222
     },
     "time_basis": "not-provided",
     "upstream_status_counts": {},
     "reference_count": 0,
-    "total_record_count": 226,
+    "total_record_count": 222,
     "rejected_record_count": 0,
     "rejected_samples": [],
-    "record_count": 226,
-    "unique_indicator_count": 226,
+    "record_count": 222,
+    "unique_indicator_count": 222,
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://raw.githubusercontent.com/drb-ra/C2IntelFeeds/master/feeds/IPC2s-30day.csv"
   },
   "feodo": {
     "id": "feodo",
-    "checked_at": "2026-11-16T06:32:15.114926+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
     "alerts": [
       "review-freshness"
     ],
-    "run_id": "43817399361",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-18T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T06:32:30.232935+00:00",
+        "started_at": "2026-11-17T07:56:30.646402+00:00",
         "requested_url": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
         "route": "direct",
         "timeout_seconds": 25,
@@ -560,8 +560,8 @@
         "bytes_read": 1763,
         "body_file": "evidence/feodo/attempt-1.response",
         "body_sha256": "ef1c98c807014247b232483e542b5deadb1b8738d30a072f2e2b154b05ebda52",
-        "at": "2026-11-16T06:32:30.578525+00:00",
-        "elapsed_ms": 346
+        "at": "2026-11-17T07:56:30.694100+00:00",
+        "elapsed_ms": 48
       }
     ],
     "access": "reachable",
@@ -605,7 +605,7 @@
     "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
     "freshness": "review",
     "content": "valid",
-    "last_success_at": "2026-11-16T06:32:15.114926+00:00",
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
     "indicator_types": {
       "ip": 5
     },
@@ -621,7 +621,7 @@
     "record_count": 5,
     "unique_indicator_count": 5,
     "alert_streaks": {
-      "review-freshness": 8
+      "review-freshness": 9
     },
     "incident_id": "feodo:2026-11-09T14:43:01.994037+00:00",
     "http_status": 200,
@@ -629,14 +629,16 @@
   },
   "circl": {
     "id": "circl",
-    "checked_at": "2026-11-16T06:32:15.114926+00:00",
+    "checked_at": "2026-11-17T07:56:29.576821+00:00",
     "check_origin": "github-actions",
-    "alerts": [],
-    "run_id": "43817399361",
-    "next_due_at": "2026-11-17T00:00:00+00:00",
+    "alerts": [
+      "review-unchanged-content"
+    ],
+    "run_id": "44042561700",
+    "next_due_at": "2026-11-18T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-16T06:32:30.578940+00:00",
+        "started_at": "2026-11-17T07:56:30.694379+00:00",
         "requested_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
         "route": "direct",
         "timeout_seconds": 25,
@@ -647,8 +649,8 @@
         "bytes_read": 12044,
         "body_file": "evidence/circl/attempt-1.response",
         "body_sha256": "4f173b1a5a982fb4c8916e287beada6b4ad01e8b2ba18ec96f9655ebe2fc1759",
-        "at": "2026-11-16T06:32:31.134848+00:00",
-        "elapsed_ms": 556
+        "at": "2026-11-17T07:56:31.233627+00:00",
+        "elapsed_ms": 539
       }
     ],
     "access": "reachable",
@@ -661,16 +663,19 @@
     "last_content_change_at": "2026-11-09T14:43:01.994037+00:00",
     "freshness": "unknown",
     "content": "valid",
-    "last_success_at": "2026-11-16T06:32:15.114926+00:00",
-    "alert_streaks": {},
+    "last_success_at": "2026-11-17T07:56:29.576821+00:00",
+    "alert_streaks": {
+      "review-unchanged-content": 1
+    },
     "http_status": 200,
-    "final_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400"
+    "final_url": "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400",
+    "incident_id": "circl:2026-11-17T07:56:29.576821+00:00"
   },
   "paloalto-psirt": {
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-16T22:04:12.272673+00:00",
+    "evaluated_at": "2026-11-17T07:56:29.576821+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
