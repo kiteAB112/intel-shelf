@@ -59,5 +59,41 @@
     "verified_by": "Codex",
     "verified_at": "2026-11-08T16:14:46.040599+00:00",
     "execution_environment": "hermes-cloud"
+  },
+  {
+    "id": "circl-unchanged-content-probe-20261117",
+    "source_id": "circl",
+    "task_id": "77d1c5f46af72d6e4f40",
+    "incident_id": "circl:2026-11-17T07:56:29.576821+00:00",
+    "run_id": "44042561700",
+    "reviewed_by": "Hermes",
+    "reviewed_on": "2026-11-17",
+    "reasons": [
+      "review-unchanged-content"
+    ],
+    "problem_key": [
+      [
+        "review-unchanged-content"
+      ],
+      null,
+      200
+    ],
+    "trigger_count": 1,
+    "evidence": [
+      "https://vulnerability.circl.lu/api/vulnerability/CVE-2024-3400 (Actions run 44042561700: HTTP 200, application/json, 12044 bytes, body_sha256 4f173b1a5a982fb4c8916e287beada6b4ad01e8b2ba18ec96f9655ebe2fc1759)",
+      "hermes-cloud auxiliary recheck 2026-11-17: same endpoint HTTP 200, 12044 bytes, sha256 4f173b1a... (byte-identical to Actions evidence); cveMetadata.cveId == CVE-2024-3400, state PUBLISHED, CNA container present, datePublished 2024-04-12, dateUpdated 2025-10-21",
+      "sources/catalog.json circl: probe_cve CVE-2024-3400, format cve-record; docs/source-checks.md: '单条 CVE 查询探针，不证明全库及时性或独立利用证据'",
+      "status.json: circl count=1, samples=[], latest_item_at=null, changed=false, last_content_change_at=2026-11-09, stale_after_hours=168"
+    ],
+    "decision": "False-positive alert, not a source failure or parse defect. 'review-unchanged-content' is a feed-oriented staleness heuristic that must not fire for single-record probe formats. CVE-2024-3400 is a fixed, PUBLISHED, patched vulnerability whose record is static by design, so unchanged content is expected. The CIRCL endpoint is healthy: reachable, valid, correct probe CVE, CNA container present.",
+    "why": "assess() raised 'review-unchanged-content' because parse() returns latest=None for probe formats and the record digest stays stable past stale_after_hours (168h). For cve-record and nvd single-record probes, content change is not a freshness signal (the NVD single-record response even changes digest only via its retrieval timestamp metadata). Gate the alert on non-probe formats.",
+    "changes": [
+      "scripts/maintain.py: add PROBE_FORMATS = ('cve-record', 'nvd') and skip the 'review-unchanged-content' alert for these formats",
+      "tests/test_source_maintenance.py: add test_probe_sources_do_not_flag_unchanged_content and test_feed_with_unchanged_content_still_flagged (regression guard)"
+    ],
+    "validation": "python3 -m unittest discover -s tests -> 61 tests passed (incl. 2 new). Offline assess() for circl/nvd probes with a 10-day-old static record yields no 'review-unchanged-content'; a url-list feed with identical conditions still raises it. Actions live recheck pending.",
+    "uncertainty": "The change removes the staleness heuristic only for probe formats; a schema-valid but wrong/frozen probe record is still caught by validate_source (probe-CVE equality and CNA-container check). CIRCL/NVD freshness remains 'unknown' by contract.",
+    "outcome": "fixed",
+    "execution_environment": "hermes-cloud"
   }
 ]

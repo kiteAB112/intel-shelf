@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -39,6 +40,34 @@ class SourceContracts(unittest.TestCase):
         result = m.assess(source, {}, body, m.now())
         self.assertEqual(result['freshness'], 'unknown')
         self.assertIsNone(result['latest_item_at'])
+
+    def test_probe_sources_do_not_flag_unchanged_content(self):
+        # A fixed CVE record (CIRCL) and a single-record NVD probe are static by
+        # design; unchanged content past the stale window must not raise the
+        # feed-oriented 'review-unchanged-content' alert.
+        timestamp = m.now()
+        old = (timestamp - timedelta(days=10)).isoformat()
+        cases = [
+            (dict(check_profile='circl', format='cve-record', probe_cve='CVE-2024-3400', stale_after_hours=168),
+             b'{"cveMetadata":{"cveId":"CVE-2024-3400"},"containers":{"cna":{}}}'),
+            (dict(check_profile='nvd', format='nvd', stale_after_hours=168),
+             b'{"totalResults":1,"vulnerabilities":[{"cve":{"id":"CVE-2026-1234","published":"2026-11-01T00:00:00Z","lastModified":"2026-11-02T00:00:00Z"}}]}'),
+        ]
+        for source, body in cases:
+            with self.subTest(format=source['format']):
+                previous = {'sha256': hashlib.sha256(body).hexdigest(), 'last_content_change_at': old}
+                result = m.assess(source, previous, body, timestamp)
+                self.assertNotIn('review-unchanged-content', result['alerts'])
+
+    def test_feed_with_unchanged_content_still_flagged(self):
+        # Guard against over-broadening: a no-timestamp feed whose content is
+        # frozen past its stale window must still raise the alert.
+        timestamp = m.now()
+        body = b'https://example.test/a\n'
+        source = dict(id='openphish', format='url-list', stale_after_hours=48)
+        previous = {'sha256': hashlib.sha256(body).hexdigest(), 'last_content_change_at': (timestamp - timedelta(days=10)).isoformat()}
+        result = m.assess(source, previous, body, timestamp)
+        self.assertIn('review-unchanged-content', result['alerts'])
 
     def test_circl_checks_the_actual_probe(self):
         body = b'{"cveMetadata":{"cveId":"CVE-2024-3400"},"containers":{"cna":{}}}'

@@ -22,6 +22,13 @@ from source_checks import validate as validate_source, display_status
 
 IOC_FORMATS = ('tweetfeed-csv', 'feodo-json', 'c2-csv', 'ip-list')
 
+# Single-record probe formats: parse() returns no per-item timestamp because the
+# check verifies one fixed record (CIRCL probe_cve) or one record for schema and
+# availability (NVD). Static content — or change caused only by response metadata —
+# is expected here, not a content-staleness signal, so the feed-oriented
+# 'review-unchanged-content' alert must not fire for these formats.
+PROBE_FORMATS = ('cve-record', 'nvd')
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -121,7 +128,7 @@ def assess(source, previous, body, timestamp):
         alerts.append('review-freshness')
     changed = digest != previous.get('sha256')
     changed_at = timestamp.isoformat() if changed else previous.get('last_content_change_at', timestamp.isoformat())
-    if not latest and not changed and (timestamp - parse_date(changed_at)).total_seconds() > source['stale_after_hours'] * 3600:
+    if source['format'] not in PROBE_FORMATS and not latest and not changed and (timestamp - parse_date(changed_at)).total_seconds() > source['stale_after_hours'] * 3600:
         alerts.append('review-unchanged-content')
     samples = ioc_details.get('samples', [])
     if source['format'] == 'rss':
