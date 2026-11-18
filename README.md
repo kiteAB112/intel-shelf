@@ -5,23 +5,23 @@
 ## 来源状态
 
 <!-- intel-shelf-status:start -->
-最近完整检查：**2026-11-17 20:56 UTC** · [运行记录](https://github.com/kiteAB112/intel-shelf/actions/runs/44174616107) · 代码 `86f66e7`
+最近完整检查：**2026-11-18 07:30 UTC** · [运行记录](https://github.com/kiteAB112/intel-shelf/actions/runs/44259396284) · 代码 `fbf1448`
 
-已接入 **11** · 入口可读取 **9** · 维护待办 **0**
+已接入 **11** · 入口可读取 **10** · 维护待办 **0**
 
 | 来源 | 类别 | 状态 | 最近检查 · UTC |
 |---|---|---|---|
-| [NVD](https://nvd.nist.gov/) | 漏洞基础与已知利用 | 入口可读取 · 时效未知 | 11-17 07:56 |
-| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | 漏洞基础与已知利用 | 入口可读取 | 11-17 20:56 |
-| [Unit 42](https://unit42.paloaltonetworks.com/) | 攻击活动与研究报告 | 入口可读取 | 11-17 20:56 |
-| [Cisco Talos](https://blog.talosintelligence.com/) | 攻击活动与研究报告 | 入口可读取 | 11-17 20:56 |
-| [Check Point Research](https://research.checkpoint.com/) | 攻击活动与研究报告 | 入口可读取 | 11-17 20:56 |
-| [The DFIR Report](https://thedfirreport.com/) | 入侵过程与狩猎线索 | 入口可读取 | 11-17 07:56 |
-| [OpenPhish Community](https://www.openphish.com/phishing_feeds.html) | 钓鱼 | 入口可读取 · 时效未知 | 11-17 20:56 |
-| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) | 恶意基础设施与载荷地址 | 入口可读取 | 11-17 20:56 |
-| [C2IntelFeeds（非商业研究）](https://github.com/drb-ra/C2IntelFeeds) | 恶意基础设施与载荷地址 | 入口可读取 · 时效未知 | 11-17 07:56 |
-| [Feodo Tracker（历史参考）](https://feodotracker.abuse.ch/blocklist/) | 恶意基础设施与载荷地址 | 仅历史参考 | 11-17 07:56 |
-| [CIRCL Vulnerability-Lookup](https://vulnerability.circl.lu/) | 漏洞基础与已知利用 | 检查异常 | 11-17 07:56 |
+| [NVD](https://nvd.nist.gov/) | 漏洞基础与已知利用 | 入口可读取 · 时效未知 | 11-18 07:30 |
+| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | 漏洞基础与已知利用 | 入口可读取 | 11-18 07:30 |
+| [Unit 42](https://unit42.paloaltonetworks.com/) | 攻击活动与研究报告 | 入口可读取 | 11-18 07:30 |
+| [Cisco Talos](https://blog.talosintelligence.com/) | 攻击活动与研究报告 | 入口可读取 | 11-18 07:30 |
+| [Check Point Research](https://research.checkpoint.com/) | 攻击活动与研究报告 | 入口可读取 | 11-18 07:30 |
+| [The DFIR Report](https://thedfirreport.com/) | 入侵过程与狩猎线索 | 入口可读取 | 11-18 07:30 |
+| [OpenPhish Community](https://www.openphish.com/phishing_feeds.html) | 钓鱼 | 入口可读取 · 时效未知 | 11-18 07:30 |
+| [TweetFeed](https://github.com/0xDanielLopez/TweetFeed) | 恶意基础设施与载荷地址 | 入口可读取 | 11-18 07:30 |
+| [C2IntelFeeds（非商业研究）](https://github.com/drb-ra/C2IntelFeeds) | 恶意基础设施与载荷地址 | 入口可读取 · 时效未知 | 11-18 07:30 |
+| [Feodo Tracker（历史参考）](https://feodotracker.abuse.ch/blocklist/) | 恶意基础设施与载荷地址 | 仅历史参考 | 11-18 07:30 |
+| [CIRCL Vulnerability-Lookup](https://vulnerability.circl.lu/) | 漏洞基础与已知利用 | 入口可读取 · 时效未知 | 11-18 07:30 |
 
 <details>
 <summary>待接入 / 人工参考</summary>
