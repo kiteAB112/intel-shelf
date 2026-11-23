@@ -45,14 +45,14 @@
   },
   "cisa-kev": {
     "id": "cisa-kev",
-    "checked_at": "2026-11-23T07:41:30.152403+00:00",
+    "checked_at": "2026-11-23T23:55:07.395145+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "45132918558",
-    "next_due_at": "2026-11-23T12:00:00+00:00",
+    "run_id": "45292807458",
+    "next_due_at": "2026-11-24T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-23T07:41:31.961035+00:00",
+        "started_at": "2026-11-23T23:55:07.409253+00:00",
         "requested_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
         "route": "direct",
         "timeout_seconds": 120,
@@ -60,16 +60,16 @@
         "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
         "content_type": "application/json",
         "outcome": "received",
-        "bytes_read": 1871127,
+        "bytes_read": 1874664,
         "body_file": "evidence/cisa-kev/attempt-1.response",
-        "body_sha256": "12c9ca4c5350ecacdf22bdce91b4ffcf06b8c8dc9c69b8bfb4c1a21be7a5fe50",
-        "at": "2026-11-23T07:41:32.045126+00:00",
-        "elapsed_ms": 84
+        "body_sha256": "ac8f0c4e73ec9212dd00afbb9bed2b43abc9cdb3c8719fc2c2606f008171f70a",
+        "at": "2026-11-23T23:55:07.697441+00:00",
+        "elapsed_ms": 288
       }
     ],
     "access": "reachable",
     "consecutive_failures": 0,
-    "count": 1790,
+    "count": 1792,
     "samples": [
       {
         "cve": "CVE-2020-10189",
@@ -87,27 +87,27 @@
         "date": "2021-11-03"
       }
     ],
-    "latest_item_at": "2026-11-20T17:48:39.151600+00:00",
-    "sha256": "12c9ca4c5350ecacdf22bdce91b4ffcf06b8c8dc9c69b8bfb4c1a21be7a5fe50",
-    "changed": false,
-    "last_content_change_at": "2026-11-20T20:23:36.159770+00:00",
+    "latest_item_at": "2026-11-23T19:43:55.797900+00:00",
+    "sha256": "ac8f0c4e73ec9212dd00afbb9bed2b43abc9cdb3c8719fc2c2606f008171f70a",
+    "changed": true,
+    "last_content_change_at": "2026-11-23T23:55:07.395145+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_success_at": "2026-11-23T23:55:07.395145+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
   },
   "unit42": {
     "id": "unit42",
-    "checked_at": "2026-11-23T07:41:30.152403+00:00",
+    "checked_at": "2026-11-23T23:55:07.395145+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "45132918558",
-    "next_due_at": "2026-11-23T12:00:00+00:00",
+    "run_id": "45292807458",
+    "next_due_at": "2026-11-24T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-23T07:41:32.066683+00:00",
+        "started_at": "2026-11-23T23:55:07.719469+00:00",
         "requested_url": "https://unit42.paloaltonetworks.com/feed/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -118,8 +118,8 @@
         "bytes_read": 23924,
         "body_file": "evidence/unit42/attempt-1.response",
         "body_sha256": "1b52c6ab2308a8f9cd773ae6bfc29f53c0442fa51913647e095e1706daa09e72",
-        "at": "2026-11-23T07:41:32.144220+00:00",
-        "elapsed_ms": 78
+        "at": "2026-11-23T23:55:07.824942+00:00",
+        "elapsed_ms": 105
       }
     ],
     "access": "reachable",
@@ -145,21 +145,21 @@
     "last_content_change_at": "2026-11-21T07:10:42.353906+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_success_at": "2026-11-23T23:55:07.395145+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://unit42.paloaltonetworks.com/feed/"
   },
   "talos": {
     "id": "talos",
-    "checked_at": "2026-11-23T07:41:30.152403+00:00",
+    "checked_at": "2026-11-23T23:55:07.395145+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "45132918558",
-    "next_due_at": "2026-11-23T12:00:00+00:00",
+    "run_id": "45292807458",
+    "next_due_at": "2026-11-24T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-23T07:41:32.145662+00:00",
+        "started_at": "2026-11-23T23:55:07.826329+00:00",
         "requested_url": "https://blog.talosintelligence.com/rss/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -169,9 +169,9 @@
         "outcome": "received",
         "bytes_read": 1143462,
         "body_file": "evidence/talos/attempt-1.response",
-        "body_sha256": "7a79ec4c2bf8ed1d93d88b79da016a4548b64ca4f30d4b190fee46ec331ece1c",
-        "at": "2026-11-23T07:41:32.180752+00:00",
-        "elapsed_ms": 35
+        "body_sha256": "28c37c5933445e39ccd8db23071ab9bc6d84e03221ad04cee1cc1da08a3f6dcd",
+        "at": "2026-11-23T23:55:07.928741+00:00",
+        "elapsed_ms": 102
       }
     ],
     "access": "reachable",
@@ -192,26 +192,26 @@
       }
     ],
     "latest_item_at": "2026-11-19T19:00:00+00:00",
-    "sha256": "7a79ec4c2bf8ed1d93d88b79da016a4548b64ca4f30d4b190fee46ec331ece1c",
-    "changed": false,
-    "last_content_change_at": "2026-11-19T20:39:58.347292+00:00",
+    "sha256": "28c37c5933445e39ccd8db23071ab9bc6d84e03221ad04cee1cc1da08a3f6dcd",
+    "changed": true,
+    "last_content_change_at": "2026-11-23T23:55:07.395145+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_success_at": "2026-11-23T23:55:07.395145+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://blog.talosintelligence.com/rss/"
   },
   "checkpoint": {
     "id": "checkpoint",
-    "checked_at": "2026-11-23T07:41:30.152403+00:00",
+    "checked_at": "2026-11-23T23:55:07.395145+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "45132918558",
-    "next_due_at": "2026-11-23T12:00:00+00:00",
+    "run_id": "45292807458",
+    "next_due_at": "2026-11-24T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-23T07:41:32.193652+00:00",
+        "started_at": "2026-11-23T23:55:07.941586+00:00",
         "requested_url": "https://research.checkpoint.com/feed/",
         "route": "direct",
         "timeout_seconds": 25,
@@ -219,11 +219,11 @@
         "final_url": "https://research.checkpoint.com/feed/",
         "content_type": "application/rss+xml; charset=UTF-8",
         "outcome": "received",
-        "bytes_read": 404062,
+        "bytes_read": 369479,
         "body_file": "evidence/checkpoint/attempt-1.response",
-        "body_sha256": "ad42626da41bfaa75758cf9aacc6c37fcb2b1271c9e42d33e70ee6ed31de279d",
-        "at": "2026-11-23T07:41:32.222901+00:00",
-        "elapsed_ms": 29
+        "body_sha256": "d0b1f719dd51bfffa10df518fe180901bf63e8ed7c55db504e532ec414cb9f5e",
+        "at": "2026-11-23T23:55:08.027904+00:00",
+        "elapsed_ms": 86
       }
     ],
     "access": "reachable",
@@ -231,25 +231,25 @@
     "count": 15,
     "samples": [
       {
+        "title": "23rd November – Threat Intelligence Report",
+        "url": "https://research.checkpoint.com/2026/23rd-november-threat-intelligence-report/"
+      },
+      {
         "title": "30 Years of Gatekeeper Asymmetry Doom: The Paradox that Makes Powerful LLMs More Vulnerable",
         "url": "https://research.checkpoint.com/2026/30-years-of-gatekeeper-asymmetry-doom-the-paradox-that-makes-powerful-llms-more-vulnerable/"
       },
       {
         "title": "The State of Ransomware Q3 2026",
         "url": "https://research.checkpoint.com/2026/the-state-of-ransomware-q3-2026/"
-      },
-      {
-        "title": "16th November – Threat Intelligence Report",
-        "url": "https://research.checkpoint.com/2026/16th-november-threat-intelligence-report/"
       }
     ],
-    "latest_item_at": "2026-11-19T13:19:10+00:00",
-    "sha256": "ad42626da41bfaa75758cf9aacc6c37fcb2b1271c9e42d33e70ee6ed31de279d",
-    "changed": false,
-    "last_content_change_at": "2026-11-19T20:39:58.347292+00:00",
+    "latest_item_at": "2026-11-23T15:16:27+00:00",
+    "sha256": "d0b1f719dd51bfffa10df518fe180901bf63e8ed7c55db504e532ec414cb9f5e",
+    "changed": true,
+    "last_content_change_at": "2026-11-23T23:55:07.395145+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_success_at": "2026-11-23T23:55:07.395145+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://research.checkpoint.com/feed/"
@@ -310,7 +310,7 @@
     "id": "threatfox",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-23T07:41:30.152403+00:00",
+    "evaluated_at": "2026-11-23T23:55:07.395145+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -319,7 +319,7 @@
     "id": "urlhaus",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-23T07:41:30.152403+00:00",
+    "evaluated_at": "2026-11-23T23:55:07.395145+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
@@ -328,21 +328,21 @@
     "id": "malwarebazaar",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-23T07:41:30.152403+00:00",
+    "evaluated_at": "2026-11-23T23:55:07.395145+00:00",
     "access": "needs-auth-or-access-review",
     "content": "not-checked",
     "freshness": "unknown"
   },
   "openphish": {
     "id": "openphish",
-    "checked_at": "2026-11-23T07:41:30.152403+00:00",
+    "checked_at": "2026-11-23T23:55:07.395145+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "45132918558",
-    "next_due_at": "2026-11-23T12:00:00+00:00",
+    "run_id": "45292807458",
+    "next_due_at": "2026-11-24T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-23T07:41:32.274384+00:00",
+        "started_at": "2026-11-23T23:55:08.032828+00:00",
         "requested_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
         "route": "direct",
         "timeout_seconds": 25,
@@ -350,11 +350,11 @@
         "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt",
         "content_type": "text/plain; charset=utf-8",
         "outcome": "received",
-        "bytes_read": 16038,
+        "bytes_read": 14762,
         "body_file": "evidence/openphish/attempt-1.response",
-        "body_sha256": "6fa9696694f7f39157e3f0f77b8b7a4386ca895c63159cd95bfe5a8a096c6218",
-        "at": "2026-11-23T07:41:32.283389+00:00",
-        "elapsed_ms": 9
+        "body_sha256": "5711deadfde6e54165863bc1b4caec14de764014ee7a47a649dd4912c53f3bfd",
+        "at": "2026-11-23T23:55:08.063566+00:00",
+        "elapsed_ms": 31
       }
     ],
     "access": "reachable",
@@ -362,26 +362,26 @@
     "count": 300,
     "samples": [],
     "latest_item_at": null,
-    "sha256": "6fa9696694f7f39157e3f0f77b8b7a4386ca895c63159cd95bfe5a8a096c6218",
+    "sha256": "5711deadfde6e54165863bc1b4caec14de764014ee7a47a649dd4912c53f3bfd",
     "changed": true,
-    "last_content_change_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_content_change_at": "2026-11-23T23:55:07.395145+00:00",
     "freshness": "unknown",
     "content": "valid",
-    "last_success_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_success_at": "2026-11-23T23:55:07.395145+00:00",
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://raw.githubusercontent.com/openphish/public_feed/refs/heads/main/feed.txt"
   },
   "tweetfeed": {
     "id": "tweetfeed",
-    "checked_at": "2026-11-23T07:41:30.152403+00:00",
+    "checked_at": "2026-11-23T23:55:07.395145+00:00",
     "check_origin": "github-actions",
     "alerts": [],
-    "run_id": "45132918558",
-    "next_due_at": "2026-11-23T12:00:00+00:00",
+    "run_id": "45292807458",
+    "next_due_at": "2026-11-24T00:00:00+00:00",
     "request_attempts": [
       {
-        "started_at": "2026-11-23T07:41:32.284517+00:00",
+        "started_at": "2026-11-23T23:55:08.064667+00:00",
         "requested_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "route": "direct",
         "timeout_seconds": 25,
@@ -389,82 +389,79 @@
         "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv",
         "content_type": "text/plain; charset=utf-8",
         "outcome": "received",
-        "bytes_read": 247655,
+        "bytes_read": 274428,
         "body_file": "evidence/tweetfeed/attempt-1.response",
-        "body_sha256": "98da5ea2ecfc78746660c6f68e74bb84f7d6e8de039dd8de55ae7293f714820c",
-        "at": "2026-11-23T07:41:32.327221+00:00",
-        "elapsed_ms": 43
+        "body_sha256": "8f2cc12de1b45b2884bfeaa5f4fb5cdc6d4028b4b8a1ba7343fef7f84d7246bc",
+        "at": "2026-11-23T23:55:08.169194+00:00",
+        "elapsed_ms": 105
       }
     ],
     "access": "reachable",
     "consecutive_failures": 0,
-    "count": 1957,
+    "count": 2169,
     "samples": [
       {
         "type": "domain",
-        "value": "orbittwilightx-jp[.]com",
-        "reported_at": "2026-11-23 06:10:50",
-        "reporter": "masaomi346",
+        "value": "zxdftyu890234rtyhjm[.]getenjoyment[.]net",
+        "reported_at": "2026-11-23 23:28:52",
+        "reporter": "skocherhan",
         "tags": [
-          "#malware",
-          "#phishing"
+          "#Kimsuky"
         ],
-        "reference": "https://x.com/masaomi346/status/2124747482219655670",
+        "reference": "https://x.com/skocherhan/status/2125008713929134442",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
         "type": "url",
-        "value": "hxxps://orbittwilightx-jp[.]com",
-        "reported_at": "2026-11-23 06:10:50",
-        "reporter": "masaomi346",
+        "value": "hxxp://zxdftyu890234rtyhjm[.]getenjoyment[.]net",
+        "reported_at": "2026-11-23 23:28:52",
+        "reporter": "skocherhan",
         "tags": [
-          "#malware",
-          "#phishing"
+          "#Kimsuky"
         ],
-        "reference": "https://x.com/masaomi346/status/2124747482219655670",
+        "reference": "https://x.com/skocherhan/status/2125008713929134442",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       },
       {
-        "type": "sha256",
-        "value": "b2b386edce5af8084484858ac2310f214bf01e363714133ed0f9c322f2c727a1",
-        "reported_at": "2026-11-23 06:10:50",
-        "reporter": "masaomi346",
+        "type": "domain",
+        "value": "hy78xdcfghyu4rtghj[.]medianewsonline[.]com",
+        "reported_at": "2026-11-23 23:28:52",
+        "reporter": "skocherhan",
         "tags": [
-          "#malware",
-          "#phishing"
+          "#Kimsuky"
         ],
-        "reference": "https://x.com/masaomi346/status/2124747482219655670",
+        "reference": "https://x.com/skocherhan/status/2125008713929134442",
         "observed_at": null,
         "current_validity": "unknown",
         "validation_error": null
       }
     ],
-    "latest_item_at": "2026-11-23T06:10:50+00:00",
-    "sha256": "98da5ea2ecfc78746660c6f68e74bb84f7d6e8de039dd8de55ae7293f714820c",
+    "latest_item_at": "2026-11-23T23:28:52+00:00",
+    "sha256": "8f2cc12de1b45b2884bfeaa5f4fb5cdc6d4028b4b8a1ba7343fef7f84d7246bc",
     "changed": true,
-    "last_content_change_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_content_change_at": "2026-11-23T23:55:07.395145+00:00",
     "freshness": "within-window",
     "content": "valid",
-    "last_success_at": "2026-11-23T07:41:30.152403+00:00",
+    "last_success_at": "2026-11-23T23:55:07.395145+00:00",
     "indicator_types": {
-      "domain": 608,
-      "url": 843,
-      "ip": 244,
-      "md5": 56,
-      "sha256": 206
+      "domain": 673,
+      "url": 929,
+      "ip": 271,
+      "md5": 62,
+      "sha256": 234
     },
     "time_basis": "report-time",
     "upstream_status_counts": {},
-    "reference_count": 1957,
-    "total_record_count": 1957,
+    "reference_count": 2169,
+    "total_record_count": 2169,
     "rejected_record_count": 0,
     "rejected_samples": [],
-    "record_count": 1957,
-    "unique_indicator_count": 1807,
+    "record_count": 2169,
+    "unique_indicator_count": 1974,
     "alert_streaks": {},
     "http_status": 200,
     "final_url": "https://raw.githubusercontent.com/0xDanielLopez/TweetFeed/master/week.csv"
@@ -673,7 +670,7 @@
     "id": "paloalto-psirt",
     "check_origin": "local",
     "alerts": [],
-    "evaluated_at": "2026-11-23T07:41:30.152403+00:00",
+    "evaluated_at": "2026-11-23T23:55:07.395145+00:00",
     "access": "manual-reference",
     "content": "not-checked",
     "freshness": "unknown"
